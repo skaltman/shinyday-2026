@@ -1,0 +1,219 @@
+[
+  {
+    "objectID": "index.html#title",
+    "href": "index.html#title",
+    "title": "",
+    "section": "",
+    "text": "Weaving in trust\n\nData agents in 2026\n\n\nSara Altman\nJ&J Shiny Day · October 15, 2026\n\n\n\n\n\n\nhttps://pos.it/TODO\n\n\nA year ago, we were really worried about Databot. Some of those concerns are much less relevant now because the models have improved.\nToday I want to talk about what has changed and how we weave trust into the systems themselves so these things work for us.\nBecause it’s Shiny Day, I’ll spend some time on commons, a new open-source package built on shinychat. First, the story of an eval."
+  },
+  {
+    "objectID": "index.html#story-of-an-eval",
+    "href": "index.html#story-of-an-eval",
+    "title": "",
+    "section": "The story of an eval",
+    "text": "The story of an eval"
+  },
+  {
+    "objectID": "index.html#bluffbench-counterintuitive-plot",
+    "href": "index.html#bluffbench-counterintuitive-plot",
+    "title": "",
+    "section": "",
+    "text": "Model: “There’s a strong positive relationship between carat and price!”\n\n\nCan models interpret plots that contradict their expectations?\n\n\naround a year ago we did an experiment we wanted to know how well models interpret plots we showed them plots like this one, which plots diamonds and asked them to interpret them and they said stuff like this: and that sounds good until you release: that is not …\nthis is what we wanted to know: would models correctly interpret plots that contradicted their expectations?"
+  },
+  {
+    "objectID": "index.html#bluffbench-november-2025",
+    "href": "index.html#bluffbench-november-2025",
+    "title": "",
+    "section": "November 2025",
+    "text": "November 2025\n\n\n\n\n\n\n\n\n\n\n\n\nposit-dev.github.io/bluffbench\n\n\nWe tried a range of interventions to improve these scores, but none moved them much."
+  },
+  {
+    "objectID": "index.html#bluffbench-september-2026",
+    "href": "index.html#bluffbench-september-2026",
+    "title": "",
+    "section": "September 2026",
+    "text": "September 2026\n\n\n\n\n\n\n\n\n\n\n\n\nposit-dev.github.io/bluffbench\n\n\nThe newer models did substantially better on this eval. This was a failure that worried us, and interventions hadn’t helped much. Model improvements changed the results, so our assessment needs to change too."
+  },
+  {
+    "objectID": "index.html#models-got-better",
+    "href": "index.html#models-got-better",
+    "title": "",
+    "section": "The models got better",
+    "text": "The models got better"
+  },
+  {
+    "objectID": "index.html#rising-tide",
+    "href": "index.html#rising-tide",
+    "title": "",
+    "section": "A rising tide lifts some of the boats",
+    "text": "A rising tide lifts some of the boats\n\nPhoto: Vidar Nordli-Mathisen, Unsplash"
+  },
+  {
+    "objectID": "index.html#frontier-model-not-enough",
+    "href": "index.html#frontier-model-not-enough",
+    "title": "",
+    "section": "But this doesn’t mean everything is solved",
+    "text": "But this doesn’t mean everything is solved\n\nKeep this a brief qualification: improvement isn’t uniform across tasks. Bluffbench2 asks whether models notice subtle data-quality issues in plots."
+  },
+  {
+    "objectID": "index.html#bluffbench2-data-artifact",
+    "href": "index.html#bluffbench2-data-artifact",
+    "title": "",
+    "section": "",
+    "text": "github.com/posit-dev/bluffbench2\n\n\nwe showed them plots that look like this take a look at this plot. what do you notice?\none thing that flags my attention is these points through the middle of the cloud that fall exactly on a straight line. this is something i might want to dig into further and make sure nothing strange was happening in the underlying data.\nwe wanted to see if models would be able to pick up on this kind of subtle visual artifact"
+  },
+  {
+    "objectID": "index.html#bluffbench2-results",
+    "href": "index.html#bluffbench2-results",
+    "title": "",
+    "section": "",
+    "text": "github.com/posit-dev/bluffbench2\n\n\nModels have improved, but not every capability has improved equally. Keep this a qualification rather than a second extended warning story.\nThis is the jaggedness of model capability: strengths in one task don’t tell us everything about performance on another."
+  },
+  {
+    "objectID": "index.html#llms-are-jagged",
+    "href": "index.html#llms-are-jagged",
+    "title": "",
+    "section": "LLMs are jagged",
+    "text": "LLMs are jagged\n\n\nCopied from rstudio/llms, website/slides/slides-02.qmd. A task that seems harder to us isn’t necessarily harder for the model. Capabilities don’t follow a smooth, predictable frontier."
+  },
+  {
+    "objectID": "index.html#capability-profiles",
+    "href": "index.html#capability-profiles",
+    "title": "",
+    "section": "",
+    "text": "We can’t really make statements like “LLMs can’t do X” because it changes.\nSome of the things we worried about a year ago are much less relevant now. We need to update our judgments as the evidence changes."
+  },
+  {
+    "objectID": "index.html#advice-2025",
+    "href": "index.html#advice-2025",
+    "title": "",
+    "section": "Advice for working with LLMs",
+    "text": "Advice for working with LLMs\n\nUse the best models\nHave a human review the work\nBe (a little) afraid\n\n\n6 months ago we might have said, “use the best model available” now it’s more like use the least expensive model that does a sufficient job at your task, and switch depending on the task.\nWe’ll come back to this advice at the end of the talk."
+  },
+  {
+    "objectID": "index.html#trust-question",
+    "href": "index.html#trust-question",
+    "title": "",
+    "section": "How do we make data agents trustworthy?",
+    "text": "How do we make data agents trustworthy?"
+  },
+  {
+    "objectID": "index.html#posit-assistant",
+    "href": "index.html#posit-assistant",
+    "title": "",
+    "section": "",
+    "text": "Our flagship agent is Posit Assistant. Posit Assistant is a coding and data science agent. It’s available in RStudio, Positron, and the terminal. When it’s running inside of your IDE, it works inside of your active R and Python session. You can use whatever model from whatever provider you want with it.\n\n\nassistant.posit.co"
+  },
+  {
+    "objectID": "index.html#build-the-environment-so-that-its-easy-to-be-right",
+    "href": "index.html#build-the-environment-so-that-its-easy-to-be-right",
+    "title": "",
+    "section": "Build the environment so that it’s easy to be right",
+    "text": "Build the environment so that it’s easy to be right\n\nyou control the harness around the model, not the model itself build an environment that makes it as likely as possible that your agent will fall into correctness\ndon’t control the model control the harness"
+  },
+  {
+    "objectID": "index.html#pit-of-success",
+    "href": "index.html#pit-of-success",
+    "title": "",
+    "section": "The pit of success",
+    "text": "The pit of success\n\nPhoto: Falling into the Pit of Success, Coding Horror\n\n\nA pit of success: design the environment so that falling into it lands you somewhere good. The harness should make the correct path the easy path."
+  },
+  {
+    "objectID": "index.html#code-as-the-foundation",
+    "href": "index.html#code-as-the-foundation",
+    "title": "",
+    "section": "Code as the foundation",
+    "text": "Code as the foundation\n\nLLMs are good at writing code\nReproducible, transparent, auditable\n\n\ndoes the agent have to run code? no – it could do things “in its head,” but then you lose reproducibility and transparency.\nllms are good at code\nwe’ve learned from years of code for analysis…\nhave the agent write code"
+  },
+  {
+    "objectID": "index.html#design-the-harness-with-correctness-in-mind",
+    "href": "index.html#design-the-harness-with-correctness-in-mind",
+    "title": "",
+    "section": "Design the harness with correctness in mind",
+    "text": "Design the harness with correctness in mind\n\nPrompting: prioritize correctness, not progress.\nTools that serve correctness: run code, see your session.\nAccess to your files and environment to have enough context.\n\n\nPrompting: prioritize correctness over just moving the analysis forward. Posit Assistant … ” openness to uncertainty and subtlety, and a commitment to statistical rigor … Rather than maintaining a feeling of “moving forward,” call out ambiguities and unclear results.”” Tools: the ability to run code and see your session. Context: give it broad access to your files and environment, so it has a good chance at knowing the correct context to solve the problem.\nThe harness has to work well with the person, giving them the right amount of information at the right times."
+  },
+  {
+    "objectID": "index.html#performance-improves-when-the-environment-makes-it-easy-to-be-right",
+    "href": "index.html#performance-improves-when-the-environment-makes-it-easy-to-be-right",
+    "title": "",
+    "section": "Performance improves when the environment makes it easy to be right",
+    "text": "Performance improves when the environment makes it easy to be right\n\n\n\n\n\n\n\n\n\n\n\n\nPosit Assistant is our coding and data science agent. In the IDE it works with your active R or Python session. Here we compare it with a minimal harness on the intuitive condition of bluffbench. This is a different comparison from the earlier model-update results. Harness design can make a difference without changing the underlying model."
+  },
+  {
+    "objectID": "index.html#auto-mode",
+    "href": "index.html#auto-mode",
+    "title": "",
+    "section": "Auto mode and human review",
+    "text": "Auto mode and human review\n\n\nThe Simpsons GIF, via Caps N Lock\n\n\nRepeated permission prompts can turn human review into rubber-stamping. The drinking bird is the joke: an approval click isn’t necessarily review."
+  },
+  {
+    "objectID": "index.html#auto-mode-evidence",
+    "href": "index.html#auto-mode-evidence",
+    "title": "",
+    "section": "Auto mode and human review",
+    "text": "Auto mode and human review\n\n\nAnthropic, Auto mode is now the default in Claude Code (August 7, 2026)\n\n\nAnthropic made auto mode the default for Pro, Max, and Team plans. In their controlled study with 1,053 paid professional testers, human reviewers blocked 13.6% of dangerous commands and auto mode blocked 89%. One permission prompt per session was replaced with dangerous command text; approving it didn’t execute anything dangerous. This was a test environment, not the testers’ own projects, and isn’t a claim that automation is always safer.\nThe point is to design review around actual human behavior, not assume that putting a person at every approval step automatically makes a system safer. PLACEHOLDER: Posit Assistant auto-mode comparison, if needed; not researched further."
+  },
+  {
+    "objectID": "index.html#showing-all-code",
+    "href": "index.html#showing-all-code",
+    "title": "",
+    "section": "Code visibility",
+    "text": "Code visibility\n\n\n\n\nCode should remain available for inspection, but users don’t need every execution block expanded all the time. Visibility is an interaction-design choice, not a substitute for reproducibility.\nDatabot originally put executed R/Python code and output directly in chat. Over time we added collapsible blocks and show/hide controls. In April 2026, Hide code became independent of result visibility: users could collapse the code input while leaving results visible.\nOrdinary chat still shows data-analysis code by default. Optional hiding, collapsed Bash calls, and Canvas summaries are distinct behaviors, not a blanket switch to hiding R/Python code.\nThis recording shows expanded R code alongside its execution and plot. It illustrates inspectability; it does not demonstrate clicking Hide code."
+  },
+  {
+    "objectID": "index.html#slowing-eda",
+    "href": "index.html#slowing-eda",
+    "title": "",
+    "section": "Slowing down the EDA process",
+    "text": "Slowing down the EDA process\n\nPLACEHOLDER: slowing down the EDA process example.\n\n\nPLACEHOLDER: expand."
+  },
+  {
+    "objectID": "index.html#internal-vibe-analysis",
+    "href": "index.html#internal-vibe-analysis",
+    "title": "",
+    "section": "Vibe analysis",
+    "text": "Vibe analysis\nSomeone fires up Claude Code to answer a data question—and gets “vibe analysis” slop.\n\nPLACEHOLDER: add the internal example and what went wrong. They are curious and reached for an accessible tool, but don’t necessarily have the expertise or context needed to diagnose the answer."
+  },
+  {
+    "objectID": "index.html#commons-trust-flow",
+    "href": "index.html#commons-trust-flow",
+    "title": "",
+    "section": "",
+    "text": "Search trusted calculations\n  \n    Find one↓\n    Don’t find one↓\n  \n  \n    \n      Run trusted calculation\n      ↓\n      \n        \n      \n    \n    \n      Search context\n      ↓\n      Write SQL/R/Python\n      \n        Cite↓\n        Don’t cite↓\n      \n      \n        \n          \n        \n        \n          \n        \n      \n    \n  \n\n\nCommons records which tools produced the answer. Trust is based on that execution path, not on the model’s confidence in its own answer. trust is deterministic\nThe citation itself is checked against trusted context. A custom answer is not promoted merely because the model says it used a trusted source."
+  },
+  {
+    "objectID": "index.html#commons-does-3-things",
+    "href": "index.html#commons-does-3-things",
+    "title": "",
+    "section": "commons does 3 things",
+    "text": "commons does 3 things\n\nExtract trusted calculations from existing artifacts into a data structure\nA harness to give the right context at the right time\nA feedback loop to push more queries up the trust ladder over time"
+  },
+  {
+    "objectID": "index.html#devrel-agent",
+    "href": "index.html#devrel-agent",
+    "title": "",
+    "section": "DevRel agent",
+    "text": "DevRel agent\nOpen the live demo\n\nLive demo: https://posit-devrel-agent.share.connect.posit.cloud/ PLACEHOLDER: choose questions to demonstrate."
+  },
+  {
+    "objectID": "index.html#clinical-trials-agent-demo",
+    "href": "index.html#clinical-trials-agent-demo",
+    "title": "",
+    "section": "",
+    "text": "pos.it/clinical-trials-agent"
+  },
+  {
+    "objectID": "index.html#integrations",
+    "href": "index.html#integrations",
+    "title": "",
+    "section": "Snowflake and other integrations",
+    "text": "Snowflake and other integrations\n\ndata_source() works with data frames, pins boards, and DBI connections\nSnowflake semantic views and Databricks metric views become trusted measures\nAnswers built on them are marked trusted\n\n\nPLACEHOLDER: expand on Snowflake and other integrations. Native trusted metric execution described here is available in the R package; do not imply feature parity with Python without checking the current implementation."
+  },
+  {
+    "objectID": "index.html#trajectory-review",
+    "href": "index.html#trajectory-review",
+    "title": "",
+    "section": "Trajectory review",
+    "text": "Trajectory review\n\ncommons(log = TRUE) records conversation histories with OpenTelemetry\ntrajectory_read() reads trajectories from Connect or local traces\ntrajectory_review() opens a Shiny app to browse, flag, and annotate conversations\n\n\nPLACEHOLDER: expand with specifics about hooking up the trajectory reviewer (Connect observability settings, review markdown output, etc.). Use reviewed conversations to find recurring questions, then add trusted calculations or context. The goal is to improve the system, not just ask users to check answers more carefully. These reviewer functions are in the R package."
+  }
+]
