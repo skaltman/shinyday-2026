@@ -65,6 +65,18 @@ $link-color: color("bridge");
   margin-inline: 72px;
 }
 
+.reveal .slides #trust-question {
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  top: 0 !important;
+}
+
+.reveal .slides #trust-question > h2 {
+  margin-block: 0;
+}
+
 .reveal .slides #build-agent > h4,
 .reveal .slides #build-warehouse > h4 {
   margin: 12px 72px 28px;

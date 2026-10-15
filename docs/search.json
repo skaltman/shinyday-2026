@@ -10,8 +10,8 @@
     "objectID": "index.html#story-of-an-eval",
     "href": "index.html#story-of-an-eval",
     "title": "",
-    "section": "The story of an eval",
-    "text": "The story of an eval"
+    "section": "How good are models at data analysis?",
+    "text": "How good are models at data analysis?"
   },
   {
     "objectID": "index.html#bluffbench-counterintuitive-plot",
@@ -87,8 +87,8 @@
     "objectID": "index.html#trust-question",
     "href": "index.html#trust-question",
     "title": "",
-    "section": "How do we make data agents trustworthy?",
-    "text": "How do we make data agents trustworthy?"
+    "section": "How do we make data analysis agents trustworthy?",
+    "text": "How do we make data analysis agents trustworthy?"
   },
   {
     "objectID": "index.html#posit-assistant",
@@ -126,13 +126,6 @@
     "text": "Design the harness with correctness in mind\n\nPrompting: prioritize correctness, not progress.\nTools that serve correctness: run code, see your session.\nAccess to your files and environment to have enough context.\n\n\nPrompting: prioritize correctness over just moving the analysis forward. Posit Assistant … ” openness to uncertainty and subtlety, and a commitment to statistical rigor … Rather than maintaining a feeling of “moving forward,” call out ambiguities and unclear results.”” Tools: the ability to run code and see your session. Context: give it broad access to your files and environment, so it has a good chance at knowing the correct context to solve the problem.\nThe harness has to work well with the person, giving them the right amount of information at the right times."
   },
   {
-    "objectID": "index.html#harness-demo",
-    "href": "index.html#harness-demo",
-    "title": "",
-    "section": "",
-    "text": "The agent works in the live session: it runs code, sees the results, and pauses with suggestions instead of running on. Correctness comes from the harness, namely the tools that run code and show the session"
-  },
-  {
     "objectID": "index.html#performance-improves-when-the-environment-makes-it-easy-to-be-right",
     "href": "index.html#performance-improves-when-the-environment-makes-it-easy-to-be-right",
     "title": "",
@@ -158,7 +151,7 @@
     "href": "index.html#auto-mode-evidence",
     "title": "",
     "section": "Auto mode and human review",
-    "text": "Auto mode and human review\n\n\n\n\n\n\nAnthropic, Auto mode is now the default in Claude Code (August 7, 2026)\n\n\nAnthropic compared auto mode with human permission review. Auto mode uses a classifier to check tool calls and block dangerous actions, rather than asking the person to approve every command. After a block, Claude can try a safer approach or ask the user; repeated blocks cause fallback to manual approvals. Not every block becomes a human-review prompt.\nIn a controlled study with 1,053 professional testers, human reviewers blocked 143 dangerous commands (13.6%). Auto mode blocked 937 of those same 1,053 commands (89%). That is auto mode’s own block rate, not a combined model-plus-human catch rate.\nOne permission prompt per session was replaced with dangerous command text; approving it did not execute the command. Testers were working in a study environment, not their own projects. This shows that auto mode blocked more of these dangerous commands, not that automation is universally safer.\nAnthropic subsequently made auto mode the default for eligible plans.\nThe point is to design review around actual human behavior, not assume that putting a person at every approval step automatically makes a system safer."
+    "text": "Auto mode and human review\n\n\n\n\n\n\nAnthropic, Auto mode is now the default in Claude Code (August 7, 2026)\n\n\nAnthropic compared auto mode with human permission review. Auto mode uses a classifier to check tool calls and block dangerous actions, rather than asking the person to approve every command. After a block, Claude can try a safer approach or ask the user; repeated blocks cause fallback to manual approvals. Not every block becomes a human-review prompt.\nhuman reviewers blocked 143 dangerous commands (13.6%). Auto mode blocked 937 of those same 1,053 commands (89%). That is auto mode’s own block rate, not a combined model-plus-human catch rate.\nAnthropic subsequently made auto mode the default for eligible plans.\nThe point is to design review around actual human behavior, not assume that putting a person at every approval step automatically makes a system safer.\nPosit Assistant also has auto mode"
   },
   {
     "objectID": "index.html#showing-all-code",
@@ -168,18 +161,18 @@
     "text": "When should code be shown to the user?\n\n\n  \n\n\n\nthis is something we thought about in posit assistant when thinking through when code should be shown to the user It is important that it also remain available for inspection, but users don’t need every execution block expanded all the time.\nDatabot originally put executed R/Python code and output directly in chat. Over time we added collapsible blocks and show/hide controls. In April 2026, Hide code became independent of result visibility: users could collapse the code input while leaving results visible.\nOrdinary chat still shows data-analysis code by default."
   },
   {
-    "objectID": "index.html#showing-all-code-b",
-    "href": "index.html#showing-all-code-b",
-    "title": "",
-    "section": "When should code be shown to the user?",
-    "text": "When should code be shown to the user?\n\n\n\n\nReused from the keynote. This cut shows a mix of collapsed and expanded code in the chat transcript, while the plot stays visible."
-  },
-  {
     "objectID": "index.html#slowing-eda",
     "href": "index.html#slowing-eda",
     "title": "",
-    "section": "Slowing down the EDA process",
-    "text": "Slowing down the EDA process\n\n\n\nThe assistant plots the top 20 states by number of Spanish speakers, notes that raw counts aren’t normalized by population, and pauses to suggest three follow-up questions rather than continuing on its own.\n\n\n\nReused from the PHUSE deck. The agent pauses after each result, summarizes what it found, and asks what to look at next, instead of running on to a finished conclusion. Slowing down keeps the person in the exploration loop."
+    "section": "Pause when needed",
+    "text": "Pause when needed\n\n\nReused from the PHUSE deck. The agent pauses after each result, summarizes what it found, and asks what to look at next, instead of running on to a finished conclusion. Slowing down keeps the person in the exploration loop."
+  },
+  {
+    "objectID": "index.html#test-set",
+    "href": "index.html#test-set",
+    "title": "",
+    "section": "",
+    "text": "This is something we’ve seen internally at Posit and in organizations we work with: it’s becoming normal to vibe-analyze data.\nThe idea for the following hypothetical came from this episode of The Test Set podcast."
   },
   {
     "objectID": "index.html#site-traffic-analysis",
@@ -187,13 +180,6 @@
     "title": "",
     "section": "",
     "text": "how is traffic trending for our site?\n          \n        \n        \n          \n             Analyzing site traffic\n            \n              ⌕\n              Searching workspaceweb analytics\n              ✓\n            \n            \n              ◫\n              Querying warehouseanalytics.pageviews\n              ✓\n            \n            \n              ∿\n              Calculating daily visitslast 90 days\n              ✓\n            \n          \n        \n        \n          \n            Daily visits are down 64% over the last 90 days.\n            \n              Daily site visits−64%\n              \n                \n                  \n                    \n                    \n                  \n                \n                \n                  \n                  \n                \n                \n                  60k40k20k\n                  90 days ago45 days agoToday\n                \n                \n                \n                \n              \n            \n          \n        \n  \n\n\nThis morning, your VP pulled up a coding agent and asked a question.\n[yada yada this is what happen]\nNow, as data people, we might have asked ourselves “How are daily visits being measured?” “What event triggers an entry in this column?” “What other possible explanations could account for this change in trend other than a genuine reversal in the traffic going to this site?” If you had dug further, you would have learned that this kind of pageview event no longer triggers on newer versions of Chrome. As users gradually update Chrome, their page visits are no longer registered in this table. Regardless, this isn’t even the typical table that the data science team uses to measure site traffic anyway.\nNevertheless, you’re not there. Your VP brings this chart to leadership. They decide to spend millions to reverse the trend."
-  },
-  {
-    "objectID": "index.html#site-traffic-recreated",
-    "href": "index.html#site-traffic-recreated",
-    "title": "",
-    "section": "",
-    "text": "could you find the site traffic chart we made a month ago?\n      \n    \n    \n      \n         Looking for prior analysis\n        \n          ⌕\n          Searching conversationssite traffic chart\n          ✓\n        \n        \n          ◫\n          Checking generated filestemporary workspace\n          ✓\n        \n      \n    \n    \n      \n        I couldn’t find that conversation or any saved analysis files. Do you want me to recreate that chart for the last 90 days?\n      \n    \n    \n      \n        yeah\n      \n    \n    \n      \n         Analyzing site traffic\n        \n          ⌕\n          Searching workspaceweb analytics\n          ✓\n        \n        \n          ◫\n          Querying warehouseanalytics.sessions\n          ✓\n        \n        \n          ∿\n          Calculating daily visitslast 90 days\n          ✓\n        \n      \n    \n    \n      \n        Daily visits increased 22% over the last 90 days.\n        \n          Daily site visits+22%\n          \n            \n              \n                \n                \n              \n            \n            \n              \n              \n            \n            \n              60k40k20k\n              90 days ago45 days agoToday\n            \n            \n            \n            \n          \n        \n      \n    \n  \n\n\nA month later, leadership will ask to see the chart again. The VP will open up the same agent, but it can’t find the conversation. (It was deleted after 30 days.) All of the analysis had happened in a tempfile that is long gone.\nThe agent offers to make it again. This time, when the VP asks for the same plot, they see that site visits had been steadily trending upward the whole time."
   },
   {
     "objectID": "index.html#commons-does-3-things",

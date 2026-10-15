@@ -47,7 +47,7 @@ https://skaltman.github.io/shinyday-2026/
 :::
 
 
-## The story of an eval {#story-of-an-eval .beat-slide}
+## How good are models at data analysis? {#story-of-an-eval .beat-slide}
 
 ```{r}
 #| include: false
@@ -460,7 +460,11 @@ one reason i would now not say "use the best model available"
 but instead use the least expensive model that does a sufficient job at your task, and switch depending on the task.
 :::
 
-# {.paper-slide}
+# {#deficits-slide .statement-slide .paper-slide}
+
+::: {.statement}
+Models still have deficits in skills central to data analysis. 
+:::
 
 
 # {#context-outside-the-data .statement-slide .paper-slide}
@@ -480,7 +484,7 @@ of a coworker who has been at the organization for 20 years.
 Depending on your organization's setup, making that context available can be a lot of work in itself.
 :::
 
-## How do we make data agents trustworthy? {#trust-question .deep-slide}
+## How do we make data analysis agents trustworthy? {#trust-question .deep-slide}
 
 ## {#posit-assistant .paper-slide}
 
@@ -554,17 +558,6 @@ Context: give it broad access to your files and environment, so it has a good ch
 
 The harness has to work well with the person, giving them the right amount of
 information at the right times.
-:::
-
-## {#harness-demo .paper-slide}
-
-<img src="figures/posit-assistant-pause-often.gif" alt="Posit Assistant plots the top 20 states by number of Spanish speakers, notes that raw counts aren't normalized by population, and pauses to suggest three follow-up questions rather than continuing on its own." style="height: 560px; display: block; margin: 0 auto;">
-
-::: notes
-The agent works in the live session: it runs
-code, sees the results, and pauses with suggestions instead of running on.
-Correctness comes from the harness, namely the tools that run code and show the
-session
 :::
 
 ## Performance improves when the environment makes it easy to be right
@@ -731,20 +724,17 @@ rather than asking the person to approve every command. After a block,
 Claude can try a safer approach or ask the user; repeated blocks cause
 fallback to manual approvals. Not every block becomes a human-review prompt.
 
-In a controlled study with 1,053 professional testers, human reviewers
+human reviewers
 blocked 143 dangerous commands (13.6%). Auto mode blocked 937 of those same
 1,053 commands (89%). That is auto mode's own block rate, not a combined
 model-plus-human catch rate.
-
-One permission prompt per session was replaced with dangerous command text;
-approving it did not execute the command. Testers were working in a study
-environment, not their own projects. This shows that auto mode blocked more
-of these dangerous commands, not that automation is universally safer.
 
 Anthropic subsequently made auto mode the default for eligible plans.
 
 The point is to design review around actual human behavior, not assume that
 putting a person at every approval step automatically makes a system safer.
+
+Posit Assistant also has auto mode
 :::
 
 ## When should code be shown to the user? {#showing-all-code .paper-slide}
@@ -752,7 +742,7 @@ putting a person at every approval step automatically makes a system safer.
 ::: {.fragment}
 
 ```{=html}
-<video class="rounded click-to-toggle" width="100%" style="display: block; margin: 0 auto; max-height: 510px;" data-autoplay muted preload="auto" tabindex="0" aria-label="Posit Assistant recording showing expanded R code in chat, execution in the Console, and a carrier-delay plot. Click to pause or resume.">
+<video class="rounded click-to-toggle" style="display: block; margin: 0 auto; height: 510px; width: auto; max-width: 90%;" data-autoplay muted preload="auto" tabindex="0" aria-label="Posit Assistant recording showing expanded R code in chat, execution in the Console, and a carrier-delay plot. Click to pause or resume.">
   <source src="figures/05-pa-demo-carriers-a.mp4" type="video/mp4">
 </video>
 ```
@@ -772,20 +762,11 @@ could collapse the code input while leaving results visible.
 Ordinary chat still shows data-analysis code by default.
 :::
 
-## When should code be shown to the user? {#showing-all-code-b .paper-slide}
+## Pause when needed {#slowing-eda .paper-slide}
 
-<video class="rounded click-to-toggle" width="100%" style="display: block; margin: 0 auto; max-height: 560px;" data-autoplay muted preload="auto" tabindex="0" aria-label="Posit Assistant recording continuing the carriers analysis, showing collapsed and expanded code in chat. Click to pause or resume.">
-  <source src="figures/05-pa-demo-carriers-b.mp4" type="video/mp4">
-</video>
-
-::: notes
-Reused from the keynote. This cut shows a mix of collapsed and expanded
-code in the chat transcript, while the plot stays visible.
-:::
-
-## Slowing down the EDA process {#slowing-eda .paper-slide}
-
-![The assistant plots the top 20 states by number of Spanish speakers, notes that raw counts aren't normalized by population, and pauses to suggest three follow-up questions rather than continuing on its own.](figures/posit-assistant-pause-often.gif){.rounded .nostretch height="560" fig-alt="A screen recording of the Posit Assistant panel mid-analysis. The assistant plots the top 20 states by number of Spanish speakers, summarizes the result, and pauses to suggest three follow-up questions rather than continuing on its own."}
+```{=html}
+<img class="rounded" src="figures/posit-assistant-pause-often.gif" alt="Posit Assistant plots the top 20 states by number of Spanish speakers, notes that raw counts aren't normalized by population, and pauses to suggest follow-up questions." style="display: block; height: 540px; width: auto; max-width: 90%; margin: 16px auto 0;">
+```
 
 ::: notes
 Reused from the PHUSE deck. The agent pauses after each result, summarizes
@@ -800,6 +781,18 @@ finished conclusion. Slowing down keeps the person in the exploration loop.
 ::: notes
 but what if the user is not a data scientist?
 how do we help them get correct answers too?
+:::
+
+## {#test-set .paper-slide}
+
+![](figures/rogue-analysis-in-cursor.png){.rounded .nostretch style="display: block; margin: 0 auto; max-width: 90%; max-height: 620px;" fig-alt="Screenshot of The Test Set podcast episode about rogue analysis in Cursor."}
+
+::: notes
+This is something we've seen internally at Posit and in organizations we
+work with: it's becoming normal to vibe-analyze data.
+
+The idea for the following hypothetical came from this episode of
+The Test Set podcast.
 :::
 
 ## {#site-traffic-analysis .agent-story-slide .slow-tool-calls}
@@ -873,98 +866,6 @@ Now, as data people, we might have asked ourselves "How are daily visits being m
 Nevertheless, you're not there. Your VP brings this chart to leadership. They decide to spend millions to reverse the trend.
 :::
 
-
-## {#site-traffic-recreated .agent-story-slide .slow-tool-calls}
-
-```{=html}
-<div class="agent-window month-later-window">
-  <div class="agent-thread">
-    <div class="chat-turn chat-turn-user">
-      <div class="chat-message chat-message-user">
-        could you find the site traffic chart we made a month ago?
-      </div>
-    </div>
-    <div class="chat-turn chat-turn-agent tool-run history-tool-run fragment fade-up" data-fragment-index="0">
-      <div class="chat-message chat-message-agent">
-        <div class="agent-thinking"><span></span> Looking for prior analysis</div>
-        <div class="tool-card" style="--tool-delay: 0s">
-          <span class="tool-card-icon">⌕</span>
-          <span><strong>Searching conversations</strong><small>site traffic chart</small></span>
-          <span class="tool-progress"><i class="tool-spinner"></i><i class="tool-check">✓</i></span>
-        </div>
-        <div class="tool-card history-file-check" style="--tool-delay: 1.25s">
-          <span class="tool-card-icon">◫</span>
-          <span><strong>Checking generated files</strong><small>temporary workspace</small></span>
-          <span class="tool-progress"><i class="tool-spinner"></i><i class="tool-check">✓</i></span>
-        </div>
-      </div>
-    </div>
-    <div class="chat-turn chat-turn-agent history-missing fragment fade-up" data-fragment-index="0">
-      <div class="chat-message chat-message-agent">
-        I couldn’t find that conversation or any saved analysis files. Do you want me to recreate that chart for the last 90 days?
-      </div>
-    </div>
-    <div class="chat-turn chat-turn-user fragment fade-up" data-fragment-index="1">
-      <div class="chat-message chat-message-user">
-        yeah
-      </div>
-    </div>
-    <div class="chat-turn chat-turn-agent tool-run fragment fade-up" data-fragment-index="2">
-      <div class="chat-message chat-message-agent">
-        <div class="agent-thinking"><span></span> Analyzing site traffic</div>
-        <div class="tool-card" style="--tool-delay: 0s">
-          <span class="tool-card-icon">⌕</span>
-          <span><strong>Searching workspace</strong><small>web analytics</small></span>
-          <span class="tool-progress"><i class="tool-spinner"></i><i class="tool-check">✓</i></span>
-        </div>
-        <div class="tool-card" style="--tool-delay: 1.75s">
-          <span class="tool-card-icon">◫</span>
-          <span><strong>Querying warehouse</strong><small>analytics.sessions</small></span>
-          <span class="tool-progress"><i class="tool-spinner"></i><i class="tool-check">✓</i></span>
-        </div>
-        <div class="tool-card" style="--tool-delay: 3.5s">
-          <span class="tool-card-icon">∿</span>
-          <span><strong>Calculating daily visits</strong><small>last 90 days</small></span>
-          <span class="tool-progress"><i class="tool-spinner"></i><i class="tool-check">✓</i></span>
-        </div>
-      </div>
-    </div>
-    <div class="chat-turn chat-turn-agent result-turn fragment fade-up" data-fragment-index="2">
-      <div class="chat-message chat-message-agent">
-        <p>Daily visits increased <strong>22%</strong> over the last 90 days.</p>
-        <div class="dau-chart">
-          <div class="dau-chart-title"><span>Daily site visits</span><strong>+22%</strong></div>
-          <svg viewBox="0 0 620 225" role="img" aria-label="Daily site visits trend unevenly upward over the last 90 days.">
-            <defs>
-              <linearGradient id="traffic-area-up" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#23875b" stop-opacity="0.26"/>
-                <stop offset="100%" stop-color="#23875b" stop-opacity="0.02"/>
-              </linearGradient>
-            </defs>
-            <g class="chart-grid">
-              <line x1="56" y1="34" x2="598" y2="34"/><line x1="56" y1="86" x2="598" y2="86"/>
-              <line x1="56" y1="138" x2="598" y2="138"/><line x1="56" y1="190" x2="598" y2="190"/>
-            </g>
-            <g class="chart-labels">
-              <text x="46" y="39">60k</text><text x="46" y="91">40k</text><text x="46" y="143">20k</text>
-              <text x="56" y="215">90 days ago</text><text x="324" y="215">45 days ago</text><text x="598" y="215">Today</text>
-            </g>
-            <path class="chart-area" d="M56,69 L69,74 L82,66 L95,71 L108,63 L121,68 L134,70 L147,61 L160,65 L173,57 L186,64 L199,60 L212,54 L225,58 L238,62 L251,52 L264,56 L277,48 L290,55 L303,51 L316,44 L329,50 L342,47 L355,39 L368,46 L381,43 L394,49 L407,40 L420,44 L433,36 L446,43 L459,38 L472,34 L485,42 L498,37 L511,31 L524,39 L537,35 L550,29 L563,36 L576,33 L589,38 L598,41 L598,190 L56,190 Z"/>
-            <path class="chart-line" pathLength="1" d="M56,69 L69,74 L82,66 L95,71 L108,63 L121,68 L134,70 L147,61 L160,65 L173,57 L186,64 L199,60 L212,54 L225,58 L238,62 L251,52 L264,56 L277,48 L290,55 L303,51 L316,44 L329,50 L342,47 L355,39 L368,46 L381,43 L394,49 L407,40 L420,44 L433,36 L446,43 L459,38 L472,34 L485,42 L498,37 L511,31 L524,39 L537,35 L550,29 L563,36 L576,33 L589,38 L598,41"/>
-            <circle class="chart-end" cx="598" cy="41" r="6"/>
-          </svg>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-```
-
-:::notes
-A month later, leadership will ask to see the chart again. The VP will open up the same agent, but it can't find the conversation. (It was deleted after 30 days.) All of the analysis had happened in a tempfile that is long gone. 
-
-The agent offers to make it again. This time, when the VP asks for the same plot, they see that site visits had been steadily trending upward the whole time.
-:::
 
 # {.paper-slide}
 

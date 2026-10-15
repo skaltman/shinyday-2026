@@ -97,7 +97,7 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-54b2b9b1dfeab259032c0879443035a0.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-d0e299d3d29466fd3e3d033099e9f753.css">
   <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -216,7 +216,7 @@
 </div>
 </section>
 <section id="story-of-an-eval" class="slide level2 beat-slide">
-<h2>The story of an eval</h2>
+<h2>How good are models at data analysis?</h2>
 </section>
 <section id="bluffbench-counterintuitive-plot" class="slide level2 paper-slide">
 <h2></h2>
@@ -474,9 +474,11 @@ Can models interpret plots that contradict their expectations?
           display:block!important;
       }</style></aside>
 </section>
-<section id="section" class="title-slide slide level1 paper-slide center">
+<section id="deficits-slide" class="title-slide slide level1 statement-slide paper-slide center">
 <h1></h1>
-
+<div class="statement">
+<p>Models still have deficits in skills central to data analysis.</p>
+</div>
 </section>
 
 <section>
@@ -502,7 +504,7 @@ Can models interpret plots that contradict their expectations?
       }</style></aside>
 </section>
 <section id="trust-question" class="slide level2 deep-slide">
-<h2>How do we make data agents trustworthy?</h2>
+<h2>How do we make data analysis agents trustworthy?</h2>
 </section>
 <section id="posit-assistant" class="slide level2 paper-slide">
 <h2></h2>
@@ -606,23 +608,6 @@ Can models interpret plots that contradict their expectations?
           display:block!important;
       }</style></aside>
 </section>
-<section id="harness-demo" class="slide level2 paper-slide">
-<h2></h2>
-<p><img src="figures/posit-assistant-pause-often.gif" alt="Posit Assistant plots the top 20 states by number of Spanish speakers, notes that raw counts aren't normalized by population, and pauses to suggest three follow-up questions rather than continuing on its own." style="height: 560px; display: block; margin: 0 auto;"></p>
-<aside class="notes">
-<p>The agent works in the live session: it runs code, sees the results, and pauses with suggestions instead of running on. Correctness comes from the harness, namely the tools that run code and show the session</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
 <section id="performance-improves-when-the-environment-makes-it-easy-to-be-right" class="slide level2">
 <h2>Performance improves when the environment makes it easy to be right</h2>
 <div class="fragment">
@@ -650,7 +635,7 @@ Can models interpret plots that contradict their expectations?
           display:block!important;
       }</style></aside>
 </section></section>
-<section id="section-1" class="title-slide slide level1 paper-slide center">
+<section id="section" class="title-slide slide level1 paper-slide center">
 <h1></h1>
 
 </section>
@@ -740,10 +725,10 @@ Can models interpret plots that contradict their expectations?
 </div>
 <aside class="notes">
 <p>Anthropic compared auto mode with human permission review. Auto mode uses a classifier to check tool calls and block dangerous actions, rather than asking the person to approve every command. After a block, Claude can try a safer approach or ask the user; repeated blocks cause fallback to manual approvals. Not every block becomes a human-review prompt.</p>
-<p>In a controlled study with 1,053 professional testers, human reviewers blocked 143 dangerous commands (13.6%). Auto mode blocked 937 of those same 1,053 commands (89%). That is auto mode’s own block rate, not a combined model-plus-human catch rate.</p>
-<p>One permission prompt per session was replaced with dangerous command text; approving it did not execute the command. Testers were working in a study environment, not their own projects. This shows that auto mode blocked more of these dangerous commands, not that automation is universally safer.</p>
+<p>human reviewers blocked 143 dangerous commands (13.6%). Auto mode blocked 937 of those same 1,053 commands (89%). That is auto mode’s own block rate, not a combined model-plus-human catch rate.</p>
 <p>Anthropic subsequently made auto mode the default for eligible plans.</p>
 <p>The point is to design review around actual human behavior, not assume that putting a person at every approval step automatically makes a system safer.</p>
+<p>Posit Assistant also has auto mode</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -759,7 +744,7 @@ Can models interpret plots that contradict their expectations?
 <section id="showing-all-code" class="slide level2 paper-slide">
 <h2>When should code be shown to the user?</h2>
 <div class="fragment">
-<video class="rounded click-to-toggle" width="100%" style="display: block; margin: 0 auto; max-height: 510px;" data-autoplay="" muted="" preload="auto" tabindex="0" aria-label="Posit Assistant recording showing expanded R code in chat, execution in the Console, and a carrier-delay plot. Click to pause or resume.">
+<video class="rounded click-to-toggle" style="display: block; margin: 0 auto; height: 510px; width: auto; max-width: 90%;" data-autoplay="" muted="" preload="auto" tabindex="0" aria-label="Posit Assistant recording showing expanded R code in chat, execution in the Console, and a carrier-delay plot. Click to pause or resume.">
   <source src="figures/05-pa-demo-carriers-a.mp4" type="video/mp4">
 </video>
 </div>
@@ -779,33 +764,9 @@ Can models interpret plots that contradict their expectations?
           display:block!important;
       }</style></aside>
 </section>
-<section id="showing-all-code-b" class="slide level2 paper-slide">
-<h2>When should code be shown to the user?</h2>
-<video class="rounded click-to-toggle" width="100%" style="display: block; margin: 0 auto; max-height: 560px;" data-autoplay="" muted="" preload="auto" tabindex="0" aria-label="Posit Assistant recording continuing the carriers analysis, showing collapsed and expanded code in chat. Click to pause or resume.">
-<source src="figures/05-pa-demo-carriers-b.mp4" type="video/mp4">
-</video>
-<aside class="notes">
-<p>Reused from the keynote. This cut shows a mix of collapsed and expanded code in the chat transcript, while the plot stays visible.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
 <section id="slowing-eda" class="slide level2 paper-slide">
-<h2>Slowing down the EDA process</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="figures/posit-assistant-pause-often.gif" class="rounded" alt="A screen recording of the Posit Assistant panel mid-analysis. The assistant plots the top 20 states by number of Spanish speakers, summarizes the result, and pauses to suggest three follow-up questions rather than continuing on its own." height="560"></p>
-<figcaption>The assistant plots the top 20 states by number of Spanish speakers, notes that raw counts aren’t normalized by population, and pauses to suggest three follow-up questions rather than continuing on its own.</figcaption>
-</figure>
-</div>
+<h2>Pause when needed</h2>
+<img class="rounded" src="figures/posit-assistant-pause-often.gif" alt="Posit Assistant plots the top 20 states by number of Spanish speakers, notes that raw counts aren't normalized by population, and pauses to suggest follow-up questions." style="display: block; height: 540px; width: auto; max-width: 90%; margin: 16px auto 0;">
 <aside class="notes">
 <p>Reused from the PHUSE deck. The agent pauses after each result, summarizes what it found, and asks what to look at next, instead of running on to a finished conclusion. Slowing down keeps the person in the exploration loop.</p>
 <style type="text/css">
@@ -820,7 +781,7 @@ Can models interpret plots that contradict their expectations?
           display:block!important;
       }</style></aside>
 </section></section>
-<section id="section-2" class="title-slide slide level1 paper-slide center">
+<section id="section-1" class="title-slide slide level1 paper-slide center">
 <h1></h1>
 
 </section>
@@ -830,6 +791,24 @@ Can models interpret plots that contradict their expectations?
 <h1>And what if the user is not a data scientist?</h1>
 <aside class="notes">
 <p>but what if the user is not a data scientist? how do we help them get correct answers too?</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="test-set" class="slide level2 paper-slide">
+<h2></h2>
+<p><img data-src="figures/rogue-analysis-in-cursor.png" class="rounded" style="display: block; margin: 0 auto; max-width: 90%; max-height: 620px;" alt="Screenshot of The Test Set podcast episode about rogue analysis in Cursor."></p>
+<aside class="notes">
+<p>This is something we’ve seen internally at Posit and in organizations we work with: it’s becoming normal to vibe-analyze data.</p>
+<p>The idea for the following hypothetical came from this episode of The Test Set podcast.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -916,106 +895,8 @@ Can models interpret plots that contradict their expectations?
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-</section>
-<section id="site-traffic-recreated" class="slide level2 agent-story-slide slow-tool-calls">
-<h2></h2>
-<div class="agent-window month-later-window">
-  <div class="agent-thread">
-    <div class="chat-turn chat-turn-user">
-      <div class="chat-message chat-message-user">
-        could you find the site traffic chart we made a month ago?
-      </div>
-    </div>
-    <div class="chat-turn chat-turn-agent tool-run history-tool-run fragment fade-up" data-fragment-index="0">
-      <div class="chat-message chat-message-agent">
-        <div class="agent-thinking"><span></span> Looking for prior analysis</div>
-        <div class="tool-card" style="--tool-delay: 0s">
-          <span class="tool-card-icon">⌕</span>
-          <span><strong>Searching conversations</strong><small>site traffic chart</small></span>
-          <span class="tool-progress"><i class="tool-spinner"></i><i class="tool-check">✓</i></span>
-        </div>
-        <div class="tool-card history-file-check" style="--tool-delay: 1.25s">
-          <span class="tool-card-icon">◫</span>
-          <span><strong>Checking generated files</strong><small>temporary workspace</small></span>
-          <span class="tool-progress"><i class="tool-spinner"></i><i class="tool-check">✓</i></span>
-        </div>
-      </div>
-    </div>
-    <div class="chat-turn chat-turn-agent history-missing fragment fade-up" data-fragment-index="0">
-      <div class="chat-message chat-message-agent">
-        I couldn’t find that conversation or any saved analysis files. Do you want me to recreate that chart for the last 90 days?
-      </div>
-    </div>
-    <div class="chat-turn chat-turn-user fragment fade-up" data-fragment-index="1">
-      <div class="chat-message chat-message-user">
-        yeah
-      </div>
-    </div>
-    <div class="chat-turn chat-turn-agent tool-run fragment fade-up" data-fragment-index="2">
-      <div class="chat-message chat-message-agent">
-        <div class="agent-thinking"><span></span> Analyzing site traffic</div>
-        <div class="tool-card" style="--tool-delay: 0s">
-          <span class="tool-card-icon">⌕</span>
-          <span><strong>Searching workspace</strong><small>web analytics</small></span>
-          <span class="tool-progress"><i class="tool-spinner"></i><i class="tool-check">✓</i></span>
-        </div>
-        <div class="tool-card" style="--tool-delay: 1.75s">
-          <span class="tool-card-icon">◫</span>
-          <span><strong>Querying warehouse</strong><small>analytics.sessions</small></span>
-          <span class="tool-progress"><i class="tool-spinner"></i><i class="tool-check">✓</i></span>
-        </div>
-        <div class="tool-card" style="--tool-delay: 3.5s">
-          <span class="tool-card-icon">∿</span>
-          <span><strong>Calculating daily visits</strong><small>last 90 days</small></span>
-          <span class="tool-progress"><i class="tool-spinner"></i><i class="tool-check">✓</i></span>
-        </div>
-      </div>
-    </div>
-    <div class="chat-turn chat-turn-agent result-turn fragment fade-up" data-fragment-index="2">
-      <div class="chat-message chat-message-agent">
-        <p>Daily visits increased <strong>22%</strong> over the last 90 days.</p>
-        <div class="dau-chart">
-          <div class="dau-chart-title"><span>Daily site visits</span><strong>+22%</strong></div>
-          <svg viewbox="0 0 620 225" role="img" aria-label="Daily site visits trend unevenly upward over the last 90 days.">
-            <defs>
-              <lineargradient id="traffic-area-up" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#23875b" stop-opacity="0.26"></stop>
-                <stop offset="100%" stop-color="#23875b" stop-opacity="0.02"></stop>
-              </lineargradient>
-            </defs>
-            <g class="chart-grid">
-              <line x1="56" y1="34" x2="598" y2="34"></line><line x1="56" y1="86" x2="598" y2="86"></line>
-              <line x1="56" y1="138" x2="598" y2="138"></line><line x1="56" y1="190" x2="598" y2="190"></line>
-            </g>
-            <g class="chart-labels">
-              <text x="46" y="39">60k</text><text x="46" y="91">40k</text><text x="46" y="143">20k</text>
-              <text x="56" y="215">90 days ago</text><text x="324" y="215">45 days ago</text><text x="598" y="215">Today</text>
-            </g>
-            <path class="chart-area" d="M56,69 L69,74 L82,66 L95,71 L108,63 L121,68 L134,70 L147,61 L160,65 L173,57 L186,64 L199,60 L212,54 L225,58 L238,62 L251,52 L264,56 L277,48 L290,55 L303,51 L316,44 L329,50 L342,47 L355,39 L368,46 L381,43 L394,49 L407,40 L420,44 L433,36 L446,43 L459,38 L472,34 L485,42 L498,37 L511,31 L524,39 L537,35 L550,29 L563,36 L576,33 L589,38 L598,41 L598,190 L56,190 Z"></path>
-            <path class="chart-line" pathlength="1" d="M56,69 L69,74 L82,66 L95,71 L108,63 L121,68 L134,70 L147,61 L160,65 L173,57 L186,64 L199,60 L212,54 L225,58 L238,62 L251,52 L264,56 L277,48 L290,55 L303,51 L316,44 L329,50 L342,47 L355,39 L368,46 L381,43 L394,49 L407,40 L420,44 L433,36 L446,43 L459,38 L472,34 L485,42 L498,37 L511,31 L524,39 L537,35 L550,29 L563,36 L576,33 L589,38 L598,41"></path>
-            <circle class="chart-end" cx="598" cy="41" r="6"></circle>
-          </svg>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<aside class="notes">
-<p>A month later, leadership will ask to see the chart again. The VP will open up the same agent, but it can’t find the conversation. (It was deleted after 30 days.) All of the analysis had happened in a tempfile that is long gone.</p>
-<p>The agent offers to make it again. This time, when the VP asks for the same plot, they see that site visits had been steadily trending upward the whole time.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
 </section></section>
-<section id="section-3" class="title-slide slide level1 paper-slide center">
+<section id="section-2" class="title-slide slide level1 paper-slide center">
 <h1></h1>
 <aside class="notes">
 <p>and this is not good! but we know that data teams often have code to answer these kinds of questions if this happened in real life, the vp could ask a data scientist or statician. and they might have code that they use all the time to run this kind of analysis.</p>
