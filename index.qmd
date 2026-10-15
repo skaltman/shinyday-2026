@@ -751,9 +751,11 @@ putting a person at every approval step automatically makes a system safer.
 
 ::: {.fragment}
 
+```{=html}
 <video class="rounded click-to-toggle" width="100%" style="display: block; margin: 0 auto; max-height: 510px;" data-autoplay muted preload="auto" tabindex="0" aria-label="Posit Assistant recording showing expanded R code in chat, execution in the Console, and a carrier-delay plot. Click to pause or resume.">
   <source src="figures/05-pa-demo-carriers-a.mp4" type="video/mp4">
 </video>
+```
 
 :::
 
@@ -1209,9 +1211,8 @@ Improve: review its behavior and add calculations or context for recurring quest
 ## Build: the commons skill {#build-onboarding .paper-slide}
 
 ::: {.incremental}
-* A coding agent with the commons skill walks you through building your agent
-* It inspects your data, documentation, and trusted code before writing anything
-* It pauses at each decision: scope, data sources, trust boundaries
+* Use a coding agent plus the built-in commons skill to parse through your data and code and build a commons agent.
+* Walks you through the process of creating a commons agent. 
 :::
 
 ::: footer
@@ -1223,9 +1224,8 @@ The commons package ships as a skill for coding agents (Posit Assistant,
 Claude Code, Codex). 
 :::
 
-## Information layers {#information-layers .paper-slide}
+## Build: information layers {#information-layers .paper-slide}
 
-Trusted calculations, plus the knowledge needed to use and interpret the data.
 
 | Layer | Sources | Role |
 |---|---|---|
@@ -1246,10 +1246,9 @@ semantic layer, and descriptive information to the context layer.
 
 ## Build: the semantic layer {#build-semantic .paper-slide}
 
-Trusted calculations: **how an answer is computed.**
+Trusted calculations specify how an answer is computed.
 
 ::: {.incremental}
-* For example: enrollment counts by trial phase, using the team's agreed definition
 * Define vetted R or Python functions as measures in scripts. 
 * Or use data dictionary definitions, Snowflake semantic views, and Databricks metric views.
 :::
@@ -1269,7 +1268,7 @@ definitions, Snowflake semantic views, or Databricks metric views.
 
 ## Build: the context layer {#build-context .paper-slide}
 
-Organizational knowledge: **what the data means and how to interpret it.**
+What the data means and how to interpret it.
 
 ::: {.incremental}
 * Markdown files
@@ -1322,7 +1321,9 @@ loads into an in-process DuckDB database. The semantic and context layers are
 optional and grow over time -- start with a small working scope and expand.
 :::
 
-## Build: data sources from the warehouse {#build-warehouse .paper-slide}
+## Build {#build-warehouse .paper-slide}
+
+#### Databricks and Snowflake
 
 ```r
 # Snowflake semantic view
@@ -1343,8 +1344,23 @@ agent <- commons(
 ```
 
 ::: {.incremental}
-* Use existing governed metrics as trusted calculations
-* No separate `semantic_layer()` call needed for these views
+* **Semantic layer:** Snowflake **semantic views** or Databricks **metric views**, imported through `data_source()`
+* **Context:** warehouse models can also supply descriptive information. Add additional information to Markdown files and data dictionaries
+:::
+
+::: notes
+The two warehouse objects above supply trusted metrics and dimensions:
+Snowflake calls them semantic views; Databricks calls them metric views.
+commons imports these through the data source, so they do not require a
+separate semantic_layer() call.
+
+Warehouse models need not supply only calculations: the Databricks
+integration also imports descriptive context from metric views. Do not
+present warehouse metadata and context as mutually exclusive categories.
+
+The protocol-conventions Markdown file adds explicit context in this
+example. Descriptive entries in data dictionaries can also supply context;
+calculation definitions in dictionaries contribute trusted logic.
 :::
 
 
@@ -1353,38 +1369,14 @@ agent <- commons(
 ::: {.incremental}
 * Deploy like any other Shiny app.
 * (Optional) Enable built in trajectory-logging.
+* Enforce access with warehouse permissions and per-viewer credentials.
 :::
 
 ::: notes
-Deployment is ordinary Connect deployment. For trajectory capture, include
-"OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT" in deployApp()'s
-envVars argument, and a server administrator must enable
-OpenTelemetry.Enabled and OpenTelemetry.AllowContentInstrumentation.
-
-Users whose Connect account role is viewer cannot read traces even when
-named in share_with; trace readers need at least a publisher account.
-:::
-
-## Governance {#governance .paper-slide}
-
-::: {.incremental}
-* Enforce access with warehouse permissions and per-viewer credentials
-* Restrict provider-visible data, context, results, and measure source
-* Protect full-conversation trajectory logs with access controls and retention
-:::
-
-::: footer
-https://posit-dev.github.io/commons/r/articles/governance.html
-:::
-
-::: notes
-Tables describe data; they do not authorize access. Create DBI connections
+Create DBI connections
 and the agent inside the Shiny server for each session, using Connect viewer
 OAuth. The supplied connection enforces warehouse row-level security and
 table- and column-level policies.
-
-A shared service account has the same database permissions for every user;
-it does not automatically differentiate users.
 :::
 
 ## Improve: analyze trajectories {#trajectory-review .paper-slide}
@@ -1401,17 +1393,19 @@ recurring questions, then you add trusted calculations or context. The goal
 is to improve the system, not just ask users to check answers more
 carefully. These reviewer functions are in the R package.
 
-Go to trajectory reviewer
+Go to trajectory reviewer 
+
+https://01a13e15-380b-24ec-91a0-f7e07302f411.share.connect.posit.cloud/
 :::
 
-# commons, shinychat, querychat, and Posit Assistant {#ecosystem .paper-slide}
+## Which tool is which?{#ecosystem .paper-slide}
 
 | | Use |
 |---|---|
-| Posit Assistant | Get help with coding and data analysis in your development environment |
-| commons | Build general data-analysis agents for colleagues, grounded in your team’s trusted code |
-| shinychat | Build custom Shiny apps with chat components |
-| querychat | Explore tabular data through SQL-powered chat |
+| [Posit Assistant](https://assistant.posit.co/) | Get help with coding and data analysis in your development environment |
+| [commons](https://posit-dev.github.io/commons/) | Build general data-analysis agents for colleagues, grounded in your team’s trusted code |
+| [shinychat](https://posit-dev.github.io/shinychat/) | Build custom Shiny apps with chat components |
+| [querychat](https://posit-dev.github.io/querychat/) | Explore tabular data through SQL-powered chat |
 
 
 
@@ -1425,7 +1419,6 @@ Go to trajectory reviewer
 
 ```{=html}
 <div class="thank-you-wrap">
-  <img class="thanks-weave" src="figures/thanks-weave.svg" alt="">
   <div class="thank-you-row">
     <h1>Thank you!</h1>
   </div>

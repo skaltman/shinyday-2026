@@ -97,7 +97,7 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-7a523e8bacf1ee6088578373b64a45d5.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-54b2b9b1dfeab259032c0879443035a0.css">
   <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -760,9 +760,9 @@ Can models interpret plots that contradict their expectations?
 <h2>When should code be shown to the user?</h2>
 <div class="fragment">
 <video class="rounded click-to-toggle" width="100%" style="display: block; margin: 0 auto; max-height: 510px;" data-autoplay="" muted="" preload="auto" tabindex="0" aria-label="Posit Assistant recording showing expanded R code in chat, execution in the Console, and a carrier-delay plot. Click to pause or resume.">
-<source src="figures/05-pa-demo-carriers-a.mp4" type="video/mp4">
+  <source src="figures/05-pa-demo-carriers-a.mp4" type="video/mp4">
 </video>
-<p>:::</p>
+</div>
 <aside class="notes">
 <p>this is something we thought about in posit assistant when thinking through when code should be shown to the user It is important that it also remain available for inspection, but users don’t need every execution block expanded all the time.</p>
 <p>Databot originally put executed R/Python code and output directly in chat. Over time we added collapsible blocks and show/hide controls. In April 2026, Hide code became independent of result visibility: users could collapse the code input while leaving results visible.</p>
@@ -778,6 +778,7 @@ Can models interpret plots that contradict their expectations?
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</section>
 <section id="showing-all-code-b" class="slide level2 paper-slide">
 <h2>When should code be shown to the user?</h2>
 <video class="rounded click-to-toggle" width="100%" style="display: block; margin: 0 auto; max-height: 560px;" data-autoplay="" muted="" preload="auto" tabindex="0" aria-label="Posit Assistant recording continuing the carriers analysis, showing collapsed and expanded code in chat. Click to pause or resume.">
@@ -818,12 +819,13 @@ Can models interpret plots that contradict their expectations?
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-</section>
+</section></section>
 <section id="section-2" class="title-slide slide level1 paper-slide center">
 <h1></h1>
 
 </section>
 
+<section>
 <section id="non-data-scientist" class="title-slide slide level1 beat-slide center">
 <h1>And what if the user is not a data scientist?</h1>
 <aside class="notes">
@@ -1012,8 +1014,7 @@ Can models interpret plots that contradict their expectations?
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-</section>
-
+</section></section>
 <section id="section-3" class="title-slide slide level1 paper-slide center">
 <h1></h1>
 <aside class="notes">
@@ -1057,6 +1058,7 @@ Can models interpret plots that contradict their expectations?
       }</style></aside>
 </section>
 
+<section>
 <section id="commons" class="title-slide slide level1 commons-intro-slide center">
 <h1></h1>
 <p><img data-src="figures/commons-hex.png" class="commons-intro-logo" alt="Commons logo"></p>
@@ -1212,8 +1214,8 @@ Can models interpret plots that contradict their expectations?
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-</section>
-
+</section></section>
+<section>
 <section id="demos" class="title-slide slide level1 beat-slide center">
 <h1>Demos</h1>
 
@@ -1240,8 +1242,8 @@ Can models interpret plots that contradict their expectations?
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-</section>
-
+</section></section>
+<section>
 <section id="clinical-trials-agent" class="title-slide slide level1 header-slide deep-slide center">
 <h1></h1>
 <div class="columns">
@@ -1294,9 +1296,8 @@ Can models interpret plots that contradict their expectations?
 <section id="build-onboarding" class="slide level2 paper-slide">
 <h2>Build: the commons skill</h2>
 <ul>
-<li class="fragment">A coding agent with the commons skill walks you through building your agent</li>
-<li class="fragment">It inspects your data, documentation, and trusted code before writing anything</li>
-<li class="fragment">It pauses at each decision: scope, data sources, trust boundaries</li>
+<li class="fragment">Use a coding agent plus the built-in commons skill to parse through your data and code and build a commons agent.</li>
+<li class="fragment">Walks you through the process of creating a commons agent.</li>
 </ul>
 <div class="footer">
 <p><a href="https://posit-dev.github.io/commons/r/articles/commons.html#working-with-the-agent-skill">Working with the agent skill</a></p>
@@ -1316,8 +1317,7 @@ Can models interpret plots that contradict their expectations?
       }</style></aside>
 </section>
 <section id="information-layers" class="slide level2 paper-slide">
-<h2>Information layers</h2>
-<p>Trusted calculations, plus the knowledge needed to use and interpret the data.</p>
+<h2>Build: information layers</h2>
 <table class="caption-top">
 <colgroup>
 <col style="width: 33%">
@@ -1362,9 +1362,8 @@ Can models interpret plots that contradict their expectations?
 </section>
 <section id="build-semantic" class="slide level2 paper-slide">
 <h2>Build: the semantic layer</h2>
-<p>Trusted calculations: <strong>how an answer is computed.</strong></p>
+<p>Trusted calculations specify how an answer is computed.</p>
 <ul>
-<li class="fragment">For example: enrollment counts by trial phase, using the team’s agreed definition</li>
 <li class="fragment">Define vetted R or Python functions as measures in scripts.</li>
 <li class="fragment">Or use data dictionary definitions, Snowflake semantic views, and Databricks metric views.</li>
 </ul>
@@ -1385,7 +1384,7 @@ Can models interpret plots that contradict their expectations?
 </section>
 <section id="build-context" class="slide level2 paper-slide">
 <h2>Build: the context layer</h2>
-<p>Organizational knowledge: <strong>what the data means and how to interpret it.</strong></p>
+<p>What the data means and how to interpret it.</p>
 <ul>
 <li class="fragment">Markdown files</li>
 <li class="fragment">Descriptive entries in data dictionaries</li>
@@ -1449,7 +1448,8 @@ Can models interpret plots that contradict their expectations?
       }</style></aside>
 </section>
 <section id="build-warehouse" class="slide level2 paper-slide">
-<h2>Build: data sources from the warehouse</h2>
+<h2>Build</h2>
+<h4 id="databricks-and-snowflake">Databricks and Snowflake</h4>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="co"># Snowflake semantic view</span></span>
 <span id="cb8-2"><a></a>warehouse <span class="ot">&lt;-</span> <span class="fu">data_source</span>(</span>
 <span id="cb8-3"><a></a>  snowflake_con, <span class="at">tables =</span> <span class="st">"ANALYTICS.TRIAL_ENROLLMENT"</span></span>
@@ -1466,19 +1466,13 @@ Can models interpret plots that contradict their expectations?
 <span id="cb8-14"><a></a>  <span class="at">context_layer =</span> <span class="fu">context_layer</span>(<span class="at">files =</span> <span class="st">"context/protocol-conventions.md"</span>)</span>
 <span id="cb8-15"><a></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
-<li class="fragment">Use existing governed metrics as trusted calculations</li>
-<li class="fragment">No separate <code>semantic_layer()</code> call needed for these views</li>
-</ul>
-</section>
-<section id="deploy-connect" class="slide level2 paper-slide">
-<h2>Deploy</h2>
-<ul>
-<li class="fragment">Deploy like any other Shiny app.</li>
-<li class="fragment">(Optional) Enable built in trajectory-logging.</li>
+<li class="fragment"><strong>Semantic layer:</strong> Snowflake <strong>semantic views</strong> or Databricks <strong>metric views</strong>, imported through <code>data_source()</code></li>
+<li class="fragment"><strong>Context:</strong> warehouse models can also supply descriptive information. Add additional information to Markdown files and data dictionaries</li>
 </ul>
 <aside class="notes">
-<p>Deployment is ordinary Connect deployment. For trajectory capture, include “OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT” in deployApp()’s envVars argument, and a server administrator must enable OpenTelemetry.Enabled and OpenTelemetry.AllowContentInstrumentation.</p>
-<p>Users whose Connect account role is viewer cannot read traces even when named in share_with; trace readers need at least a publisher account.</p>
+<p>The two warehouse objects above supply trusted metrics and dimensions: Snowflake calls them semantic views; Databricks calls them metric views. commons imports these through the data source, so they do not require a separate semantic_layer() call.</p>
+<p>Warehouse models need not supply only calculations: the Databricks integration also imports descriptive context from metric views. Do not present warehouse metadata and context as mutually exclusive categories.</p>
+<p>The protocol-conventions Markdown file adds explicit context in this example. Descriptive entries in data dictionaries can also supply context; calculation definitions in dictionaries contribute trusted logic.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1491,19 +1485,15 @@ Can models interpret plots that contradict their expectations?
           display:block!important;
       }</style></aside>
 </section>
-<section id="governance" class="slide level2 paper-slide">
-<h2>Governance</h2>
+<section id="deploy-connect" class="slide level2 paper-slide">
+<h2>Deploy</h2>
 <ul>
-<li class="fragment">Enforce access with warehouse permissions and per-viewer credentials</li>
-<li class="fragment">Restrict provider-visible data, context, results, and measure source</li>
-<li class="fragment">Protect full-conversation trajectory logs with access controls and retention</li>
+<li class="fragment">Deploy like any other Shiny app.</li>
+<li class="fragment">(Optional) Enable built in trajectory-logging.</li>
+<li class="fragment">Enforce access with warehouse permissions and per-viewer credentials.</li>
 </ul>
-<div class="footer">
-<p>https://posit-dev.github.io/commons/r/articles/governance.html</p>
-</div>
 <aside class="notes">
-<p>Tables describe data; they do not authorize access. Create DBI connections and the agent inside the Shiny server for each session, using Connect viewer OAuth. The supplied connection enforces warehouse row-level security and table- and column-level policies.</p>
-<p>A shared service account has the same database permissions for every user; it does not automatically differentiate users.</p>
+<p>Create DBI connections and the agent inside the Shiny server for each session, using Connect viewer OAuth. The supplied connection enforces warehouse row-level security and table- and column-level policies.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1526,6 +1516,7 @@ Can models interpret plots that contradict their expectations?
 <aside class="notes">
 <p>We’ll demo the trajectory reviewer here. Reviewed conversations surface recurring questions, then you add trusted calculations or context. The goal is to improve the system, not just ask users to check answers more carefully. These reviewer functions are in the R package.</p>
 <p>Go to trajectory reviewer</p>
+<p>https://01a13e15-380b-24ec-91a0-f7e07302f411.share.connect.posit.cloud/</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1538,14 +1529,9 @@ Can models interpret plots that contradict their expectations?
           display:block!important;
       }</style></aside>
 </section>
-
-<section id="ecosystem" class="title-slide slide level1 paper-slide center">
-<h1>commons, shinychat, querychat, and Posit Assistant</h1>
+<section id="ecosystem" class="slide level2 paper-slide">
+<h2>Which tool is which?</h2>
 <table class="caption-top">
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
 <thead>
 <tr class="header">
 <th></th>
@@ -1554,25 +1540,24 @@ Can models interpret plots that contradict their expectations?
 </thead>
 <tbody>
 <tr class="odd">
-<td>Posit Assistant</td>
+<td><a href="https://assistant.posit.co/">Posit Assistant</a></td>
 <td>Get help with coding and data analysis in your development environment</td>
 </tr>
 <tr class="even">
-<td>commons</td>
+<td><a href="https://posit-dev.github.io/commons/">commons</a></td>
 <td>Build general data-analysis agents for colleagues, grounded in your team’s trusted code</td>
 </tr>
 <tr class="odd">
-<td>shinychat</td>
+<td><a href="https://posit-dev.github.io/shinychat/">shinychat</a></td>
 <td>Build custom Shiny apps with chat components</td>
 </tr>
 <tr class="even">
-<td>querychat</td>
+<td><a href="https://posit-dev.github.io/querychat/">querychat</a></td>
 <td>Explore tabular data through SQL-powered chat</td>
 </tr>
 </tbody>
 </table>
-</section>
-
+</section></section>
 <section id="closing-trust" class="title-slide slide level1 statement-slide paper-slide center">
 <h1></h1>
 <div class="statement">
@@ -1583,7 +1568,6 @@ Can models interpret plots that contradict their expectations?
 <section id="thank-you" class="title-slide slide level1 thank-you-slide deep-slide center">
 <h1></h1>
 <div class="thank-you-wrap">
-  <img class="thanks-weave" src="figures/thanks-weave.svg" alt="">
   <div class="thank-you-row">
     <h1>Thank you!</h1>
   </div>
@@ -1605,9 +1589,6 @@ Can models interpret plots that contradict their expectations?
 
 
 </section>
-
-</div>
-</section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
