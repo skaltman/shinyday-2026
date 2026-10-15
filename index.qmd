@@ -1246,7 +1246,6 @@ agent <- commons(
 
 ::: {.incremental}
 * **Semantic layer:** Snowflake **semantic views** or Databricks **metric views**, imported through `data_source()`
-* **Context:** warehouse models can also supply descriptive information. Add additional information to Markdown files and data dictionaries
 :::
 
 ::: notes
@@ -1259,9 +1258,7 @@ Warehouse models need not supply only calculations: the Databricks
 integration also imports descriptive context from metric views. Do not
 present warehouse metadata and context as mutually exclusive categories.
 
-The protocol-conventions Markdown file adds explicit context in this
-example. Descriptive entries in data dictionaries can also supply context;
-calculation definitions in dictionaries contribute trusted logic.
+* **Context:** warehouse models can also supply descriptive information. Add additional information to Markdown files and data dictionaries
 :::
 
 

@@ -1348,12 +1348,13 @@ Can models interpret plots that contradict their expectations?
 <span id="cb8-15"><a></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li class="fragment"><strong>Semantic layer:</strong> Snowflake <strong>semantic views</strong> or Databricks <strong>metric views</strong>, imported through <code>data_source()</code></li>
-<li class="fragment"><strong>Context:</strong> warehouse models can also supply descriptive information. Add additional information to Markdown files and data dictionaries</li>
 </ul>
 <aside class="notes">
 <p>The two warehouse objects above supply trusted metrics and dimensions: Snowflake calls them semantic views; Databricks calls them metric views. commons imports these through the data source, so they do not require a separate semantic_layer() call.</p>
 <p>Warehouse models need not supply only calculations: the Databricks integration also imports descriptive context from metric views. Do not present warehouse metadata and context as mutually exclusive categories.</p>
-<p>The protocol-conventions Markdown file adds explicit context in this example. Descriptive entries in data dictionaries can also supply context; calculation definitions in dictionaries contribute trusted logic.</p>
+<ul>
+<li><strong>Context:</strong> warehouse models can also supply descriptive information. Add additional information to Markdown files and data dictionaries</li>
+</ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
