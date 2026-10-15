@@ -30,8 +30,74 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-5719f4479869f1a4e89374bd9ccca925.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-9b6fbfbb71f80b160c3c45a3f73b51a1.css">
   <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -148,21 +214,6 @@
 <div class="footer title-footer">
 <p>https://pos.it/TODO</p>
 </div>
-<aside class="notes">
-<p>A year ago, we were really worried about Databot. Some of those concerns are much less relevant now because the models have improved.</p>
-<p>Today I want to talk about what has changed and how we weave trust into the systems themselves so these things work for us.</p>
-<p>Because it’s Shiny Day, I’ll spend some time on commons, a new open-source package built on shinychat. First, the story of an eval.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
 </section>
 <section id="story-of-an-eval" class="slide level2 beat-slide">
 <h2>The story of an eval</h2>
@@ -291,19 +342,6 @@ Can models interpret plots that contradict their expectations?
 </section>
 <section id="frontier-model-not-enough" class="slide level2 beat-slide">
 <h2>But this doesn’t mean everything is solved</h2>
-<aside class="notes">
-<p>Keep this a brief qualification: improvement isn’t uniform across tasks. Bluffbench2 asks whether models notice subtle data-quality issues in plots.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
 </section>
 <section id="bluffbench2-data-artifact" class="slide level2 paper-slide">
 <h2></h2>
@@ -354,8 +392,7 @@ Can models interpret plots that contradict their expectations?
 <p>github.com/posit-dev/bluffbench2</p>
 </div>
 <aside class="notes">
-<p>Models have improved, but not every capability has improved equally. Keep this a qualification rather than a second extended warning story.</p>
-<p>This is the jaggedness of model capability: strengths in one task don’t tell us everything about performance on another.</p>
+<p>Models have improved, but not every capability has improved equally.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -372,7 +409,7 @@ Can models interpret plots that contradict their expectations?
 <h2>LLMs are jagged</h2>
 <p><img data-src="figures/task-llm-jagged.excalidraw.svg" class="" style="max-width: 90%; max-height: 500px; display: block; margin-left: auto; margin-right: auto;" alt="A schematic showing LLM performance rising and falling unevenly across tasks of increasing difficulty."></p>
 <aside class="notes">
-<p>Copied from rstudio/llms, website/slides/slides-02.qmd. A task that seems harder to us isn’t necessarily harder for the model. Capabilities don’t follow a smooth, predictable frontier.</p>
+<p>a year ago, we often told people about the jaggedness of llms strengths in one task don’t tell us everything about performance on another.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -423,30 +460,8 @@ Can models interpret plots that contradict their expectations?
 </div>
 </div>
 <aside class="notes">
-<p>We can’t really make statements like <span class="accent">“LLMs can’t do X”</span> because it changes.</p>
-<p>Some of the things we worried about a year ago are much less relevant now. We need to update our judgments as the evidence changes.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="advice-2025" class="slide level2 beat-slide">
-<h2>Advice for working with LLMs</h2>
-<ul>
-<li>Use the best models</li>
-<li>Have a human review the work</li>
-<li>Be (a little) afraid</li>
-</ul>
-<aside class="notes">
-<p>6 months ago we might have said, “use the best model available” now it’s more like use the least expensive model that does a sufficient job at your task, and switch depending on the task.</p>
-<p>We’ll come back to this advice at the end of the talk.</p>
+<p>now I might explain it more like this where a model has different strengths in different areas and maybe some weird behaviors but also this varies model by model and version by version</p>
+<p>one reason i would now not say “use the best model available” but instead use the least expensive model that does a sufficient job at your task, and switch depending on the task.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -493,6 +508,7 @@ Can models interpret plots that contradict their expectations?
 <h2></h2>
 <p><img data-src="figures/posit-assistant-homepage.png" class="rounded" height="650"></p>
 <aside class="notes">
+<p>we’re going to talk about posit assistant for a minute before we get back to shiny</p>
 <p>Our flagship agent is Posit Assistant. Posit Assistant is a coding and data science agent. It’s available in RStudio, Positron, and the terminal. When it’s running inside of your IDE, it works inside of your active R and Python session. You can use whatever model from whatever provider you want with it.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -532,7 +548,7 @@ Can models interpret plots that contradict their expectations?
 <p><span style="color:#f5f1ec;">Photo: <a href="https://blog.codinghorror.com/falling-into-the-pit-of-success/">Falling into the Pit of Success</a>, Coding Horror</span></p>
 </div>
 <aside class="notes">
-<p>A pit of success: design the environment so that falling into it lands you somewhere good. The harness should make the correct path the easy path.</p>
+<p>we want this to be a pit of success something hadley would often say when talking about the tidyverse make it as easy as possible for the model or the model+user system to fall into correctness</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -552,10 +568,10 @@ Can models interpret plots that contradict their expectations?
 <li class="fragment">Reproducible, transparent, auditable</li>
 </ul>
 <aside class="notes">
-<p>does the agent have to run code? no – it could do things “in its head,” but then you lose reproducibility and transparency.</p>
+<p>the primary thing, that might seem obvious but isn’t always obvious is that the model needs to write code</p>
+<p>as much as possible, get it to write code does the agent have to run code? no – it could do things “in its head,” but then you lose reproducibility and transparency.</p>
 <p>llms are good at code</p>
-<p>we’ve learned from years of code for analysis…</p>
-<p>have the agent write code</p>
+<p>we’ve learned from years of code for analysis that code is great for this</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -590,6 +606,23 @@ Can models interpret plots that contradict their expectations?
           display:block!important;
       }</style></aside>
 </section>
+<section id="harness-demo" class="slide level2 paper-slide">
+<h2>Posit Assistant demo</h2>
+<p><img src="figures/posit-assistant-pause-often.gif" alt="Posit Assistant plots the top 20 states by number of Spanish speakers, notes that raw counts aren't normalized by population, and pauses to suggest three follow-up questions rather than continuing on its own." style="height: 560px; display: block; margin: 0 auto;"></p>
+<aside class="notes">
+<p>The agent works in the live session: it runs code, sees the results, and pauses with suggestions instead of running on. Correctness comes from the harness, namely the tools that run code and show the session</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="performance-improves-when-the-environment-makes-it-easy-to-be-right" class="slide level2">
 <h2>Performance improves when the environment makes it easy to be right</h2>
 <div class="fragment">
@@ -604,7 +637,7 @@ Can models interpret plots that contradict their expectations?
 </div>
 </div>
 <aside class="notes">
-<p>Posit Assistant is our coding and data science agent. In the IDE it works with your active R or Python session. Here we compare it with a minimal harness on the intuitive condition of bluffbench. This is a different comparison from the earlier model-update results. Harness design can make a difference without changing the underlying model.</p>
+<p>Here we compare it with a minimal harness on the intuitive condition of bluffbench. This is a different comparison from the earlier model-update results. Harness design can make a difference without changing the underlying model.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -617,12 +650,52 @@ Can models interpret plots that contradict their expectations?
           display:block!important;
       }</style></aside>
 </section></section>
+<section id="section-1" class="title-slide slide level1 paper-slide center">
+<h1></h1>
+
+</section>
+
 <section>
 <section id="individual-oversight" class="title-slide slide level1 beat-slide center">
 <h1></h1>
 <p>We can’t just rely on individual oversight.</p>
 <aside class="notes">
-<p>The system has to work with how people actually behave, not depend on individual willpower to review every action carefully. Three examples: auto mode, showing code, and slowing down EDA.</p>
+<p>I hear a lot about human in the loop, and it’s important. No one is saying you shouldn’t be in the loop (well someone is). but we need to actually make that loop work. it isn’t enough for you to just kind of be there monitoring. The system has to work with how people actually behave, not depend on individual willpower to review every action carefully. Three examples: auto mode, showing code, and slowing down EDA.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="auto-mode-commands" class="slide level2 paper-slide">
+<h2>Auto mode and human review</h2>
+<div class="fragment">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a></a><span class="fu">grep</span> <span class="at">-n</span> <span class="st">"churn"</span> data/<span class="pp">*</span>.csv</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a></a><span class="ex">Rscript</span> analysis/summary.R</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">write_csv</span>(results, <span class="st">"results/published-results.csv"</span>, <span class="at">overwrite =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a></a><span class="fu">rm</span> <span class="at">-rf</span> <span class="pp">*</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="fu">unlink</span>(<span class="st">"*"</span>, <span class="at">recursive =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a>shutil.rmtree(<span class="st">"/shared/projects/trial-data"</span>, ignore_errors<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<aside class="notes">
+<p>the first comes from what anthropic discovered about people approving commands that the agent requested be run so lets say your agent is giving you a bunch of commands and initially, if you can remember, there was a lot of clicking accept or approve. and we had all these workarounds like having a notification for when claude needed your approval so you could go and do something else in the meantime</p>
+<p>but it turns out that if you just keep showing people commands, they’re pretty much just going to accept without really reading becuase we get tired of these approvals. approval fatigue</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -639,10 +712,10 @@ Can models interpret plots that contradict their expectations?
 <h2>Auto mode and human review</h2>
 <p><img data-src="figures/simpsons-keyboard-bird.gif" class="rounded" alt="A drinking bird repeatedly presses a key on Homer's computer in The Simpsons." height="440"></p>
 <div class="footer">
-<p>The Simpsons GIF, via <a href="https://www.capsnlock.com/blogs/news/simpsons-keyboard-bird">Caps N Lock</a></p>
+<p>The Simpsons</p>
 </div>
 <aside class="notes">
-<p>Repeated permission prompts can turn human review into rubber-stamping. The drinking bird is the joke: an approval click isn’t necessarily review.</p>
+<p>it just becomes like the bird in the simpson’s hitting the y key this is not a good use of our time, and importantly it is not effective! go back to previous slide – we might miss this disatrous command! or my worse nightmare: some agent hooked up to slack or with write permission on github publishes information from me that I didn’t approve</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -657,13 +730,20 @@ Can models interpret plots that contradict their expectations?
 </section>
 <section id="auto-mode-evidence" class="slide level2 paper-slide">
 <h2>Auto mode and human review</h2>
-<p><img data-src="figures/anthropic-auto-mode-human-review.png" class="" alt="Anthropic's chart: human review caught 13.6% of harmful actions and auto mode caught 89% in a controlled study with 1,053 paid developers." height="490"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figures/anthropic-auto-mode-human-review.png" class="quarto-figure quarto-figure-center" alt="Anthropic's chart: human review caught 13.6% of harmful actions and auto mode caught 89% in a controlled study with 1,053 paid developers." height="490"></p>
+</figure>
+</div>
 <div class="footer">
 <p><a href="https://claude.com/blog/auto-mode-default-in-claude-code">Anthropic, Auto mode is now the default in Claude Code (August 7, 2026)</a></p>
 </div>
 <aside class="notes">
-<p>Anthropic made auto mode the default for Pro, Max, and Team plans. In their controlled study with 1,053 paid professional testers, human reviewers blocked 13.6% of dangerous commands and auto mode blocked 89%. One permission prompt per session was replaced with dangerous command text; approving it didn’t execute anything dangerous. This was a test environment, not the testers’ own projects, and isn’t a claim that automation is always safer.</p>
-<p>The point is to design review around actual human behavior, not assume that putting a person at every approval step automatically makes a system safer. PLACEHOLDER: Posit Assistant auto-mode comparison, if needed; not researched further.</p>
+<p>Anthropic compared auto mode with human permission review. Auto mode uses a classifier to check tool calls and block dangerous actions, rather than asking the person to approve every command. After a block, Claude can try a safer approach or ask the user; repeated blocks cause fallback to manual approvals. Not every block becomes a human-review prompt.</p>
+<p>In a controlled study with 1,053 professional testers, human reviewers blocked 143 dangerous commands (13.6%). Auto mode blocked 937 of those same 1,053 commands (89%). That is auto mode’s own block rate, not a combined model-plus-human catch rate.</p>
+<p>One permission prompt per session was replaced with dangerous command text; approving it did not execute the command. Testers were working in a study environment, not their own projects. This shows that auto mode blocked more of these dangerous commands, not that automation is universally safer.</p>
+<p>Anthropic subsequently made auto mode the default for eligible plans.</p>
+<p>The point is to design review around actual human behavior, not assume that putting a person at every approval step automatically makes a system safer.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -677,15 +757,34 @@ Can models interpret plots that contradict their expectations?
       }</style></aside>
 </section>
 <section id="showing-all-code" class="slide level2 paper-slide">
-<h2>Code visibility</h2>
+<h2>When should code shown to the user?</h2>
+<div class="fragment">
 <video class="rounded click-to-toggle" width="100%" style="display: block; margin: 0 auto; max-height: 510px;" data-autoplay="" muted="" preload="auto" tabindex="0" aria-label="Posit Assistant recording showing expanded R code in chat, execution in the Console, and a carrier-delay plot. Click to pause or resume.">
 <source src="figures/05-pa-demo-carriers-a.mp4" type="video/mp4">
 </video>
+<p>:::</p>
 <aside class="notes">
-<p>Code should remain available for inspection, but users don’t need every execution block expanded all the time. Visibility is an interaction-design choice, not a substitute for reproducibility.</p>
+<p>this is something we thought about in posit assistant when thinking through when code should be shown to the user It is important that it also remain available for inspection, but users don’t need every execution block expanded all the time.</p>
 <p>Databot originally put executed R/Python code and output directly in chat. Over time we added collapsible blocks and show/hide controls. In April 2026, Hide code became independent of result visibility: users could collapse the code input while leaving results visible.</p>
-<p>Ordinary chat still shows data-analysis code by default. Optional hiding, collapsed Bash calls, and Canvas summaries are distinct behaviors, not a blanket switch to hiding R/Python code.</p>
-<p>This recording shows expanded R code alongside its execution and plot. It illustrates inspectability; it does not demonstrate clicking Hide code.</p>
+<p>Ordinary chat still shows data-analysis code by default.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<section id="showing-all-code-b" class="slide level2 paper-slide">
+<h2>When should code shown to the user?</h2>
+<video class="rounded click-to-toggle" width="100%" style="display: block; margin: 0 auto; max-height: 560px;" data-autoplay="" muted="" preload="auto" tabindex="0" aria-label="Posit Assistant recording continuing the carriers analysis, showing collapsed and expanded code in chat. Click to pause or resume.">
+<source src="figures/05-pa-demo-carriers-b.mp4" type="video/mp4">
+</video>
+<aside class="notes">
+<p>Reused from the keynote. This cut shows a mix of collapsed and expanded code in the chat transcript, while the plot stays visible.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -700,30 +799,14 @@ Can models interpret plots that contradict their expectations?
 </section>
 <section id="slowing-eda" class="slide level2 paper-slide">
 <h2>Slowing down the EDA process</h2>
-<ul>
-<li class="fragment">PLACEHOLDER: slowing down the EDA process example.</li>
-</ul>
-<aside class="notes">
-<p>PLACEHOLDER: expand.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section></section>
-<section id="guardrails" class="title-slide slide level1 statement-slide paper-slide center">
-<h1></h1>
-<div class="statement">
-<p>Guardrails, <span class="accent">not hope.</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figures/posit-assistant-pause-often.gif" class="rounded" alt="A screen recording of the Posit Assistant panel mid-analysis. The assistant plots the top 20 states by number of Spanish speakers, summarizes the result, and pauses to suggest three follow-up questions rather than continuing on its own." height="560"></p>
+<figcaption>The assistant plots the top 20 states by number of Spanish speakers, notes that raw counts aren’t normalized by population, and pauses to suggest three follow-up questions rather than continuing on its own.</figcaption>
+</figure>
 </div>
 <aside class="notes">
-<p>Across all four layers, build reliability and appropriate constraints into the environment rather than relying only on individual judgment. So far we’ve been talking about people doing their own analysis with an agent. What about collaborators who are not data scientists?</p>
+<p>Reused from the PHUSE deck. The agent pauses after each result, summarizes what it found, and asks what to look at next, instead of running on to a finished conclusion. Slowing down keeps the person in the exploration loop.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -736,10 +819,8 @@ Can models interpret plots that contradict their expectations?
           display:block!important;
       }</style></aside>
 </section>
-
-<section>
-<section id="non-data-scientist" class="title-slide slide level1 night-slide center">
-<h1>But what if the user is not a data scientist?</h1>
+<section id="non-data-scientist" class="title-slide slide level1 beat-slide center">
+<h1>And what if the user is not a data scientist?</h1>
 <aside class="notes">
 <p>but what if the user is not a data scientist? how do we help them get correct answers too?</p>
 <style type="text/css">
@@ -754,11 +835,69 @@ Can models interpret plots that contradict their expectations?
           display:block!important;
       }</style></aside>
 </section>
-<section id="internal-vibe-analysis" class="slide level2 paper-slide">
-<h2>Vibe analysis</h2>
-<p>Someone fires up Claude Code to answer a data question—and gets “vibe analysis” slop.</p>
+<section id="site-traffic-analysis" class="slide level2 agent-story-slide slow-tool-calls">
+<h2></h2>
+<div class="agent-window">
+  <div class="agent-thread">
+        <div class="chat-turn chat-turn-user">
+          <div class="chat-message chat-message-user">
+            how is traffic trending for our site?
+          </div>
+        </div>
+        <div class="chat-turn chat-turn-agent tool-run fragment fade-up" data-fragment-index="0">
+          <div class="chat-message chat-message-agent">
+            <div class="agent-thinking"><span></span> Analyzing site traffic</div>
+            <div class="tool-card" style="--tool-delay: 0s">
+              <span class="tool-card-icon">⌕</span>
+              <span><strong>Searching workspace</strong><small>web analytics</small></span>
+              <span class="tool-progress"><i class="tool-spinner"></i><i class="tool-check">✓</i></span>
+            </div>
+            <div class="tool-card" style="--tool-delay: 2.25s">
+              <span class="tool-card-icon">◫</span>
+              <span><strong>Querying warehouse</strong><small>analytics.pageviews</small></span>
+              <span class="tool-progress"><i class="tool-spinner"></i><i class="tool-check">✓</i></span>
+            </div>
+            <div class="tool-card" style="--tool-delay: 4.5s">
+              <span class="tool-card-icon">∿</span>
+              <span><strong>Calculating daily visits</strong><small>last 90 days</small></span>
+              <span class="tool-progress"><i class="tool-spinner"></i><i class="tool-check">✓</i></span>
+            </div>
+          </div>
+        </div>
+        <div class="chat-turn chat-turn-agent result-turn fragment fade-up" data-fragment-index="0">
+          <div class="chat-message chat-message-agent">
+            <p>Daily visits are down <strong>64%</strong> over the last 90 days.</p>
+            <div class="dau-chart">
+              <div class="dau-chart-title"><span>Daily site visits</span><strong>−64%</strong></div>
+              <svg viewbox="0 0 620 225" role="img" aria-label="Daily site visits rise unevenly, then fall sharply after a changepoint.">
+                <defs>
+                  <lineargradient id="dau-area" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#ee6331" stop-opacity="0.28"></stop>
+                    <stop offset="100%" stop-color="#ee6331" stop-opacity="0.02"></stop>
+                  </lineargradient>
+                </defs>
+                <g class="chart-grid">
+                  <line x1="56" y1="34" x2="598" y2="34"></line><line x1="56" y1="86" x2="598" y2="86"></line>
+                  <line x1="56" y1="138" x2="598" y2="138"></line><line x1="56" y1="190" x2="598" y2="190"></line>
+                </g>
+                <g class="chart-labels">
+                  <text x="46" y="39">60k</text><text x="46" y="91">40k</text><text x="46" y="143">20k</text>
+                  <text x="56" y="215">90 days ago</text><text x="324" y="215">45 days ago</text><text x="598" y="215">Today</text>
+                </g>
+                <path class="chart-area" d="M56,61 L69,67 L82,58 L95,60 L108,54 L121,59 L134,51 L147,55 L160,57 L173,48 L186,52 L199,45 L212,50 L225,42 L238,46 L251,39 L264,44 L277,36 L290,41 L303,34 L313,37 L319,35 L329,51 L340,57 L351,53 L362,66 L373,61 L384,72 L395,78 L406,73 L417,86 L428,82 L439,95 L450,99 L461,93 L472,108 L483,103 L494,117 L505,113 L516,126 L527,122 L538,134 L549,130 L560,140 L571,137 L582,146 L598,145 L598,190 L56,190 Z"></path>
+                <path class="chart-line" pathlength="1" d="M56,61 L69,67 L82,58 L95,60 L108,54 L121,59 L134,51 L147,55 L160,57 L173,48 L186,52 L199,45 L212,50 L225,42 L238,46 L251,39 L264,44 L277,36 L290,41 L303,34 L313,37 L319,35 L329,51 L340,57 L351,53 L362,66 L373,61 L384,72 L395,78 L406,73 L417,86 L428,82 L439,95 L450,99 L461,93 L472,108 L483,103 L494,117 L505,113 L516,126 L527,122 L538,134 L549,130 L560,140 L571,137 L582,146 L598,145"></path>
+                <circle class="chart-end" cx="598" cy="145" r="6"></circle>
+              </svg>
+            </div>
+          </div>
+        </div>
+  </div>
+</div>
 <aside class="notes">
-<p>PLACEHOLDER: add the internal example and what went wrong. They are curious and reached for an accessible tool, but don’t necessarily have the expertise or context needed to diagnose the answer.</p>
+<p>This morning, your VP pulled up a coding agent and asked a question.</p>
+<p>[yada yada this is what happen]</p>
+<p>Now, as data people, we might have asked ourselves “How are daily visits being measured?” “What event triggers an entry in this column?” “What other possible explanations could account for this change in trend other than a genuine reversal in the traffic going to this site?” If you had dug further, you would have learned that this kind of pageview event no longer triggers on newer versions of Chrome. As users gradually update Chrome, their page visits are no longer registered in this table. Regardless, this isn’t even the typical table that the data science team uses to measure site traffic anyway.</p>
+<p>Nevertheless, you’re not there. Your VP brings this chart to leadership. They decide to spend millions to reverse the trend.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -770,9 +909,108 @@ Can models interpret plots that contradict their expectations?
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-</section></section>
+</section>
+<section id="site-traffic-recreated" class="slide level2 agent-story-slide slow-tool-calls">
+<h2></h2>
+<div class="agent-window month-later-window">
+  <div class="agent-thread">
+    <div class="chat-turn chat-turn-user">
+      <div class="chat-message chat-message-user">
+        could you find the site traffic chart we made a month ago?
+      </div>
+    </div>
+    <div class="chat-turn chat-turn-agent tool-run history-tool-run fragment fade-up" data-fragment-index="0">
+      <div class="chat-message chat-message-agent">
+        <div class="agent-thinking"><span></span> Looking for prior analysis</div>
+        <div class="tool-card" style="--tool-delay: 0s">
+          <span class="tool-card-icon">⌕</span>
+          <span><strong>Searching conversations</strong><small>site traffic chart</small></span>
+          <span class="tool-progress"><i class="tool-spinner"></i><i class="tool-check">✓</i></span>
+        </div>
+        <div class="tool-card history-file-check" style="--tool-delay: 1.25s">
+          <span class="tool-card-icon">◫</span>
+          <span><strong>Checking generated files</strong><small>temporary workspace</small></span>
+          <span class="tool-progress"><i class="tool-spinner"></i><i class="tool-check">✓</i></span>
+        </div>
+      </div>
+    </div>
+    <div class="chat-turn chat-turn-agent history-missing fragment fade-up" data-fragment-index="0">
+      <div class="chat-message chat-message-agent">
+        I couldn’t find that conversation or any saved analysis files. Do you want me to recreate that chart for the last 90 days?
+      </div>
+    </div>
+    <div class="chat-turn chat-turn-user fragment fade-up" data-fragment-index="1">
+      <div class="chat-message chat-message-user">
+        yeah
+      </div>
+    </div>
+    <div class="chat-turn chat-turn-agent tool-run fragment fade-up" data-fragment-index="2">
+      <div class="chat-message chat-message-agent">
+        <div class="agent-thinking"><span></span> Analyzing site traffic</div>
+        <div class="tool-card" style="--tool-delay: 0s">
+          <span class="tool-card-icon">⌕</span>
+          <span><strong>Searching workspace</strong><small>web analytics</small></span>
+          <span class="tool-progress"><i class="tool-spinner"></i><i class="tool-check">✓</i></span>
+        </div>
+        <div class="tool-card" style="--tool-delay: 1.75s">
+          <span class="tool-card-icon">◫</span>
+          <span><strong>Querying warehouse</strong><small>analytics.sessions</small></span>
+          <span class="tool-progress"><i class="tool-spinner"></i><i class="tool-check">✓</i></span>
+        </div>
+        <div class="tool-card" style="--tool-delay: 3.5s">
+          <span class="tool-card-icon">∿</span>
+          <span><strong>Calculating daily visits</strong><small>last 90 days</small></span>
+          <span class="tool-progress"><i class="tool-spinner"></i><i class="tool-check">✓</i></span>
+        </div>
+      </div>
+    </div>
+    <div class="chat-turn chat-turn-agent result-turn fragment fade-up" data-fragment-index="2">
+      <div class="chat-message chat-message-agent">
+        <p>Daily visits increased <strong>22%</strong> over the last 90 days.</p>
+        <div class="dau-chart">
+          <div class="dau-chart-title"><span>Daily site visits</span><strong>+22%</strong></div>
+          <svg viewbox="0 0 620 225" role="img" aria-label="Daily site visits trend unevenly upward over the last 90 days.">
+            <defs>
+              <lineargradient id="traffic-area-up" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#23875b" stop-opacity="0.26"></stop>
+                <stop offset="100%" stop-color="#23875b" stop-opacity="0.02"></stop>
+              </lineargradient>
+            </defs>
+            <g class="chart-grid">
+              <line x1="56" y1="34" x2="598" y2="34"></line><line x1="56" y1="86" x2="598" y2="86"></line>
+              <line x1="56" y1="138" x2="598" y2="138"></line><line x1="56" y1="190" x2="598" y2="190"></line>
+            </g>
+            <g class="chart-labels">
+              <text x="46" y="39">60k</text><text x="46" y="91">40k</text><text x="46" y="143">20k</text>
+              <text x="56" y="215">90 days ago</text><text x="324" y="215">45 days ago</text><text x="598" y="215">Today</text>
+            </g>
+            <path class="chart-area" d="M56,69 L69,74 L82,66 L95,71 L108,63 L121,68 L134,70 L147,61 L160,65 L173,57 L186,64 L199,60 L212,54 L225,58 L238,62 L251,52 L264,56 L277,48 L290,55 L303,51 L316,44 L329,50 L342,47 L355,39 L368,46 L381,43 L394,49 L407,40 L420,44 L433,36 L446,43 L459,38 L472,34 L485,42 L498,37 L511,31 L524,39 L537,35 L550,29 L563,36 L576,33 L589,38 L598,41 L598,190 L56,190 Z"></path>
+            <path class="chart-line" pathlength="1" d="M56,69 L69,74 L82,66 L95,71 L108,63 L121,68 L134,70 L147,61 L160,65 L173,57 L186,64 L199,60 L212,54 L225,58 L238,62 L251,52 L264,56 L277,48 L290,55 L303,51 L316,44 L329,50 L342,47 L355,39 L368,46 L381,43 L394,49 L407,40 L420,44 L433,36 L446,43 L459,38 L472,34 L485,42 L498,37 L511,31 L524,39 L537,35 L550,29 L563,36 L576,33 L589,38 L598,41"></path>
+            <circle class="chart-end" cx="598" cy="41" r="6"></circle>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<aside class="notes">
+<p>A month later, leadership will ass to see the chart again. The VP will open up the same agent, but it can’t find the conversation. (It was deleted after 30 days.) All of the analysis had happened in a tempfile that is long gone.</p>
+<p>The agent offers to make it again. This time, when the VP asks for the same plot, they see that site visits had been steadily trending upward the whole time.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+
 <section id="trusted-code" class="title-slide slide level1 center">
-<h1><span id="trusted-code" style="color: #ee6331; font-size: 1.4em;"><em>Trusted</em> code</span></h1>
+<h1><span id="trusted-code" style="color: #b8623f; font-size: 1.4em;"><em>Trusted</em> code</span></h1>
 <aside class="notes">
 <p>This vetted code used by the data scientists is what we’ll called <em>trusted</em> code they rely on it and trust it to give them the right answers</p>
 <p>They also might have trusted code in</p>
@@ -796,7 +1034,6 @@ Can models interpret plots that contradict their expectations?
       }</style></aside>
 </section>
 
-<section>
 <section id="commons" class="title-slide slide level1 commons-intro-slide center">
 <h1></h1>
 <p><img data-src="figures/commons-hex.png" class="commons-intro-logo" alt="Commons logo"></p>
@@ -818,6 +1055,89 @@ Can models interpret plots that contradict their expectations?
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</section>
+<section id="commons-does-3-things" class="slide level2">
+<h2>commons does 3 things</h2>
+<ul>
+<li class="fragment">Extract trusted calculations from existing artifacts into a data structure</li>
+<li class="fragment">A harness to give the right context at the right time</li>
+<li class="fragment">A feedback loop to push more queries up the trust ladder over time</li>
+</ul>
+</section>
+<section id="commons-trusted-calculation" class="slide level2">
+<h2></h2>
+<video class="rounded click-to-toggle" width="100%" preload="auto" data-autoplay="" muted="" tabindex="0" aria-label="Commons recording: the agent searches for and runs the data scientist's site traffic calculation, and the answer is marked verified. Click to pause or resume.">
+<source src="figures/commons-01-traffic-trend-a.mp4" type="video/mp4">
+</video>
+<aside class="notes">
+<p>Let’s see how the VP’s analysis would work with a commons agent.</p>
+<p>The first thing the agent does is search for a trusted calculation. Here it finds and runs the data scientist’s site traffic calculation.</p>
+<p>The answer is marked as verified to signify that it used vetted code.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="commons-context-citations" class="slide level2">
+<h2></h2>
+<video class="rounded click-to-toggle" width="100%" preload="auto" data-autoplay="" muted="" tabindex="0" aria-label="Commons recording: the agent searches context, writes custom code, and presents a checked citation. Click to pause or resume.">
+<source src="figures/commons-02-page-views-a.mp4" type="video/mp4">
+</video>
+<aside class="notes">
+<p>However, it’s unlikely that trusted code will cover all questions a user might have. For these situations, the agent can write custom R, Python, or SQL.</p>
+<p>First, the agent looks through additional context in the form of data dictionaries, markdown files, and, if you have them, existing context layers from Databricks and Snowflake.</p>
+<p>Then, it writes whatever code it needs to find an answer.</p>
+<p>Finally, when it presents an answer, it can provide a citation to that context. The citation is deterministically checked against trusted context that has appeared in the conversation – if it matches, a citation tag is shown.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="commons-context-citations-b" class="slide level2">
+<h2></h2>
+<video class="rounded click-to-toggle" width="100%" preload="auto" data-autoplay="" muted="" tabindex="0" aria-label="Commons recording: continuation of the context and citation example. Click to pause or resume.">
+<source src="figures/commons-02-page-views-b.mp4" type="video/mp4">
+</video>
+</section>
+<section id="commons-lower-trust-answer" class="slide level2">
+<h2></h2>
+<video class="rounded click-to-toggle" width="100%" preload="auto" data-autoplay="" muted="" tabindex="0" aria-label="Commons recording: the agent cannot find trusted context, and its answer carries a lower-trust tag. Click to pause or resume.">
+<source src="figures/commons-03-most-visits-a.mp4" type="video/mp4">
+</video>
+<aside class="notes">
+<p>There’s one more possible path: the model cannot find trusted context to justify its approach. In this case, we mark the answer with a yellow tag, which lets the user know the answer should be considered less trusted.</p>
+<p>This is how we balance convenience and correctness. The tool has to feel convenient enough that the user actually wants to reach for it – it needs to feel like a normal chat. When correctness is closer to a normal coding agent, we signal that the user ought to be more skeptical of the answer.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="commons-lower-trust-answer-b" class="slide level2">
+<h2></h2>
+<video class="rounded click-to-toggle" width="100%" preload="auto" data-autoplay="" muted="" tabindex="0" aria-label="Commons recording: continuation of the lower-trust example. Click to pause or resume.">
+<source src="figures/commons-03-most-visits-b.mp4" type="video/mp4">
+</video>
 </section>
 <section id="commons-trust-flow" class="slide level2 trust-flow-slide paper-slide">
 <h2></h2>
@@ -870,22 +1190,20 @@ Can models interpret plots that contradict their expectations?
           display:block!important;
       }</style></aside>
 </section>
-<section id="commons-does-3-things" class="slide level2">
-<h2>commons does 3 things</h2>
-<ul>
-<li class="fragment">Extract trusted calculations from existing artifacts into a data structure</li>
-<li class="fragment">A harness to give the right context at the right time</li>
-<li class="fragment">A feedback loop to push more queries up the trust ladder over time</li>
-</ul>
-</section></section>
-<section>
-<section id="demos" class="title-slide slide level1 header-slide deep-slide center">
+
+<section id="demos" class="title-slide slide level1 beat-slide center">
 <h1>Demos</h1>
 
 </section>
-<section id="devrel-agent" class="slide level2 paper-slide">
-<h2>DevRel agent</h2>
-<p><a href="https://posit-devrel-agent.share.connect.posit.cloud/" target="_blank" rel="noopener">Open the live demo</a></p>
+<section id="devrel-agent" class="slide level2 header-slide deep-slide">
+<h2></h2>
+<div class="columns">
+<div class="column header-text" style="width:64%;">
+<p>DevRel Agent</p>
+</div></div>
+<div class="footer clinical-trials-header-footer">
+<p>https://github.com/posit-dev/devrel-agent</p>
+</div>
 <aside class="notes">
 <p>Live demo: https://posit-devrel-agent.share.connect.posit.cloud/ PLACEHOLDER: choose questions to demonstrate.</p>
 <style type="text/css">
@@ -899,8 +1217,8 @@ Can models interpret plots that contradict their expectations?
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-</section></section>
-<section>
+</section>
+
 <section id="clinical-trials-agent" class="title-slide slide level1 header-slide deep-slide center">
 <h1></h1>
 <div class="columns">
@@ -910,7 +1228,7 @@ Can models interpret plots that contradict their expectations?
 <p><img data-src="figures/clinical-trials-agent-logo-orange.png" class="header-image" alt="Clinical trials agent logo"></p>
 </div></div>
 <div class="footer clinical-trials-header-footer">
-<p><a href="https://pos.it/clinical-trials-agent">pos.it/clinical-trials-agent</a></p>
+<p><a href="https://github.com/posit-dev/clinical-trials-agent">https://github.com/posit-dev/clinical-trials-agent</a></p>
 </div>
 </section>
 <section id="clinical-trials-agent-demo" class="slide level2">
@@ -918,15 +1236,9 @@ Can models interpret plots that contradict their expectations?
 <video class="rounded click-to-toggle" width="100%" data-autoplay="" muted="" preload="auto" tabindex="0" aria-label="Clinical Trials Agent demo. Plays automatically; click to pause or resume.">
 <source src="figures/clinical-trials-agent-demo.mp4" type="video/mp4">
 </video>
-<div class="footer clinical-trials-footer">
-<p><a href="https://pos.it/clinical-trials-agent">pos.it/clinical-trials-agent</a></p>
-</div>
-</section></section>
-<section>
-<section id="commons-lifecycle" class="title-slide slide level1 lifecycle-slide paper-slide center">
-<h1></h1>
-
 </section>
+<section id="commons-lifecycle" class="slide level2 lifecycle-slide paper-slide">
+<h2></h2>
 <div class="lifecycle-cards">
 <div class="lifecycle-card fragment fade-up">
 <h3 id="build">Build</h3>
@@ -956,15 +1268,255 @@ Can models interpret plots that contradict their expectations?
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-<section id="integrations" class="slide level2 paper-slide">
-<h2>Snowflake and other integrations</h2>
+</section>
+<section id="build-onboarding" class="slide level2 paper-slide">
+<h2>Build: the commons skill</h2>
 <ul>
-<li class="fragment"><code>data_source()</code> works with data frames, pins boards, and DBI connections</li>
-<li class="fragment">Snowflake semantic views and Databricks metric views become trusted measures</li>
-<li class="fragment">Answers built on them are marked trusted</li>
+<li class="fragment">A coding agent with the commons skill walks you through building your agent</li>
+<li class="fragment">It inspects your data, documentation, and trusted code before writing anything</li>
+<li class="fragment">It pauses at each decision: scope, data sources, trust boundaries</li>
+</ul>
+<div class="footer">
+<p><a href="https://posit-dev.github.io/commons/r/articles/commons.html#working-with-the-agent-skill">Working with the agent skill</a></p>
+</div>
+<aside class="notes">
+<p>The commons package ships as a skill for coding agents (Posit Assistant, Claude Code, Codex). The skill is named commons; onboarding is one workflow within it, alongside extraction, evaluation, and iteration. The onboarding reference scaffolds the project, collects source material incrementally, and records durable guidance in AGENTS.md / CLAUDE.md.</p>
+<p>You don’t have to learn the API cold: the skill knows the package and asks you only for the decisions that matter.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="information-layers" class="slide level2 paper-slide">
+<h2>Information layers</h2>
+<p>Give the agent more than access to data.</p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Semantic layer</th>
+<th>Context layer</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Trusted calculations the agent can reuse</td>
+<td>Background information that helps the agent reason about the data</td>
+</tr>
+<tr class="even">
+<td>R measures, data dictionary definitions, warehouse metrics</td>
+<td>Documentation, definitions, conventions, and known limitations</td>
+</tr>
+</tbody>
+</table>
+<aside class="notes">
+<p>These layers complement the data source. The semantic layer supplies trusted ways to compute answers. The context layer helps the agent write custom SQL or R and interpret the results when a trusted calculation doesn’t cover the question.</p>
+<p>Data dictionaries can contribute to both: calculation definitions to the semantic layer, and descriptive information to the context layer.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="build-semantic" class="slide level2 paper-slide">
+<h2>Build: the semantic layer</h2>
+<p>Trusted calculations: <strong>how an answer is computed.</strong></p>
+<ul>
+<li class="fragment">For example: enrollment counts by trial phase, using the team’s agreed definition</li>
+<li class="fragment">Reuse vetted R functions as measures, defined inline or in R scripts</li>
+<li class="fragment">Or use data dictionary definitions, Snowflake semantic views, and Databricks metric views</li>
 </ul>
 <aside class="notes">
-<p>PLACEHOLDER: expand on Snowflake and other integrations. Native trusted metric execution described here is available in the R package; do not imply feature parity with Python without checking the current implementation.</p>
+<p>The semantic layer collects the vetted calculations the agent prefers to use. Functions documented with <span class="citation" data-cites="measure">@measure</span> become measures; the roxygen description and <span class="citation" data-cites="param">@param</span> tags become the tool’s description and arguments.</p>
+<p>The enrollment example is illustrative, not a statement about J&amp;J’s definitions. The point is to reuse the team’s calculation rather than have the model reinvent its logic for each question. Measures can contain ordinary R code; they do not have to contain SQL or a dbGetQuery call. The same trusted calculations can also come from data dictionary definitions, Snowflake semantic views, or Databricks metric views.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="build-context" class="slide level2 paper-slide">
+<h2>Build: the context layer</h2>
+<p>Organizational knowledge: <strong>what the data means and how to interpret it.</strong></p>
+<ul>
+<li class="fragment">For example: what “enrolled” means, reporting conventions, and known data limitations</li>
+<li class="fragment">Supply text and Markdown documents; attach structured data dictionaries to data sources</li>
+<li class="fragment">Relevant context is retrieved as needed; always-needed guidance goes in <code>instructions</code></li>
+</ul>
+<aside class="notes">
+<p>The context layer holds the organizational knowledge that isn’t in the data: definitions, conventions, how tables join, what terms mean. commons searches it when it’s relevant and cites what it used.</p>
+<p>Things the agent needs in every conversation – like fiscal-year conventions – go in commons()’ instructions argument instead, so they’re always present.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="build-agent" class="slide level2 paper-slide">
+<h2>Build</h2>
+<h4 id="putting-the-pieces-together">Putting the pieces together</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">library</span>(commons)</span>
+<span id="cb7-2"><a></a></span>
+<span id="cb7-3"><a></a>agent <span class="ot">&lt;-</span> <span class="fu">commons</span>(</span>
+<span id="cb7-4"><a></a>  ellmer<span class="sc">::</span><span class="fu">chat_anthropic</span>(),</span>
+<span id="cb7-5"><a></a>  <span class="at">data_sources =</span> <span class="fu">data_source</span>(<span class="at">trials =</span> trials),</span>
+<span id="cb7-6"><a></a>  <span class="at">semantic_layer =</span> <span class="fu">semantic_layer</span>(<span class="st">"R/measures.R"</span>),</span>
+<span id="cb7-7"><a></a>  <span class="at">context_layer =</span> <span class="fu">context_layer</span>(<span class="at">files =</span> <span class="st">"context/protocol-conventions.md"</span>)</span>
+<span id="cb7-8"><a></a>)</span>
+<span id="cb7-9"><a></a></span>
+<span id="cb7-10"><a></a><span class="fu">commons_app</span>(agent)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<aside class="notes">
+<p>This assembles a chat client, data source, semantic layer, and context layer; commons wraps them with trusted-calculation tools, context search, provenance marking, and a sandboxed R session.</p>
+<p>The <code>R/measures.R</code> and <code>context/protocol-conventions.md</code> paths illustrate existing files that supply vetted R measures and organizational context. This is not a self-contained runnable example without those files and its data.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside class="notes">
+<p>This is the whole agent: a chat client, a data source, and commons wraps it with trusted-calculation tools, context search, provenance marking, and a sandboxed R session.</p>
+<p>The data source here is a data frame (a clinical trials table), which commons loads into an in-process DuckDB database. The semantic and context layers are optional and grow over time – start with a small working scope and expand.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="build-warehouse" class="slide level2 paper-slide">
+<h2>Build: data sources from the warehouse</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="co"># Snowflake semantic view</span></span>
+<span id="cb8-2"><a></a>warehouse <span class="ot">&lt;-</span> <span class="fu">data_source</span>(</span>
+<span id="cb8-3"><a></a>  snowflake_con, <span class="at">tables =</span> <span class="st">"ANALYTICS.TRIAL_ENROLLMENT"</span></span>
+<span id="cb8-4"><a></a>)</span>
+<span id="cb8-5"><a></a></span>
+<span id="cb8-6"><a></a><span class="co"># Or: Databricks metric view</span></span>
+<span id="cb8-7"><a></a>warehouse <span class="ot">&lt;-</span> <span class="fu">data_source</span>(</span>
+<span id="cb8-8"><a></a>  databricks_con, <span class="at">tables =</span> <span class="st">"clinical.trial_enrollment_metrics"</span></span>
+<span id="cb8-9"><a></a>)</span>
+<span id="cb8-10"><a></a></span>
+<span id="cb8-11"><a></a>agent <span class="ot">&lt;-</span> <span class="fu">commons</span>(</span>
+<span id="cb8-12"><a></a>  ellmer<span class="sc">::</span><span class="fu">chat_anthropic</span>(),</span>
+<span id="cb8-13"><a></a>  <span class="at">data_sources =</span> <span class="fu">list</span>(<span class="at">warehouse =</span> warehouse),</span>
+<span id="cb8-14"><a></a>  <span class="at">context_layer =</span> <span class="fu">context_layer</span>(<span class="at">files =</span> <span class="st">"context/protocol-conventions.md"</span>)</span>
+<span id="cb8-15"><a></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li class="fragment">Use existing governed metrics as trusted calculations</li>
+<li class="fragment">No separate <code>semantic_layer()</code> call needed for these views</li>
+</ul>
+<aside class="notes">
+<p>These are illustrative view names, not actual J&amp;J objects. Choose one of the two source definitions; the connections are already configured DBI connections. The Snowflake object is a semantic view, and the Databricks object is a metric view, rather than an ordinary table.</p>
+<p>The data source is whatever the data team already maintains in Snowflake or Databricks. Pass a DBI connection and select tables: qualified names like “schema.table”, or a DBI::Id ending in a catalog or schema to select a whole namespace (with <code>exclude</code> globs like “TMP_*” to omit objects).</p>
+<p>Namespace selections also import Snowflake semantic views and Databricks metric views as native trusted metrics and dimensions, so warehouse-side definitions become trusted calculations without rewriting them in R. These warehouse semantic models need no separate <code>semantic_layer()</code> call.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="deploy-connect" class="slide level2 paper-slide">
+<h2>Deploy: your colleagues open the app</h2>
+<ul>
+<li class="fragment">Deploy like any other Shiny app: <code>rsconnect::deployApp()</code></li>
+<li class="fragment">Collaborators ask questions in natural language – no R required</li>
+<li class="fragment">Access follows Connect permissions; <code>share_with</code> grants trajectory access</li>
+</ul>
+<aside class="notes">
+<p>Deployment is ordinary Connect deployment. For trajectory capture, include “OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT” in deployApp()’s envVars argument, and a server administrator must enable OpenTelemetry.Enabled and OpenTelemetry.AllowContentInstrumentation.</p>
+<p>Users whose Connect account role is viewer cannot read traces even when named in share_with; trace readers need at least a publisher account.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="governance" class="slide level2 paper-slide">
+<h2>Governance</h2>
+<ul>
+<li class="fragment">Enforce access with warehouse permissions and per-viewer credentials</li>
+<li class="fragment">Restrict provider-visible data, context, results, and measure source</li>
+<li class="fragment">Protect full-conversation trajectory logs with access controls and retention</li>
+</ul>
+<div class="footer">
+<p>https://posit-dev.github.io/commons/r/articles/governance.html</p>
+</div>
+<aside class="notes">
+<p>Tables describe data; they do not authorize access. Create DBI connections and the agent inside the Shiny server for each session, using Connect viewer OAuth. The supplied connection enforces warehouse row-level security and table- and column-level policies.</p>
+<p>A shared service account has the same database permissions for every user; it does not automatically differentiate users.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="integrations" class="slide level2 paper-slide">
+<h2>Snowflake and Databricks integration</h2>
+<ul>
+<li class="fragment"><code>data_source()</code> works with data frames, pins boards, and DBI connections</li>
+<li class="fragment">Snowflake semantic views and Databricks metric views are read as trusted measures</li>
+<li class="fragment">Queries against them execute natively in the warehouse, under the connection’s permissions</li>
+<li class="fragment">Answers built on them are marked trusted; custom code is marked differently</li>
+</ul>
+<aside class="notes">
+<p>The integration works with what your warehouse team already maintains: the semantic layer lives in Snowflake or Databricks, and commons reads its measures and dimensions rather than copying them into the agent.</p>
+<p>Metrics execute in the warehouse under the connection’s permissions. commons queries the existing database rather than loading the source into its own DuckDB database; query results can still be returned to the agent. Native trusted metric execution is available in the R package; do not imply Python parity without checking.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -978,14 +1530,14 @@ Can models interpret plots that contradict their expectations?
       }</style></aside>
 </section>
 <section id="trajectory-review" class="slide level2 paper-slide">
-<h2>Trajectory review</h2>
+<h2>Improve: the trajectory reviewer</h2>
 <ul>
 <li class="fragment"><code>commons(log = TRUE)</code> records conversation histories with OpenTelemetry</li>
 <li class="fragment"><code>trajectory_read()</code> reads trajectories from Connect or local traces</li>
 <li class="fragment"><code>trajectory_review()</code> opens a Shiny app to browse, flag, and annotate conversations</li>
 </ul>
 <aside class="notes">
-<p>PLACEHOLDER: expand with specifics about hooking up the trajectory reviewer (Connect observability settings, review markdown output, etc.). Use reviewed conversations to find recurring questions, then add trusted calculations or context. The goal is to improve the system, not just ask users to check answers more carefully. These reviewer functions are in the R package.</p>
+<p>We’ll demo the trajectory reviewer here. Reviewed conversations surface recurring questions, then you add trusted calculations or context. The goal is to improve the system, not just ask users to check answers more carefully. These reviewer functions are in the R package.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -997,7 +1549,35 @@ Can models interpret plots that contradict their expectations?
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-</section></section>
+</section>
+<section id="trajectory-code" class="slide level2 paper-slide">
+<h2>Reading trajectories back into R</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="co"># All trajectories you can access</span></span>
+<span id="cb9-2"><a></a>trajectories <span class="ot">&lt;-</span> <span class="fu">trajectory_read</span>()</span>
+<span id="cb9-3"><a></a></span>
+<span id="cb9-4"><a></a><span class="co"># A recent window</span></span>
+<span id="cb9-5"><a></a>recent <span class="ot">&lt;-</span> <span class="fu">trajectory_read</span>(<span class="at">n =</span> <span class="dv">20</span>, <span class="at">from =</span> <span class="st">"2026-07-01"</span>)</span>
+<span id="cb9-6"><a></a></span>
+<span id="cb9-7"><a></a><span class="co"># Deployed content, by Connect GUID or URL</span></span>
+<span id="cb9-8"><a></a>deployed <span class="ot">&lt;-</span> <span class="fu">trajectory_read</span>(<span class="st">"https://connect.example.com/content/abc123"</span>)</span>
+<span id="cb9-9"><a></a></span>
+<span id="cb9-10"><a></a><span class="co"># Browse, flag, and annotate</span></span>
+<span id="cb9-11"><a></a><span class="fu">trajectory_review</span>(trajectories)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<aside class="notes">
+<p><code>trajectory_read()</code> pulls captured conversations into a data frame; <code>trajectory_review()</code> launches a Shiny app over them. Review output feeds back into the Build stage as new trusted calculations and context.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+
 <section id="ecosystem" class="title-slide slide level1 paper-slide center">
 <h1>commons, shinychat, querychat, and Posit Assistant</h1>
 <table class="caption-top">
@@ -1091,10 +1671,10 @@ Can models interpret plots that contradict their expectations?
 <section id="closing-trust" class="title-slide slide level1 statement-slide paper-slide center">
 <h1></h1>
 <div class="statement">
-<p>Don’t just ask people to be careful.<br><br> <span class="accent">Weave trustworthiness into the system.</span></p>
+<p><span class="accent">Weave trustworthiness into the system.</span></p>
 </div>
 <aside class="notes">
-<p>Use a model appropriate for the task and understand where it tends to go wrong. Design a trustworthy system rather than relying on individual willpower for review. There is plenty to build: engineering, data science, and IT practices that make these systems useful and dependable. We don’t want overtrust or undertrust; we want good reasons to rely on the system.</p>
+<p>don’t just ask people to be careful</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1146,6 +1726,9 @@ Can models interpret plots that contradict their expectations?
 
 
 </section>
+
+</div>
+</section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">

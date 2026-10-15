@@ -45,16 +45,6 @@ J&J Shiny Day · October 15, 2026
 https://pos.it/TODO
 :::
 
-::: notes
-A year ago, we were really worried about Databot. Some of those concerns are
-much less relevant now because the models have improved.
-
-Today I want to talk about what has changed and how we weave trust into the
-systems themselves so these things work for us.
-
-Because it's Shiny Day, I'll spend some time on commons, a new open-source
-package built on shinychat. First, the story of an eval.
-:::
 
 ## The story of an eval {#story-of-an-eval .beat-slide}
 
@@ -280,10 +270,6 @@ the rising tide of model capability really floats all the boats
 
 ## But this doesn't mean everything is solved {#frontier-model-not-enough .beat-slide}
 
-::: notes
-Keep this a brief qualification: improvement isn't uniform across tasks.
-Bluffbench2 asks whether models notice subtle data-quality issues in plots.
-:::
 
 ## {#bluffbench2-data-artifact .paper-slide}
 
@@ -379,10 +365,6 @@ github.com/posit-dev/bluffbench2
 
 ::: notes
 Models have improved, but not every capability has improved equally.
-Keep this a qualification rather than a second extended warning story.
-
-This is the jaggedness of model capability: strengths in one task don't
-tell us everything about performance on another.
 :::
 
 ## LLMs are jagged {#llms-are-jagged .paper-slide}
@@ -390,9 +372,9 @@ tell us everything about performance on another.
 ![](figures/task-llm-jagged.excalidraw.svg){.nostretch style="max-width: 90%; max-height: 500px; display: block; margin-left: auto; margin-right: auto;" fig-alt="A schematic showing LLM performance rising and falling unevenly across tasks of increasing difficulty."}
 
 ::: notes
-Copied from rstudio/llms, website/slides/slides-02.qmd.
-A task that seems harder to us isn't necessarily harder for the model.
-Capabilities don't follow a smooth, predictable frontier.
+a year ago, we often told people about the jaggedness of llms
+strengths in one task don't
+tell us everything about performance on another.
 :::
 
 ## {#capability-profiles .paper-slide}
@@ -468,23 +450,13 @@ capability_profile_plot(c(0.9, 0.7, 0.75, 0.8, 0.75), title = "Model 1.1")
 :::
 
 ::: notes
-We can't really make statements like ["LLMs can't do X"]{.accent} because it changes.
+now I might explain it more like this
+where a model has different strengths in different areas and maybe some weird behaviors
+but also this varies model by model
+and version by version 
 
-Some of the things we worried about a year ago are much less relevant now.
-We need to update our judgments as the evidence changes.
-:::
-
-## Advice for working with LLMs {#advice-2025 .beat-slide}
-
-- Use the best models
-- Have a human review the work
-- Be (a little) afraid
-
-::: notes
-6 months ago we might have said, "use the best model available"
-now it's more like use the least expensive model that does a sufficient job at your task, and switch depending on the task.
-
-We'll come back to this advice at the end of the talk.
+one reason i would now not say "use the best model available"
+but instead use the least expensive model that does a sufficient job at your task, and switch depending on the task.
 :::
 
 # {.paper-slide}
@@ -513,6 +485,8 @@ Depending on your organization's setup, making that context available can be a l
 ![](figures/posit-assistant-homepage.png){.rounded .nostretch height="650"}
 
 ::: notes
+we're going to talk about posit assistant for a minute before we get back to shiny
+
 Our flagship agent is Posit Assistant. Posit Assistant is a coding and data science agent. It's available in RStudio, Positron, and the terminal. When it's running inside of your IDE, it works inside of your active R and Python session. You can use whatever model from whatever provider you want with it.
 :::
 
@@ -537,8 +511,9 @@ don't control the model control the harness
 :::
 
 ::: notes
-A pit of success: design the environment so that falling into it lands you
-somewhere good. The harness should make the correct path the easy path.
+we want this to be a pit of success
+something hadley would often say when talking about the tidyverse
+make it as easy as possible for the model or the model+user system to fall into correctness
 :::
 
 ## Code as the foundation
@@ -549,14 +524,16 @@ somewhere good. The harness should make the correct path the easy path.
 :::
 
 ::: notes
+the primary thing, that might seem obvious but isn't always obvious
+is that the model needs to write code
+
+as much as possible, get it to write code
 does the agent have to run code? no --
 it could do things "in its head," but then you lose reproducibility and transparency.
 
 llms are good at code
 
-we've learned from years of code for analysis...
-
-have the agent write code
+we've learned from years of code for analysis that code is great for this
 :::
 
 ## Design the harness with correctness in mind
@@ -575,6 +552,17 @@ Context: give it broad access to your files and environment, so it has a good ch
 
 The harness has to work well with the person, giving them the right amount of
 information at the right times.
+:::
+
+## Posit Assistant demo {#harness-demo .paper-slide}
+
+<img src="figures/posit-assistant-pause-often.gif" alt="Posit Assistant plots the top 20 states by number of Spanish speakers, notes that raw counts aren't normalized by population, and pauses to suggest three follow-up questions rather than continuing on its own." style="height: 560px; display: block; margin: 0 auto;">
+
+::: notes
+The agent works in the live session: it runs
+code, sees the results, and pauses with suggestions instead of running on.
+Correctness comes from the harness, namely the tools that run code and show the
+session
 :::
 
 ## Performance improves when the environment makes it easy to be right
@@ -643,21 +631,72 @@ bind_rows(raw, harness) |>
 :::
 
 ::: notes
-Posit Assistant is our coding and data science agent. In the IDE it works
-with your active R or Python session.
 Here we compare it with a minimal harness on the intuitive condition of
 bluffbench. This is a different comparison from the earlier model-update results.
 Harness design can make a difference without changing the underlying model.
 :::
+
+# {.paper-slide}
 
 # {#individual-oversight .beat-slide}
 
 We can't just rely on individual oversight.
 
 ::: notes
+I hear a lot about human in the loop, and it's important. No one is saying you shouldn't be in the loop (well someone is).
+but we need to actually make that loop work. it isn't enough for you to just kind of be there monitoring. 
 The system has to work with how people actually behave, not depend on
 individual willpower to review every action carefully.
 Three examples: auto mode, showing code, and slowing down EDA.
+:::
+
+## Auto mode and human review {#auto-mode-commands .paper-slide}
+
+::: {.fragment}
+
+```bash
+grep -n "churn" data/*.csv
+```
+:::
+
+::: {.fragment}
+```bash
+Rscript analysis/summary.R
+```
+:::
+
+::: {.fragment}
+```r
+write_csv(results, "results/published-results.csv", overwrite = TRUE)
+```
+:::
+
+::: {.fragment}
+```bash
+rm -rf *
+```
+:::
+
+::: {.fragment}
+```r
+unlink("*", recursive = TRUE)
+```
+:::
+
+::: {.fragment}
+```python
+shutil.rmtree("/shared/projects/trial-data", ignore_errors=False)
+```
+:::
+
+::: notes
+the first comes from what anthropic discovered about people approving commands that the agent requested be run
+so lets say your agent is giving you a bunch of commands
+and initially, if you can remember, there was a lot of clicking accept or approve. 
+and we had all these workarounds like having a notification for when claude needed your approval so you could go and do something else in the meantime
+
+but it turns out that if you just keep showing people commands, they're pretty much just going to accept without really reading
+becuase we get tired of these approvals. approval fatigue
 :::
 
 ## Auto mode and human review {#auto-mode .paper-slide}
@@ -665,100 +704,261 @@ Three examples: auto mode, showing code, and slowing down EDA.
 ![](figures/simpsons-keyboard-bird.gif){.rounded .nostretch height="440" fig-alt="A drinking bird repeatedly presses a key on Homer's computer in The Simpsons."}
 
 ::: footer
-The Simpsons GIF, via [Caps N Lock](https://www.capsnlock.com/blogs/news/simpsons-keyboard-bird)
+The Simpsons
 :::
 
 ::: notes
-Repeated permission prompts can turn human review into rubber-stamping.
-The drinking bird is the joke: an approval click isn't necessarily review.
+it just becomes like the bird in the simpson's hitting the y key
+this is not a good use of our time, and importantly it is not effective!
+go back to previous slide -- we might miss this disatrous command!
+or my worse nightmare: some agent hooked up to slack or with write permission on github publishes information from me that I didn't approve
 :::
 
 ## Auto mode and human review {#auto-mode-evidence .paper-slide}
 
-![](figures/anthropic-auto-mode-human-review.png){.nostretch height="490" fig-alt="Anthropic's chart: human review caught 13.6% of harmful actions and auto mode caught 89% in a controlled study with 1,053 paid developers."}
+![](figures/anthropic-auto-mode-human-review.png){.nostretch height="490" fig-align="center" fig-alt="Anthropic's chart: human review caught 13.6% of harmful actions and auto mode caught 89% in a controlled study with 1,053 paid developers."}
 
 ::: footer
 [Anthropic, Auto mode is now the default in Claude Code (August 7, 2026)](https://claude.com/blog/auto-mode-default-in-claude-code)
 :::
 
 ::: notes
-Anthropic made auto mode the default for Pro, Max, and Team plans.
-In their controlled study with 1,053 paid professional testers, human reviewers
-blocked 13.6% of dangerous commands and auto mode blocked 89%.
+Anthropic compared auto mode with human permission review.
+Auto mode uses a classifier to check tool calls and block dangerous actions,
+rather than asking the person to approve every command. After a block,
+Claude can try a safer approach or ask the user; repeated blocks cause
+fallback to manual approvals. Not every block becomes a human-review prompt.
+
+In a controlled study with 1,053 professional testers, human reviewers
+blocked 143 dangerous commands (13.6%). Auto mode blocked 937 of those same
+1,053 commands (89%). That is auto mode's own block rate, not a combined
+model-plus-human catch rate.
+
 One permission prompt per session was replaced with dangerous command text;
-approving it didn't execute anything dangerous. This was a test environment,
-not the testers' own projects, and isn't a claim that automation is always safer.
+approving it did not execute the command. Testers were working in a study
+environment, not their own projects. This shows that auto mode blocked more
+of these dangerous commands, not that automation is universally safer.
+
+Anthropic subsequently made auto mode the default for eligible plans.
 
 The point is to design review around actual human behavior, not assume that
 putting a person at every approval step automatically makes a system safer.
-PLACEHOLDER: Posit Assistant auto-mode comparison, if needed; not researched further.
 :::
 
-## Code visibility {#showing-all-code .paper-slide}
+## When should code shown to the user? {#showing-all-code .paper-slide}
 
+::: {.fragment}
 <video class="rounded click-to-toggle" width="100%" style="display: block; margin: 0 auto; max-height: 510px;" data-autoplay muted preload="auto" tabindex="0" aria-label="Posit Assistant recording showing expanded R code in chat, execution in the Console, and a carrier-delay plot. Click to pause or resume.">
   <source src="figures/05-pa-demo-carriers-a.mp4" type="video/mp4">
 </video>
+:::
 
 ::: notes
-Code should remain available for inspection, but users don't need every
-execution block expanded all the time. Visibility is an interaction-design
-choice, not a substitute for reproducibility.
+this is something we thought about in posit assistant when thinking through when code should be shown to the user
+It is important that it also remain available for inspection, but users don't need every
+execution block expanded all the time.
 
 Databot originally put executed R/Python code and output directly in chat.
 Over time we added collapsible blocks and show/hide controls.
 In April 2026, Hide code became independent of result visibility: users
 could collapse the code input while leaving results visible.
 
-Ordinary chat still shows data-analysis code by default. Optional hiding,
-collapsed Bash calls, and Canvas summaries are distinct behaviors, not a
-blanket switch to hiding R/Python code.
+Ordinary chat still shows data-analysis code by default.
+:::
 
-This recording shows expanded R code alongside its execution and plot.
-It illustrates inspectability; it does not demonstrate clicking Hide code.
+## When should code shown to the user? {#showing-all-code-b .paper-slide}
+
+<video class="rounded click-to-toggle" width="100%" style="display: block; margin: 0 auto; max-height: 560px;" data-autoplay muted preload="auto" tabindex="0" aria-label="Posit Assistant recording continuing the carriers analysis, showing collapsed and expanded code in chat. Click to pause or resume.">
+  <source src="figures/05-pa-demo-carriers-b.mp4" type="video/mp4">
+</video>
+
+::: notes
+Reused from the keynote. This cut shows a mix of collapsed and expanded
+code in the chat transcript, while the plot stays visible.
 :::
 
 ## Slowing down the EDA process {#slowing-eda .paper-slide}
 
-::: {.incremental}
-* PLACEHOLDER: slowing down the EDA process example.
-:::
+![The assistant plots the top 20 states by number of Spanish speakers, notes that raw counts aren't normalized by population, and pauses to suggest three follow-up questions rather than continuing on its own.](figures/posit-assistant-pause-often.gif){.rounded .nostretch height="560" fig-alt="A screen recording of the Posit Assistant panel mid-analysis. The assistant plots the top 20 states by number of Spanish speakers, summarizes the result, and pauses to suggest three follow-up questions rather than continuing on its own."}
 
 ::: notes
-PLACEHOLDER: expand.
+Reused from the PHUSE deck. The agent pauses after each result, summarizes
+what it found, and asks what to look at next, instead of running on to a
+finished conclusion. Slowing down keeps the person in the exploration loop.
 :::
 
-# {#guardrails .statement-slide .paper-slide}
-
-::: {.statement}
-Guardrails, [not hope.]{.accent}
-:::
-
-::: notes
-Across all four layers, build reliability and appropriate constraints into
-the environment rather than relying only on individual judgment.
-So far we've been talking about people doing their own analysis with an agent.
-What about collaborators who are not data scientists?
-:::
-
-# But what if the user is not a data scientist? {#non-data-scientist .night-slide}
+# And what if the user is not a data scientist? {#non-data-scientist .beat-slide}
 
 ::: notes
 but what if the user is not a data scientist?
 how do we help them get correct answers too?
 :::
 
-## Vibe analysis {#internal-vibe-analysis .paper-slide}
+## {#site-traffic-analysis .agent-story-slide .slow-tool-calls}
 
-Someone fires up Claude Code to answer a data question—and gets "vibe analysis" slop.
+```{=html}
+<div class="agent-window">
+  <div class="agent-thread">
+        <div class="chat-turn chat-turn-user">
+          <div class="chat-message chat-message-user">
+            how is traffic trending for our site?
+          </div>
+        </div>
+        <div class="chat-turn chat-turn-agent tool-run fragment fade-up" data-fragment-index="0">
+          <div class="chat-message chat-message-agent">
+            <div class="agent-thinking"><span></span> Analyzing site traffic</div>
+            <div class="tool-card" style="--tool-delay: 0s">
+              <span class="tool-card-icon">⌕</span>
+              <span><strong>Searching workspace</strong><small>web analytics</small></span>
+              <span class="tool-progress"><i class="tool-spinner"></i><i class="tool-check">✓</i></span>
+            </div>
+            <div class="tool-card" style="--tool-delay: 2.25s">
+              <span class="tool-card-icon">◫</span>
+              <span><strong>Querying warehouse</strong><small>analytics.pageviews</small></span>
+              <span class="tool-progress"><i class="tool-spinner"></i><i class="tool-check">✓</i></span>
+            </div>
+            <div class="tool-card" style="--tool-delay: 4.5s">
+              <span class="tool-card-icon">∿</span>
+              <span><strong>Calculating daily visits</strong><small>last 90 days</small></span>
+              <span class="tool-progress"><i class="tool-spinner"></i><i class="tool-check">✓</i></span>
+            </div>
+          </div>
+        </div>
+        <div class="chat-turn chat-turn-agent result-turn fragment fade-up" data-fragment-index="0">
+          <div class="chat-message chat-message-agent">
+            <p>Daily visits are down <strong>64%</strong> over the last 90 days.</p>
+            <div class="dau-chart">
+              <div class="dau-chart-title"><span>Daily site visits</span><strong>−64%</strong></div>
+              <svg viewBox="0 0 620 225" role="img" aria-label="Daily site visits rise unevenly, then fall sharply after a changepoint.">
+                <defs>
+                  <linearGradient id="dau-area" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#ee6331" stop-opacity="0.28"/>
+                    <stop offset="100%" stop-color="#ee6331" stop-opacity="0.02"/>
+                  </linearGradient>
+                </defs>
+                <g class="chart-grid">
+                  <line x1="56" y1="34" x2="598" y2="34"/><line x1="56" y1="86" x2="598" y2="86"/>
+                  <line x1="56" y1="138" x2="598" y2="138"/><line x1="56" y1="190" x2="598" y2="190"/>
+                </g>
+                <g class="chart-labels">
+                  <text x="46" y="39">60k</text><text x="46" y="91">40k</text><text x="46" y="143">20k</text>
+                  <text x="56" y="215">90 days ago</text><text x="324" y="215">45 days ago</text><text x="598" y="215">Today</text>
+                </g>
+                <path class="chart-area" d="M56,61 L69,67 L82,58 L95,60 L108,54 L121,59 L134,51 L147,55 L160,57 L173,48 L186,52 L199,45 L212,50 L225,42 L238,46 L251,39 L264,44 L277,36 L290,41 L303,34 L313,37 L319,35 L329,51 L340,57 L351,53 L362,66 L373,61 L384,72 L395,78 L406,73 L417,86 L428,82 L439,95 L450,99 L461,93 L472,108 L483,103 L494,117 L505,113 L516,126 L527,122 L538,134 L549,130 L560,140 L571,137 L582,146 L598,145 L598,190 L56,190 Z"/>
+                <path class="chart-line" pathLength="1" d="M56,61 L69,67 L82,58 L95,60 L108,54 L121,59 L134,51 L147,55 L160,57 L173,48 L186,52 L199,45 L212,50 L225,42 L238,46 L251,39 L264,44 L277,36 L290,41 L303,34 L313,37 L319,35 L329,51 L340,57 L351,53 L362,66 L373,61 L384,72 L395,78 L406,73 L417,86 L428,82 L439,95 L450,99 L461,93 L472,108 L483,103 L494,117 L505,113 L516,126 L527,122 L538,134 L549,130 L560,140 L571,137 L582,146 L598,145"/>
+                <circle class="chart-end" cx="598" cy="145" r="6"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+  </div>
+</div>
+```
 
-::: notes
-PLACEHOLDER: add the internal example and what went wrong.
-They are curious and reached for an accessible tool, but don't necessarily
-have the expertise or context needed to diagnose the answer.
+:::notes
+This morning, your VP pulled up a coding agent and asked a question. 
+
+[yada yada this is what happen]
+
+Now, as data people, we might have asked ourselves "How are daily visits being measured?" "What event triggers an entry in this column?" "What other possible explanations could account for this change in trend other than a genuine reversal in the traffic going to this site?" If you had dug further, you would have learned that this kind of pageview event no longer triggers on newer versions of Chrome. As users gradually update Chrome, their page visits are no longer registered in this table. Regardless, this isn't even the typical table that the data science team uses to measure site traffic anyway.
+
+Nevertheless, you're not there. Your VP brings this chart to leadership. They decide to spend millions to reverse the trend.
 :::
 
-# [_Trusted_ code]{#trusted-code style="color: #ee6331; font-size: 1.4em;"}
+
+## {#site-traffic-recreated .agent-story-slide .slow-tool-calls}
+
+```{=html}
+<div class="agent-window month-later-window">
+  <div class="agent-thread">
+    <div class="chat-turn chat-turn-user">
+      <div class="chat-message chat-message-user">
+        could you find the site traffic chart we made a month ago?
+      </div>
+    </div>
+    <div class="chat-turn chat-turn-agent tool-run history-tool-run fragment fade-up" data-fragment-index="0">
+      <div class="chat-message chat-message-agent">
+        <div class="agent-thinking"><span></span> Looking for prior analysis</div>
+        <div class="tool-card" style="--tool-delay: 0s">
+          <span class="tool-card-icon">⌕</span>
+          <span><strong>Searching conversations</strong><small>site traffic chart</small></span>
+          <span class="tool-progress"><i class="tool-spinner"></i><i class="tool-check">✓</i></span>
+        </div>
+        <div class="tool-card history-file-check" style="--tool-delay: 1.25s">
+          <span class="tool-card-icon">◫</span>
+          <span><strong>Checking generated files</strong><small>temporary workspace</small></span>
+          <span class="tool-progress"><i class="tool-spinner"></i><i class="tool-check">✓</i></span>
+        </div>
+      </div>
+    </div>
+    <div class="chat-turn chat-turn-agent history-missing fragment fade-up" data-fragment-index="0">
+      <div class="chat-message chat-message-agent">
+        I couldn’t find that conversation or any saved analysis files. Do you want me to recreate that chart for the last 90 days?
+      </div>
+    </div>
+    <div class="chat-turn chat-turn-user fragment fade-up" data-fragment-index="1">
+      <div class="chat-message chat-message-user">
+        yeah
+      </div>
+    </div>
+    <div class="chat-turn chat-turn-agent tool-run fragment fade-up" data-fragment-index="2">
+      <div class="chat-message chat-message-agent">
+        <div class="agent-thinking"><span></span> Analyzing site traffic</div>
+        <div class="tool-card" style="--tool-delay: 0s">
+          <span class="tool-card-icon">⌕</span>
+          <span><strong>Searching workspace</strong><small>web analytics</small></span>
+          <span class="tool-progress"><i class="tool-spinner"></i><i class="tool-check">✓</i></span>
+        </div>
+        <div class="tool-card" style="--tool-delay: 1.75s">
+          <span class="tool-card-icon">◫</span>
+          <span><strong>Querying warehouse</strong><small>analytics.sessions</small></span>
+          <span class="tool-progress"><i class="tool-spinner"></i><i class="tool-check">✓</i></span>
+        </div>
+        <div class="tool-card" style="--tool-delay: 3.5s">
+          <span class="tool-card-icon">∿</span>
+          <span><strong>Calculating daily visits</strong><small>last 90 days</small></span>
+          <span class="tool-progress"><i class="tool-spinner"></i><i class="tool-check">✓</i></span>
+        </div>
+      </div>
+    </div>
+    <div class="chat-turn chat-turn-agent result-turn fragment fade-up" data-fragment-index="2">
+      <div class="chat-message chat-message-agent">
+        <p>Daily visits increased <strong>22%</strong> over the last 90 days.</p>
+        <div class="dau-chart">
+          <div class="dau-chart-title"><span>Daily site visits</span><strong>+22%</strong></div>
+          <svg viewBox="0 0 620 225" role="img" aria-label="Daily site visits trend unevenly upward over the last 90 days.">
+            <defs>
+              <linearGradient id="traffic-area-up" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#23875b" stop-opacity="0.26"/>
+                <stop offset="100%" stop-color="#23875b" stop-opacity="0.02"/>
+              </linearGradient>
+            </defs>
+            <g class="chart-grid">
+              <line x1="56" y1="34" x2="598" y2="34"/><line x1="56" y1="86" x2="598" y2="86"/>
+              <line x1="56" y1="138" x2="598" y2="138"/><line x1="56" y1="190" x2="598" y2="190"/>
+            </g>
+            <g class="chart-labels">
+              <text x="46" y="39">60k</text><text x="46" y="91">40k</text><text x="46" y="143">20k</text>
+              <text x="56" y="215">90 days ago</text><text x="324" y="215">45 days ago</text><text x="598" y="215">Today</text>
+            </g>
+            <path class="chart-area" d="M56,69 L69,74 L82,66 L95,71 L108,63 L121,68 L134,70 L147,61 L160,65 L173,57 L186,64 L199,60 L212,54 L225,58 L238,62 L251,52 L264,56 L277,48 L290,55 L303,51 L316,44 L329,50 L342,47 L355,39 L368,46 L381,43 L394,49 L407,40 L420,44 L433,36 L446,43 L459,38 L472,34 L485,42 L498,37 L511,31 L524,39 L537,35 L550,29 L563,36 L576,33 L589,38 L598,41 L598,190 L56,190 Z"/>
+            <path class="chart-line" pathLength="1" d="M56,69 L69,74 L82,66 L95,71 L108,63 L121,68 L134,70 L147,61 L160,65 L173,57 L186,64 L199,60 L212,54 L225,58 L238,62 L251,52 L264,56 L277,48 L290,55 L303,51 L316,44 L329,50 L342,47 L355,39 L368,46 L381,43 L394,49 L407,40 L420,44 L433,36 L446,43 L459,38 L472,34 L485,42 L498,37 L511,31 L524,39 L537,35 L550,29 L563,36 L576,33 L589,38 L598,41"/>
+            <circle class="chart-end" cx="598" cy="41" r="6"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+:::notes
+A month later, leadership will ass to see the chart again. The VP will open up the same agent, but it can't find the conversation. (It was deleted after 30 days.) All of the analysis had happened in a tempfile that is long gone. 
+
+The agent offers to make it again. This time, when the VP asks for the same plot, they see that site visits had been steadily trending upward the whole time.
+:::
+
+# [_Trusted_ code]{#trusted-code style="color: #b8623f; font-size: 1.4em;"}
 
 ::: notes
 This vetted code used by the data scientists is what we'll called _trusted_ code
@@ -790,6 +990,81 @@ It's an open source R and Python package built on `ellmer` / `chatlas` and `shin
 
 and it's a bird because...
 :::
+
+## commons does 3 things
+
+:::incremental
+* Extract trusted calculations from existing artifacts into a data structure
+* A harness to give the right context at the right time
+* A feedback loop to push more queries up the trust ladder over time
+:::
+
+## {#commons-trusted-calculation}
+
+<video class="rounded click-to-toggle" width="100%" preload="auto" data-autoplay muted tabindex="0" aria-label="Commons recording: the agent searches for and runs the data scientist's site traffic calculation, and the answer is marked verified. Click to pause or resume.">
+  <source src="figures/commons-01-traffic-trend-a.mp4" type="video/mp4">
+</video>
+
+::: notes
+Let's see how the VP's analysis would work with a commons agent.
+
+The first thing the agent does is search for a trusted calculation. Here it
+finds and runs the data scientist's site traffic calculation.
+
+The answer is marked as verified to signify that it used vetted code.
+:::
+
+## {#commons-context-citations}
+
+<video class="rounded click-to-toggle" width="100%" preload="auto" data-autoplay muted tabindex="0" aria-label="Commons recording: the agent searches context, writes custom code, and presents a checked citation. Click to pause or resume.">
+  <source src="figures/commons-02-page-views-a.mp4" type="video/mp4">
+</video>
+
+::: notes
+However, it's unlikely that trusted code will cover all questions a user
+might have. For these situations, the agent can write custom R, Python, or
+SQL.
+
+First, the agent looks through additional context in the form of data
+dictionaries, markdown files, and, if you have them, existing context layers
+from Databricks and Snowflake.
+
+Then, it writes whatever code it needs to find an answer.
+
+Finally, when it presents an answer, it can provide a citation to that
+context. The citation is deterministically checked against trusted context
+that has appeared in the conversation -- if it matches, a citation tag is
+shown.
+:::
+
+## {#commons-context-citations-b}
+
+<video class="rounded click-to-toggle" width="100%" preload="auto" data-autoplay muted tabindex="0" aria-label="Commons recording: continuation of the context and citation example. Click to pause or resume.">
+  <source src="figures/commons-02-page-views-b.mp4" type="video/mp4">
+</video>
+
+## {#commons-lower-trust-answer}
+
+<video class="rounded click-to-toggle" width="100%" preload="auto" data-autoplay muted tabindex="0" aria-label="Commons recording: the agent cannot find trusted context, and its answer carries a lower-trust tag. Click to pause or resume.">
+  <source src="figures/commons-03-most-visits-a.mp4" type="video/mp4">
+</video>
+
+::: notes
+There's one more possible path: the model cannot find trusted context to
+justify its approach. In this case, we mark the answer with a yellow tag,
+which lets the user know the answer should be considered less trusted.
+
+This is how we balance convenience and correctness. The tool has to feel
+convenient enough that the user actually wants to reach for it -- it needs
+to feel like a normal chat. When correctness is closer to a normal coding
+agent, we signal that the user ought to be more skeptical of the answer.
+:::
+
+## {#commons-lower-trust-answer-b}
+
+<video class="rounded click-to-toggle" width="100%" preload="auto" data-autoplay muted tabindex="0" aria-label="Commons recording: continuation of the lower-trust example. Click to pause or resume.">
+  <source src="figures/commons-03-most-visits-b.mp4" type="video/mp4">
+</video>
 
 ## {#commons-trust-flow .trust-flow-slide .paper-slide}
 
@@ -839,19 +1114,22 @@ The citation itself is checked against trusted context. A custom answer is not
 promoted merely because the model says it used a trusted source.
 :::
 
-## commons does 3 things
+# Demos {#demos .beat-slide}
 
-:::incremental
-* Extract trusted calculations from existing artifacts into a data structure
-* A harness to give the right context at the right time
-* A feedback loop to push more queries up the trust ladder over time
+## {#devrel-agent .header-slide .deep-slide}
+
+::: {.columns}
+
+::: {.column .header-text width="64%"}
+DevRel Agent
 :::
 
-# Demos {#demos .header-slide .deep-slide}
+:::
 
-## DevRel agent {#devrel-agent .paper-slide}
+::: {.footer .clinical-trials-header-footer}
+https://github.com/posit-dev/devrel-agent
+:::
 
-[Open the live demo](https://posit-devrel-agent.share.connect.posit.cloud/){target="_blank" rel="noopener"}
 
 ::: notes
 Live demo: https://posit-devrel-agent.share.connect.posit.cloud/
@@ -873,7 +1151,7 @@ Clinical trials agent
 :::
 
 ::: {.footer .clinical-trials-header-footer}
-[pos.it/clinical-trials-agent](https://pos.it/clinical-trials-agent)
+[https://github.com/posit-dev/clinical-trials-agent](https://github.com/posit-dev/clinical-trials-agent)
 :::
 
 ## {#clinical-trials-agent-demo}
@@ -882,11 +1160,7 @@ Clinical trials agent
   <source src="figures/clinical-trials-agent-demo.mp4" type="video/mp4">
 </video>
 
-::: {.footer .clinical-trials-footer}
-[pos.it/clinical-trials-agent](https://pos.it/clinical-trials-agent)
-:::
-
-# {#commons-lifecycle .lifecycle-slide .paper-slide}
+## {#commons-lifecycle .lifecycle-slide .paper-slide}
 
 ::: {.lifecycle-cards}
 ::: {.lifecycle-card .fragment .fade-up}
@@ -920,21 +1194,232 @@ The boxes summarize the loops. There is no separate loops diagram.
 PLACEHOLDER: expand the lifecycle examples and deployment details as needed.
 :::
 
-## Snowflake and other integrations {#integrations .paper-slide}
+## Build: the commons skill {#build-onboarding .paper-slide}
 
 ::: {.incremental}
-* `data_source()` works with data frames, pins boards, and DBI connections
-* Snowflake semantic views and Databricks metric views become trusted measures
-* Answers built on them are marked trusted
+* A coding agent with the commons skill walks you through building your agent
+* It inspects your data, documentation, and trusted code before writing anything
+* It pauses at each decision: scope, data sources, trust boundaries
+:::
+
+::: footer
+[Working with the agent skill](https://posit-dev.github.io/commons/r/articles/commons.html#working-with-the-agent-skill)
 :::
 
 ::: notes
-PLACEHOLDER: expand on Snowflake and other integrations.
-Native trusted metric execution described here is available in the R package;
-do not imply feature parity with Python without checking the current implementation.
+The commons package ships as a skill for coding agents (Posit Assistant,
+Claude Code, Codex). The skill is named commons; onboarding is one workflow
+within it, alongside extraction, evaluation, and iteration. The onboarding reference scaffolds the project,
+collects source material incrementally, and records durable guidance in
+AGENTS.md / CLAUDE.md.
+
+You don't have to learn the API cold: the skill knows the package and asks
+you only for the decisions that matter.
 :::
 
-## Trajectory review {#trajectory-review .paper-slide}
+## Information layers {#information-layers .paper-slide}
+
+Give the agent more than access to data.
+
+| Semantic layer | Context layer |
+|---|---|
+| Trusted calculations the agent can reuse | Background information that helps the agent reason about the data |
+| R measures, data dictionary definitions, warehouse metrics | Documentation, definitions, conventions, and known limitations |
+
+::: notes
+These layers complement the data source. The semantic layer supplies
+trusted ways to compute answers. The context layer helps the agent write
+custom SQL or R and interpret the results when a trusted calculation
+doesn't cover the question.
+
+Data dictionaries can contribute to both: calculation definitions to the
+semantic layer, and descriptive information to the context layer.
+:::
+
+## Build: the semantic layer {#build-semantic .paper-slide}
+
+Trusted calculations: **how an answer is computed.**
+
+::: {.incremental}
+* For example: enrollment counts by trial phase, using the team's agreed definition
+* Reuse vetted R functions as measures, defined inline or in R scripts
+* Or use data dictionary definitions, Snowflake semantic views, and Databricks metric views
+:::
+
+::: notes
+The semantic layer collects the vetted calculations the agent prefers to
+use. Functions documented with @measure become measures; the roxygen
+description and @param tags become the tool's description and arguments.
+
+The enrollment example is illustrative, not a statement about J&J's definitions.
+The point is to reuse the team's calculation rather than have the model
+reinvent its logic for each question. Measures can contain ordinary R code;
+they do not have to contain SQL or a dbGetQuery call.
+The same trusted calculations can also come from data dictionary
+definitions, Snowflake semantic views, or Databricks metric views.
+:::
+
+## Build: the context layer {#build-context .paper-slide}
+
+Organizational knowledge: **what the data means and how to interpret it.**
+
+::: {.incremental}
+* For example: what “enrolled” means, reporting conventions, and known data limitations
+* Supply text and Markdown documents; attach structured data dictionaries to data sources
+* Relevant context is retrieved as needed; always-needed guidance goes in `instructions`
+:::
+
+::: notes
+The context layer holds the organizational knowledge that isn't in the
+data: definitions, conventions, how tables join, what terms mean. commons
+searches it when it's relevant and cites what it used.
+
+Things the agent needs in every conversation -- like fiscal-year
+conventions -- go in commons()' instructions argument instead, so they're
+always present.
+:::
+
+## Build {#build-agent .paper-slide}
+
+#### Putting the pieces together
+
+```r
+library(commons)
+
+agent <- commons(
+  ellmer::chat_anthropic(),
+  data_sources = data_source(trials = trials),
+  semantic_layer = semantic_layer("R/measures.R"),
+  context_layer = context_layer(files = "context/protocol-conventions.md")
+)
+
+commons_app(agent)
+```
+
+::: notes
+This assembles a chat client, data source, semantic layer, and context layer;
+commons wraps them with trusted-calculation tools, context search, provenance
+marking, and a sandboxed R session.
+
+The `R/measures.R` and `context/protocol-conventions.md` paths illustrate
+existing files that supply vetted R measures and organizational context. This
+is not a self-contained runnable example without those files and its data.
+:::
+
+::: notes
+This is the whole agent: a chat client, a data source, and commons wraps it
+with trusted-calculation tools, context search, provenance marking, and a
+sandboxed R session.
+
+The data source here is a data frame (a clinical trials table), which commons
+loads into an in-process DuckDB database. The semantic and context layers are
+optional and grow over time -- start with a small working scope and expand.
+:::
+
+## Build: data sources from the warehouse {#build-warehouse .paper-slide}
+
+```r
+# Snowflake semantic view
+warehouse <- data_source(
+  snowflake_con, tables = "ANALYTICS.TRIAL_ENROLLMENT"
+)
+
+# Or: Databricks metric view
+warehouse <- data_source(
+  databricks_con, tables = "clinical.trial_enrollment_metrics"
+)
+
+agent <- commons(
+  ellmer::chat_anthropic(),
+  data_sources = list(warehouse = warehouse),
+  context_layer = context_layer(files = "context/protocol-conventions.md")
+)
+```
+
+::: {.incremental}
+* Use existing governed metrics as trusted calculations
+* No separate `semantic_layer()` call needed for these views
+:::
+
+::: notes
+These are illustrative view names, not actual J&J objects. Choose one of
+the two source definitions; the connections are already configured DBI
+connections. The Snowflake object is a semantic view, and the Databricks
+object is a metric view, rather than an ordinary table.
+
+The data source is whatever the data team already maintains in Snowflake or
+Databricks. Pass a DBI connection and select tables: qualified names like
+"schema.table", or a DBI::Id ending in a catalog or schema to select a whole
+namespace (with `exclude` globs like "TMP_*" to omit objects).
+
+Namespace selections also import Snowflake semantic views and Databricks
+metric views as native trusted metrics and dimensions, so warehouse-side
+definitions become trusted calculations without rewriting them in R. These
+warehouse semantic models need no separate `semantic_layer()` call.
+:::
+
+## Deploy: your colleagues open the app {#deploy-connect .paper-slide}
+
+::: {.incremental}
+* Deploy like any other Shiny app: `rsconnect::deployApp()`
+* Collaborators ask questions in natural language -- no R required
+* Access follows Connect permissions; `share_with` grants trajectory access
+:::
+
+::: notes
+Deployment is ordinary Connect deployment. For trajectory capture, include
+"OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT" in deployApp()'s
+envVars argument, and a server administrator must enable
+OpenTelemetry.Enabled and OpenTelemetry.AllowContentInstrumentation.
+
+Users whose Connect account role is viewer cannot read traces even when
+named in share_with; trace readers need at least a publisher account.
+:::
+
+## Governance {#governance .paper-slide}
+
+::: {.incremental}
+* Enforce access with warehouse permissions and per-viewer credentials
+* Restrict provider-visible data, context, results, and measure source
+* Protect full-conversation trajectory logs with access controls and retention
+:::
+
+::: footer
+https://posit-dev.github.io/commons/r/articles/governance.html
+:::
+
+::: notes
+Tables describe data; they do not authorize access. Create DBI connections
+and the agent inside the Shiny server for each session, using Connect viewer
+OAuth. The supplied connection enforces warehouse row-level security and
+table- and column-level policies.
+
+A shared service account has the same database permissions for every user;
+it does not automatically differentiate users.
+:::
+
+## Snowflake and Databricks integration {#integrations .paper-slide}
+
+::: {.incremental}
+* `data_source()` works with data frames, pins boards, and DBI connections
+* Snowflake semantic views and Databricks metric views are read as trusted measures
+* Queries against them execute natively in the warehouse, under the connection's permissions
+* Answers built on them are marked trusted; custom code is marked differently
+:::
+
+::: notes
+The integration works with what your warehouse team already maintains: the
+semantic layer lives in Snowflake or Databricks, and commons reads its
+measures and dimensions rather than copying them into the agent.
+
+Metrics execute in the warehouse under the connection's permissions.
+commons queries the existing database rather than loading the source into
+its own DuckDB database; query results can still be returned to the agent.
+Native trusted metric execution is available in the R package; do not imply
+Python parity without checking.
+:::
+
+## Improve: the trajectory reviewer {#trajectory-review .paper-slide}
 
 ::: {.incremental}
 * `commons(log = TRUE)` records conversation histories with OpenTelemetry
@@ -943,11 +1428,32 @@ do not imply feature parity with Python without checking the current implementat
 :::
 
 ::: notes
-PLACEHOLDER: expand with specifics about hooking up the trajectory reviewer
-(Connect observability settings, review markdown output, etc.).
-Use reviewed conversations to find recurring questions, then add trusted
-calculations or context. The goal is to improve the system, not just ask users
-to check answers more carefully. These reviewer functions are in the R package.
+We'll demo the trajectory reviewer here. Reviewed conversations surface
+recurring questions, then you add trusted calculations or context. The goal
+is to improve the system, not just ask users to check answers more
+carefully. These reviewer functions are in the R package.
+:::
+
+## Reading trajectories back into R {#trajectory-code .paper-slide}
+
+```r
+# All trajectories you can access
+trajectories <- trajectory_read()
+
+# A recent window
+recent <- trajectory_read(n = 20, from = "2026-07-01")
+
+# Deployed content, by Connect GUID or URL
+deployed <- trajectory_read("https://connect.example.com/content/abc123")
+
+# Browse, flag, and annotate
+trajectory_review(trajectories)
+```
+
+::: notes
+`trajectory_read()` pulls captured conversations into a data frame;
+`trajectory_review()` launches a Shiny app over them. Review output feeds
+back into the Build stage as new trusted calculations and context.
 :::
 
 # commons, shinychat, querychat, and Posit Assistant {#ecosystem .paper-slide}
@@ -978,16 +1484,11 @@ We don't want overtrust or undertrust; we want good reasons to rely on the syste
 # {#closing-trust .statement-slide .paper-slide}
 
 ::: {.statement}
-Don't just ask people to be careful.<br><br>
 [Weave trustworthiness into the system.]{.accent}
 :::
 
 ::: notes
-Use a model appropriate for the task and understand where it tends to go wrong.
-Design a trustworthy system rather than relying on individual willpower for review.
-There is plenty to build: engineering, data science, and IT practices that
-make these systems useful and dependable.
-We don't want overtrust or undertrust; we want good reasons to rely on the system.
+don't just ask people to be careful
 :::
 
 # {#thank-you .thank-you-slide .deep-slide}
