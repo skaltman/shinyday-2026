@@ -32,7 +32,8 @@ Data agents in 2026
 ::: {.talk-meta}
 **Sara Altman**
 
-J&J Shiny Day · October 15, 2026
+J&J Shiny Day
+October 15, 2026
 :::
 :::
 :::
@@ -42,7 +43,7 @@ J&J Shiny Day · October 15, 2026
 :::
 
 ::: {.footer .title-footer}
-https://pos.it/TODO
+https://skaltman.github.io/shinyday-2026/
 :::
 
 
@@ -469,6 +470,7 @@ Data analysis depends on [context]{.accent} that is not in the data.
 :::
 
 ::: notes
+also even if models were perfect, data analysis isn't solved. depends on context
 Definitions, conventions, documentation, and tacit organizational knowledge
 don't automatically become available to an LLM just because it is more capable.
 
@@ -554,7 +556,7 @@ The harness has to work well with the person, giving them the right amount of
 information at the right times.
 :::
 
-## Posit Assistant demo {#harness-demo .paper-slide}
+## {#harness-demo .paper-slide}
 
 <img src="figures/posit-assistant-pause-often.gif" alt="Posit Assistant plots the top 20 states by number of Spanish speakers, notes that raw counts aren't normalized by population, and pauses to suggest three follow-up questions rather than continuing on its own." style="height: 560px; display: block; margin: 0 auto;">
 
@@ -745,12 +747,14 @@ The point is to design review around actual human behavior, not assume that
 putting a person at every approval step automatically makes a system safer.
 :::
 
-## When should code shown to the user? {#showing-all-code .paper-slide}
+## When should code be shown to the user? {#showing-all-code .paper-slide}
 
 ::: {.fragment}
+
 <video class="rounded click-to-toggle" width="100%" style="display: block; margin: 0 auto; max-height: 510px;" data-autoplay muted preload="auto" tabindex="0" aria-label="Posit Assistant recording showing expanded R code in chat, execution in the Console, and a carrier-delay plot. Click to pause or resume.">
   <source src="figures/05-pa-demo-carriers-a.mp4" type="video/mp4">
 </video>
+
 :::
 
 ::: notes
@@ -766,7 +770,7 @@ could collapse the code input while leaving results visible.
 Ordinary chat still shows data-analysis code by default.
 :::
 
-## When should code shown to the user? {#showing-all-code-b .paper-slide}
+## When should code be shown to the user? {#showing-all-code-b .paper-slide}
 
 <video class="rounded click-to-toggle" width="100%" style="display: block; margin: 0 auto; max-height: 560px;" data-autoplay muted preload="auto" tabindex="0" aria-label="Posit Assistant recording continuing the carriers analysis, showing collapsed and expanded code in chat. Click to pause or resume.">
   <source src="figures/05-pa-demo-carriers-b.mp4" type="video/mp4">
@@ -786,6 +790,8 @@ Reused from the PHUSE deck. The agent pauses after each result, summarizes
 what it found, and asks what to look at next, instead of running on to a
 finished conclusion. Slowing down keeps the person in the exploration loop.
 :::
+
+# {.paper-slide}
 
 # And what if the user is not a data scientist? {#non-data-scientist .beat-slide}
 
@@ -953,9 +959,19 @@ Nevertheless, you're not there. Your VP brings this chart to leadership. They de
 ```
 
 :::notes
-A month later, leadership will ass to see the chart again. The VP will open up the same agent, but it can't find the conversation. (It was deleted after 30 days.) All of the analysis had happened in a tempfile that is long gone. 
+A month later, leadership will ask to see the chart again. The VP will open up the same agent, but it can't find the conversation. (It was deleted after 30 days.) All of the analysis had happened in a tempfile that is long gone. 
 
 The agent offers to make it again. This time, when the VP asks for the same plot, they see that site visits had been steadily trending upward the whole time.
+:::
+
+# {.paper-slide}
+
+::: notes
+and this is not good!
+but we know that data teams often have code to answer these kinds of questions
+if this happened in real life, the vp could ask a data scientist or statician. and they might have code that they use all the time to run this kind of analysis. 
+
+we're going to call this kind of code trusted code
 :::
 
 # [_Trusted_ code]{#trusted-code style="color: #b8623f; font-size: 1.4em;"}
@@ -1133,7 +1149,6 @@ https://github.com/posit-dev/devrel-agent
 
 ::: notes
 Live demo: https://posit-devrel-agent.share.connect.posit.cloud/
-PLACEHOLDER: choose questions to demonstrate.
 :::
 
 # {#clinical-trials-agent .header-slide .deep-slide}
@@ -1189,9 +1204,6 @@ building and maintaining them?
 Build: connect vetted calculations, data, and organizational context.
 Deploy: make the agent available to collaborators, for example on Connect.
 Improve: review its behavior and add calculations or context for recurring questions.
-
-The boxes summarize the loops. There is no separate loops diagram.
-PLACEHOLDER: expand the lifecycle examples and deployment details as needed.
 :::
 
 ## Build: the commons skill {#build-onboarding .paper-slide}
@@ -1208,23 +1220,19 @@ PLACEHOLDER: expand the lifecycle examples and deployment details as needed.
 
 ::: notes
 The commons package ships as a skill for coding agents (Posit Assistant,
-Claude Code, Codex). The skill is named commons; onboarding is one workflow
-within it, alongside extraction, evaluation, and iteration. The onboarding reference scaffolds the project,
-collects source material incrementally, and records durable guidance in
-AGENTS.md / CLAUDE.md.
-
-You don't have to learn the API cold: the skill knows the package and asks
-you only for the decisions that matter.
+Claude Code, Codex). 
 :::
 
 ## Information layers {#information-layers .paper-slide}
 
-Give the agent more than access to data.
+Trusted calculations, plus the knowledge needed to use and interpret the data.
 
-| Semantic layer | Context layer |
-|---|---|
-| Trusted calculations the agent can reuse | Background information that helps the agent reason about the data |
-| R measures, data dictionary definitions, warehouse metrics | Documentation, definitions, conventions, and known limitations |
+| Layer | Sources | Role |
+|---|---|---|
+| **Semantic layer** | Measures in `.R` files, definitions in `data-dict.yaml`, and supported warehouse semantic models | Provides trusted calculations |
+| **Context layer** | Markdown files and descriptive fields in `data-dict.yaml` | Informs custom SQL or R and guides interpretation |
+
+Data dictionaries span both layers.
 
 ::: notes
 These layers complement the data source. The semantic layer supplies
@@ -1242,8 +1250,8 @@ Trusted calculations: **how an answer is computed.**
 
 ::: {.incremental}
 * For example: enrollment counts by trial phase, using the team's agreed definition
-* Reuse vetted R functions as measures, defined inline or in R scripts
-* Or use data dictionary definitions, Snowflake semantic views, and Databricks metric views
+* Define vetted R or Python functions as measures in scripts. 
+* Or use data dictionary definitions, Snowflake semantic views, and Databricks metric views.
 :::
 
 ::: notes
@@ -1264,19 +1272,17 @@ definitions, Snowflake semantic views, or Databricks metric views.
 Organizational knowledge: **what the data means and how to interpret it.**
 
 ::: {.incremental}
-* For example: what “enrolled” means, reporting conventions, and known data limitations
-* Supply text and Markdown documents; attach structured data dictionaries to data sources
-* Relevant context is retrieved as needed; always-needed guidance goes in `instructions`
+* Markdown files
+* Descriptive entries in data dictionaries
+* Column meanings, terminology, conventions, and known limitations
 :::
 
 ::: notes
-The context layer holds the organizational knowledge that isn't in the
-data: definitions, conventions, how tables join, what terms mean. commons
-searches it when it's relevant and cites what it used.
+Markdown files and descriptive entries in data dictionaries supply context:
+what columns mean, terminology, conventions, and limitations.
 
-Things the agent needs in every conversation -- like fiscal-year
-conventions -- go in commons()' instructions argument instead, so they're
-always present.
+Data dictionaries can serve both layers: descriptive fields supply context,
+while calculation definitions supply the semantic layer.
 :::
 
 ## Build {#build-agent .paper-slide}
@@ -1341,29 +1347,12 @@ agent <- commons(
 * No separate `semantic_layer()` call needed for these views
 :::
 
-::: notes
-These are illustrative view names, not actual J&J objects. Choose one of
-the two source definitions; the connections are already configured DBI
-connections. The Snowflake object is a semantic view, and the Databricks
-object is a metric view, rather than an ordinary table.
 
-The data source is whatever the data team already maintains in Snowflake or
-Databricks. Pass a DBI connection and select tables: qualified names like
-"schema.table", or a DBI::Id ending in a catalog or schema to select a whole
-namespace (with `exclude` globs like "TMP_*" to omit objects).
-
-Namespace selections also import Snowflake semantic views and Databricks
-metric views as native trusted metrics and dimensions, so warehouse-side
-definitions become trusted calculations without rewriting them in R. These
-warehouse semantic models need no separate `semantic_layer()` call.
-:::
-
-## Deploy: your colleagues open the app {#deploy-connect .paper-slide}
+## Deploy {#deploy-connect .paper-slide}
 
 ::: {.incremental}
-* Deploy like any other Shiny app: `rsconnect::deployApp()`
-* Collaborators ask questions in natural language -- no R required
-* Access follows Connect permissions; `share_with` grants trajectory access
+* Deploy like any other Shiny app.
+* (Optional) Enable built in trajectory-logging.
 :::
 
 ::: notes
@@ -1398,28 +1387,7 @@ A shared service account has the same database permissions for every user;
 it does not automatically differentiate users.
 :::
 
-## Snowflake and Databricks integration {#integrations .paper-slide}
-
-::: {.incremental}
-* `data_source()` works with data frames, pins boards, and DBI connections
-* Snowflake semantic views and Databricks metric views are read as trusted measures
-* Queries against them execute natively in the warehouse, under the connection's permissions
-* Answers built on them are marked trusted; custom code is marked differently
-:::
-
-::: notes
-The integration works with what your warehouse team already maintains: the
-semantic layer lives in Snowflake or Databricks, and commons reads its
-measures and dimensions rather than copying them into the agent.
-
-Metrics execute in the warehouse under the connection's permissions.
-commons queries the existing database rather than loading the source into
-its own DuckDB database; query results can still be returned to the agent.
-Native trusted metric execution is available in the R package; do not imply
-Python parity without checking.
-:::
-
-## Improve: the trajectory reviewer {#trajectory-review .paper-slide}
+## Improve: analyze trajectories {#trajectory-review .paper-slide}
 
 ::: {.incremental}
 * `commons(log = TRUE)` records conversation histories with OpenTelemetry
@@ -1432,63 +1400,25 @@ We'll demo the trajectory reviewer here. Reviewed conversations surface
 recurring questions, then you add trusted calculations or context. The goal
 is to improve the system, not just ask users to check answers more
 carefully. These reviewer functions are in the R package.
-:::
 
-## Reading trajectories back into R {#trajectory-code .paper-slide}
-
-```r
-# All trajectories you can access
-trajectories <- trajectory_read()
-
-# A recent window
-recent <- trajectory_read(n = 20, from = "2026-07-01")
-
-# Deployed content, by Connect GUID or URL
-deployed <- trajectory_read("https://connect.example.com/content/abc123")
-
-# Browse, flag, and annotate
-trajectory_review(trajectories)
-```
-
-::: notes
-`trajectory_read()` pulls captured conversations into a data frame;
-`trajectory_review()` launches a Shiny app over them. Review output feeds
-back into the Build stage as new trusted calculations and context.
+Go to trajectory reviewer
 :::
 
 # commons, shinychat, querychat, and Posit Assistant {#ecosystem .paper-slide}
 
-| | What it is |
+| | Use |
 |---|---|
-| Posit Assistant | A coding and data science agent in RStudio, Positron, and the terminal |
-| commons | An R/Python package for building trustworthy data agents with trusted calculations, context, and provenance |
-| shinychat | Shiny UI components for chat interfaces |
-| querychat | A chat interface for querying databases with SQL |
+| Posit Assistant | Get help with coding and data analysis in your development environment |
+| commons | Build general data-analysis agents for colleagues, grounded in your team’s trusted code |
+| shinychat | Build custom Shiny apps with chat components |
+| querychat | Explore tabular data through SQL-powered chat |
 
-::: notes
-PLACEHOLDER: sharpen the distinctions and the takeaway for the audience.
-:::
 
-# Revisiting the advice {#advice-2026 .paper-slide}
-
-| Earlier advice | Now |
-|---|---|
-| Use the best models | Use a model appropriate for the task. Understand what different models are good at, and where they tend to go wrong. |
-| Have a human review the work | Design the system to be trustworthy; don't rely on individual willpower for review. |
-| Be (a little) afraid | There's plenty to do: the task now is building these systems with normal engineering, data science, and IT practices. |
-
-::: notes
-We don't want overtrust or undertrust; we want good reasons to rely on the system.
-:::
 
 # {#closing-trust .statement-slide .paper-slide}
 
 ::: {.statement}
 [Weave trustworthiness into the system.]{.accent}
-:::
-
-::: notes
-don't just ask people to be careful
 :::
 
 # {#thank-you .thank-you-slide .deep-slide}
@@ -1500,9 +1430,9 @@ don't just ask people to be careful
     <h1>Thank you!</h1>
   </div>
   <div class="thank-you-resources">
-    <a class="thank-you-resource thank-you-link-card thank-you-slides-card" href="https://pos.it/keynote">
+<a class="thank-you-resource thank-you-link-card thank-you-slides-card" href="https://skaltman.github.io/shinyday-2026/">
       <span class="thank-you-resource-label">Slides</span>
-      <span class="thank-you-resource-link">pos.it/keynote</span>
+      <span class="thank-you-resource-link">skaltman.github.io/<wbr>shinyday-2026/</span>
     </a>
     <a class="thank-you-resource thank-you-link-card thank-you-commons-card" href="https://pos.it/commons">
       <span class="thank-you-resource-label">Commons</span>
@@ -1516,6 +1446,4 @@ don't just ask people to be careful
 </div>
 ```
 
-::: notes
-we will be in the lounge
-:::
+

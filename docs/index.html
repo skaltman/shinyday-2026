@@ -97,7 +97,7 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-9b6fbfbb71f80b160c3c45a3f73b51a1.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-7a523e8bacf1ee6088578373b64a45d5.css">
   <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -205,14 +205,14 @@
 </div>
 <div class="talk-meta">
 <p><strong>Sara Altman</strong></p>
-<p>J&amp;J Shiny Day · October 15, 2026</p>
+<p>J&amp;J Shiny Day October 15, 2026</p>
 </div>
 </div></div>
 <div class="title-weave">
 <p><img data-src="figures/title-weave.svg"></p>
 </div>
 <div class="footer title-footer">
-<p>https://pos.it/TODO</p>
+<p>https://skaltman.github.io/shinyday-2026/</p>
 </div>
 </section>
 <section id="story-of-an-eval" class="slide level2 beat-slide">
@@ -486,7 +486,7 @@ Can models interpret plots that contradict their expectations?
 <p>Data analysis depends on <span class="accent">context</span> that is not in the data.</p>
 </div>
 <aside class="notes">
-<p>Definitions, conventions, documentation, and tacit organizational knowledge don’t automatically become available to an LLM just because it is more capable.</p>
+<p>also even if models were perfect, data analysis isn’t solved. depends on context Definitions, conventions, documentation, and tacit organizational knowledge don’t automatically become available to an LLM just because it is more capable.</p>
 <p>That context might live in data dictionaries, semantic views, or in the mind of a coworker who has been at the organization for 20 years.</p>
 <p>Depending on your organization’s setup, making that context available can be a lot of work in itself.</p>
 <style type="text/css">
@@ -607,7 +607,7 @@ Can models interpret plots that contradict their expectations?
       }</style></aside>
 </section>
 <section id="harness-demo" class="slide level2 paper-slide">
-<h2>Posit Assistant demo</h2>
+<h2></h2>
 <p><img src="figures/posit-assistant-pause-often.gif" alt="Posit Assistant plots the top 20 states by number of Spanish speakers, notes that raw counts aren't normalized by population, and pauses to suggest three follow-up questions rather than continuing on its own." style="height: 560px; display: block; margin: 0 auto;"></p>
 <aside class="notes">
 <p>The agent works in the live session: it runs code, sees the results, and pauses with suggestions instead of running on. Correctness comes from the harness, namely the tools that run code and show the session</p>
@@ -757,7 +757,7 @@ Can models interpret plots that contradict their expectations?
       }</style></aside>
 </section>
 <section id="showing-all-code" class="slide level2 paper-slide">
-<h2>When should code shown to the user?</h2>
+<h2>When should code be shown to the user?</h2>
 <div class="fragment">
 <video class="rounded click-to-toggle" width="100%" style="display: block; margin: 0 auto; max-height: 510px;" data-autoplay="" muted="" preload="auto" tabindex="0" aria-label="Posit Assistant recording showing expanded R code in chat, execution in the Console, and a carrier-delay plot. Click to pause or resume.">
 <source src="figures/05-pa-demo-carriers-a.mp4" type="video/mp4">
@@ -779,7 +779,7 @@ Can models interpret plots that contradict their expectations?
           display:block!important;
       }</style></aside>
 <section id="showing-all-code-b" class="slide level2 paper-slide">
-<h2>When should code shown to the user?</h2>
+<h2>When should code be shown to the user?</h2>
 <video class="rounded click-to-toggle" width="100%" style="display: block; margin: 0 auto; max-height: 560px;" data-autoplay="" muted="" preload="auto" tabindex="0" aria-label="Posit Assistant recording continuing the carriers analysis, showing collapsed and expanded code in chat. Click to pause or resume.">
 <source src="figures/05-pa-demo-carriers-b.mp4" type="video/mp4">
 </video>
@@ -819,6 +819,11 @@ Can models interpret plots that contradict their expectations?
           display:block!important;
       }</style></aside>
 </section>
+<section id="section-2" class="title-slide slide level1 paper-slide center">
+<h1></h1>
+
+</section>
+
 <section id="non-data-scientist" class="title-slide slide level1 beat-slide center">
 <h1>And what if the user is not a data scientist?</h1>
 <aside class="notes">
@@ -994,8 +999,26 @@ Can models interpret plots that contradict their expectations?
   </div>
 </div>
 <aside class="notes">
-<p>A month later, leadership will ass to see the chart again. The VP will open up the same agent, but it can’t find the conversation. (It was deleted after 30 days.) All of the analysis had happened in a tempfile that is long gone.</p>
+<p>A month later, leadership will ask to see the chart again. The VP will open up the same agent, but it can’t find the conversation. (It was deleted after 30 days.) All of the analysis had happened in a tempfile that is long gone.</p>
 <p>The agent offers to make it again. This time, when the VP asks for the same plot, they see that site visits had been steadily trending upward the whole time.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+
+<section id="section-3" class="title-slide slide level1 paper-slide center">
+<h1></h1>
+<aside class="notes">
+<p>and this is not good! but we know that data teams often have code to answer these kinds of questions if this happened in real life, the vp could ask a data scientist or statician. and they might have code that they use all the time to run this kind of analysis.</p>
+<p>we’re going to call this kind of code trusted code</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1205,7 +1228,7 @@ Can models interpret plots that contradict their expectations?
 <p>https://github.com/posit-dev/devrel-agent</p>
 </div>
 <aside class="notes">
-<p>Live demo: https://posit-devrel-agent.share.connect.posit.cloud/ PLACEHOLDER: choose questions to demonstrate.</p>
+<p>Live demo: https://posit-devrel-agent.share.connect.posit.cloud/</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1256,7 +1279,6 @@ Can models interpret plots that contradict their expectations?
 <aside class="notes">
 <p>After seeing the agents in action, what does this look like for the person building and maintaining them?</p>
 <p>Build: connect vetted calculations, data, and organizational context. Deploy: make the agent available to collaborators, for example on Connect. Improve: review its behavior and add calculations or context for recurring questions.</p>
-<p>The boxes summarize the loops. There is no separate loops diagram. PLACEHOLDER: expand the lifecycle examples and deployment details as needed.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1280,8 +1302,7 @@ Can models interpret plots that contradict their expectations?
 <p><a href="https://posit-dev.github.io/commons/r/articles/commons.html#working-with-the-agent-skill">Working with the agent skill</a></p>
 </div>
 <aside class="notes">
-<p>The commons package ships as a skill for coding agents (Posit Assistant, Claude Code, Codex). The skill is named commons; onboarding is one workflow within it, alongside extraction, evaluation, and iteration. The onboarding reference scaffolds the project, collects source material incrementally, and records durable guidance in AGENTS.md / CLAUDE.md.</p>
-<p>You don’t have to learn the API cold: the skill knows the package and asks you only for the decisions that matter.</p>
+<p>The commons package ships as a skill for coding agents (Posit Assistant, Claude Code, Codex).</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1296,29 +1317,34 @@ Can models interpret plots that contradict their expectations?
 </section>
 <section id="information-layers" class="slide level2 paper-slide">
 <h2>Information layers</h2>
-<p>Give the agent more than access to data.</p>
+<p>Trusted calculations, plus the knowledge needed to use and interpret the data.</p>
 <table class="caption-top">
 <colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
 </colgroup>
 <thead>
 <tr class="header">
-<th>Semantic layer</th>
-<th>Context layer</th>
+<th>Layer</th>
+<th>Sources</th>
+<th>Role</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Trusted calculations the agent can reuse</td>
-<td>Background information that helps the agent reason about the data</td>
+<td><strong>Semantic layer</strong></td>
+<td>Measures in <code>.R</code> files, definitions in <code>data-dict.yaml</code>, and supported warehouse semantic models</td>
+<td>Provides trusted calculations</td>
 </tr>
 <tr class="even">
-<td>R measures, data dictionary definitions, warehouse metrics</td>
-<td>Documentation, definitions, conventions, and known limitations</td>
+<td><strong>Context layer</strong></td>
+<td>Markdown files and descriptive fields in <code>data-dict.yaml</code></td>
+<td>Informs custom SQL or R and guides interpretation</td>
 </tr>
 </tbody>
 </table>
+<p>Data dictionaries span both layers.</p>
 <aside class="notes">
 <p>These layers complement the data source. The semantic layer supplies trusted ways to compute answers. The context layer helps the agent write custom SQL or R and interpret the results when a trusted calculation doesn’t cover the question.</p>
 <p>Data dictionaries can contribute to both: calculation definitions to the semantic layer, and descriptive information to the context layer.</p>
@@ -1339,8 +1365,8 @@ Can models interpret plots that contradict their expectations?
 <p>Trusted calculations: <strong>how an answer is computed.</strong></p>
 <ul>
 <li class="fragment">For example: enrollment counts by trial phase, using the team’s agreed definition</li>
-<li class="fragment">Reuse vetted R functions as measures, defined inline or in R scripts</li>
-<li class="fragment">Or use data dictionary definitions, Snowflake semantic views, and Databricks metric views</li>
+<li class="fragment">Define vetted R or Python functions as measures in scripts.</li>
+<li class="fragment">Or use data dictionary definitions, Snowflake semantic views, and Databricks metric views.</li>
 </ul>
 <aside class="notes">
 <p>The semantic layer collects the vetted calculations the agent prefers to use. Functions documented with <span class="citation" data-cites="measure">@measure</span> become measures; the roxygen description and <span class="citation" data-cites="param">@param</span> tags become the tool’s description and arguments.</p>
@@ -1361,13 +1387,13 @@ Can models interpret plots that contradict their expectations?
 <h2>Build: the context layer</h2>
 <p>Organizational knowledge: <strong>what the data means and how to interpret it.</strong></p>
 <ul>
-<li class="fragment">For example: what “enrolled” means, reporting conventions, and known data limitations</li>
-<li class="fragment">Supply text and Markdown documents; attach structured data dictionaries to data sources</li>
-<li class="fragment">Relevant context is retrieved as needed; always-needed guidance goes in <code>instructions</code></li>
+<li class="fragment">Markdown files</li>
+<li class="fragment">Descriptive entries in data dictionaries</li>
+<li class="fragment">Column meanings, terminology, conventions, and known limitations</li>
 </ul>
 <aside class="notes">
-<p>The context layer holds the organizational knowledge that isn’t in the data: definitions, conventions, how tables join, what terms mean. commons searches it when it’s relevant and cites what it used.</p>
-<p>Things the agent needs in every conversation – like fiscal-year conventions – go in commons()’ instructions argument instead, so they’re always present.</p>
+<p>Markdown files and descriptive entries in data dictionaries supply context: what columns mean, terminology, conventions, and limitations.</p>
+<p>Data dictionaries can serve both layers: descriptive fields supply context, while calculation definitions supply the semantic layer.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1443,28 +1469,12 @@ Can models interpret plots that contradict their expectations?
 <li class="fragment">Use existing governed metrics as trusted calculations</li>
 <li class="fragment">No separate <code>semantic_layer()</code> call needed for these views</li>
 </ul>
-<aside class="notes">
-<p>These are illustrative view names, not actual J&amp;J objects. Choose one of the two source definitions; the connections are already configured DBI connections. The Snowflake object is a semantic view, and the Databricks object is a metric view, rather than an ordinary table.</p>
-<p>The data source is whatever the data team already maintains in Snowflake or Databricks. Pass a DBI connection and select tables: qualified names like “schema.table”, or a DBI::Id ending in a catalog or schema to select a whole namespace (with <code>exclude</code> globs like “TMP_*” to omit objects).</p>
-<p>Namespace selections also import Snowflake semantic views and Databricks metric views as native trusted metrics and dimensions, so warehouse-side definitions become trusted calculations without rewriting them in R. These warehouse semantic models need no separate <code>semantic_layer()</code> call.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
 </section>
 <section id="deploy-connect" class="slide level2 paper-slide">
-<h2>Deploy: your colleagues open the app</h2>
+<h2>Deploy</h2>
 <ul>
-<li class="fragment">Deploy like any other Shiny app: <code>rsconnect::deployApp()</code></li>
-<li class="fragment">Collaborators ask questions in natural language – no R required</li>
-<li class="fragment">Access follows Connect permissions; <code>share_with</code> grants trajectory access</li>
+<li class="fragment">Deploy like any other Shiny app.</li>
+<li class="fragment">(Optional) Enable built in trajectory-logging.</li>
 </ul>
 <aside class="notes">
 <p>Deployment is ordinary Connect deployment. For trajectory capture, include “OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT” in deployApp()’s envVars argument, and a server administrator must enable OpenTelemetry.Enabled and OpenTelemetry.AllowContentInstrumentation.</p>
@@ -1506,31 +1516,8 @@ Can models interpret plots that contradict their expectations?
           display:block!important;
       }</style></aside>
 </section>
-<section id="integrations" class="slide level2 paper-slide">
-<h2>Snowflake and Databricks integration</h2>
-<ul>
-<li class="fragment"><code>data_source()</code> works with data frames, pins boards, and DBI connections</li>
-<li class="fragment">Snowflake semantic views and Databricks metric views are read as trusted measures</li>
-<li class="fragment">Queries against them execute natively in the warehouse, under the connection’s permissions</li>
-<li class="fragment">Answers built on them are marked trusted; custom code is marked differently</li>
-</ul>
-<aside class="notes">
-<p>The integration works with what your warehouse team already maintains: the semantic layer lives in Snowflake or Databricks, and commons reads its measures and dimensions rather than copying them into the agent.</p>
-<p>Metrics execute in the warehouse under the connection’s permissions. commons queries the existing database rather than loading the source into its own DuckDB database; query results can still be returned to the agent. Native trusted metric execution is available in the R package; do not imply Python parity without checking.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
 <section id="trajectory-review" class="slide level2 paper-slide">
-<h2>Improve: the trajectory reviewer</h2>
+<h2>Improve: analyze trajectories</h2>
 <ul>
 <li class="fragment"><code>commons(log = TRUE)</code> records conversation histories with OpenTelemetry</li>
 <li class="fragment"><code>trajectory_read()</code> reads trajectories from Connect or local traces</li>
@@ -1538,33 +1525,7 @@ Can models interpret plots that contradict their expectations?
 </ul>
 <aside class="notes">
 <p>We’ll demo the trajectory reviewer here. Reviewed conversations surface recurring questions, then you add trusted calculations or context. The goal is to improve the system, not just ask users to check answers more carefully. These reviewer functions are in the R package.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="trajectory-code" class="slide level2 paper-slide">
-<h2>Reading trajectories back into R</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="co"># All trajectories you can access</span></span>
-<span id="cb9-2"><a></a>trajectories <span class="ot">&lt;-</span> <span class="fu">trajectory_read</span>()</span>
-<span id="cb9-3"><a></a></span>
-<span id="cb9-4"><a></a><span class="co"># A recent window</span></span>
-<span id="cb9-5"><a></a>recent <span class="ot">&lt;-</span> <span class="fu">trajectory_read</span>(<span class="at">n =</span> <span class="dv">20</span>, <span class="at">from =</span> <span class="st">"2026-07-01"</span>)</span>
-<span id="cb9-6"><a></a></span>
-<span id="cb9-7"><a></a><span class="co"># Deployed content, by Connect GUID or URL</span></span>
-<span id="cb9-8"><a></a>deployed <span class="ot">&lt;-</span> <span class="fu">trajectory_read</span>(<span class="st">"https://connect.example.com/content/abc123"</span>)</span>
-<span id="cb9-9"><a></a></span>
-<span id="cb9-10"><a></a><span class="co"># Browse, flag, and annotate</span></span>
-<span id="cb9-11"><a></a><span class="fu">trajectory_review</span>(trajectories)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<aside class="notes">
-<p><code>trajectory_read()</code> pulls captured conversations into a data frame; <code>trajectory_review()</code> launches a Shiny app over them. Review output feeds back into the Build stage as new trusted calculations and context.</p>
+<p>Go to trajectory reviewer</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1588,84 +1549,28 @@ Can models interpret plots that contradict their expectations?
 <thead>
 <tr class="header">
 <th></th>
-<th>What it is</th>
+<th>Use</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>Posit Assistant</td>
-<td>A coding and data science agent in RStudio, Positron, and the terminal</td>
+<td>Get help with coding and data analysis in your development environment</td>
 </tr>
 <tr class="even">
 <td>commons</td>
-<td>An R/Python package for building trustworthy data agents with trusted calculations, context, and provenance</td>
+<td>Build general data-analysis agents for colleagues, grounded in your team’s trusted code</td>
 </tr>
 <tr class="odd">
 <td>shinychat</td>
-<td>Shiny UI components for chat interfaces</td>
+<td>Build custom Shiny apps with chat components</td>
 </tr>
 <tr class="even">
 <td>querychat</td>
-<td>A chat interface for querying databases with SQL</td>
+<td>Explore tabular data through SQL-powered chat</td>
 </tr>
 </tbody>
 </table>
-<aside class="notes">
-<p>PLACEHOLDER: sharpen the distinctions and the takeaway for the audience.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-
-<section id="advice-2026" class="title-slide slide level1 paper-slide center">
-<h1>Revisiting the advice</h1>
-<table class="caption-top">
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Earlier advice</th>
-<th>Now</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Use the best models</td>
-<td>Use a model appropriate for the task. Understand what different models are good at, and where they tend to go wrong.</td>
-</tr>
-<tr class="even">
-<td>Have a human review the work</td>
-<td>Design the system to be trustworthy; don’t rely on individual willpower for review.</td>
-</tr>
-<tr class="odd">
-<td>Be (a little) afraid</td>
-<td>There’s plenty to do: the task now is building these systems with normal engineering, data science, and IT practices.</td>
-</tr>
-</tbody>
-</table>
-<aside class="notes">
-<p>We don’t want overtrust or undertrust; we want good reasons to rely on the system.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
 </section>
 
 <section id="closing-trust" class="title-slide slide level1 statement-slide paper-slide center">
@@ -1673,19 +1578,6 @@ Can models interpret plots that contradict their expectations?
 <div class="statement">
 <p><span class="accent">Weave trustworthiness into the system.</span></p>
 </div>
-<aside class="notes">
-<p>don’t just ask people to be careful</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
 </section>
 
 <section id="thank-you" class="title-slide slide level1 thank-you-slide deep-slide center">
@@ -1696,9 +1588,9 @@ Can models interpret plots that contradict their expectations?
     <h1>Thank you!</h1>
   </div>
   <div class="thank-you-resources">
-    <a class="thank-you-resource thank-you-link-card thank-you-slides-card" href="https://pos.it/keynote">
+<a class="thank-you-resource thank-you-link-card thank-you-slides-card" href="https://skaltman.github.io/shinyday-2026/">
       <span class="thank-you-resource-label">Slides</span>
-      <span class="thank-you-resource-link">pos.it/keynote</span>
+      <span class="thank-you-resource-link">skaltman.github.io/<wbr>shinyday-2026/</span>
     </a>
     <a class="thank-you-resource thank-you-link-card thank-you-commons-card" href="https://pos.it/commons">
       <span class="thank-you-resource-label">Commons</span>
@@ -1710,19 +1602,6 @@ Can models interpret plots that contradict their expectations?
     </a>
   </div>
 </div>
-<aside class="notes">
-<p>we will be in the lounge</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
 
 
 </section>

@@ -228,6 +228,10 @@ $link-color: color("bridge");
     margin: 0;
   }
 
+  .column {
+    transform: translateY(40px);
+  }
+
   .talk-title {
     margin: 0;
     font-size: 61px;
