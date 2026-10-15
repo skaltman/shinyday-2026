@@ -263,7 +263,7 @@ Model improvements changed the results, so our assessment needs to change too.
 the rising tide of model capability really floats all the boats
 :::
 
-## A rising tide lifts some of the boats {#rising-tide background-image="figures/vidar-nordli-mathisen-U45J8RWFWvA-unsplash.jpg"}
+## A rising tide lifts [some of the]{style="color: #b8623f;"} boats {#rising-tide background-image="figures/vidar-nordli-mathisen-U45J8RWFWvA-unsplash.jpg"}
 
 ::: footer
 <span style="color:#f5f1ec;">Photo: [Vidar Nordli-Mathisen](https://unsplash.com/@vidarnm), Unsplash</span>
