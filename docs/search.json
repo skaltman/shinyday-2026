@@ -235,7 +235,7 @@
     "href": "index.html#build-onboarding",
     "title": "",
     "section": "Build: the commons skill",
-    "text": "Build: the commons skill\n\nUse a coding agent plus the built-in commons skill to parse through your data and code and build a commons agent.\nWalks you through the process of creating a commons agent.\n\n\nWorking with the agent skill\n\n\nThe commons package ships as a skill for coding agents (Posit Assistant, Claude Code, Codex)."
+    "text": "Build: the commons skill\n\nUse a coding agent plus the built-in commons skill to parse through your data and code and build a commons agent.\nWalks you through the process of creating a commons agent.\n\n\nhttps://posit-dev.github.io/commons/r/articles/commons.html#working-with-the-agent-skill\n\n\nThe commons package ships as a skill for coding agents (Posit Assistant, Claude Code, Codex)."
   },
   {
     "objectID": "index.html#information-layers",

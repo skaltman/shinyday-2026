@@ -1117,7 +1117,7 @@ Improve: review its behavior and add calculations or context for recurring quest
 :::
 
 ::: footer
-[Working with the agent skill](https://posit-dev.github.io/commons/r/articles/commons.html#working-with-the-agent-skill)
+[https://posit-dev.github.io/commons/r/articles/commons.html#working-with-the-agent-skill](https://posit-dev.github.io/commons/r/articles/commons.html#working-with-the-agent-skill)
 :::
 
 ::: notes
