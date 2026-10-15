@@ -97,7 +97,7 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-d0e299d3d29466fd3e3d033099e9f753.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-fb976d6d1b39b68ea1ce40f7ab84fcfe.css">
   <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -505,6 +505,19 @@ Can models interpret plots that contradict their expectations?
 </section>
 <section id="trust-question" class="slide level2 deep-slide">
 <h2>How do we make data analysis agents trustworthy?</h2>
+<aside class="notes">
+<p>We can’t get there just by choosing a good model and telling people to be careful. We have to build trustworthiness into the environment around it.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="posit-assistant" class="slide level2 paper-slide">
 <h2></h2>
@@ -645,7 +658,7 @@ Can models interpret plots that contradict their expectations?
 <h1></h1>
 <p>We can’t just rely on individual oversight.</p>
 <aside class="notes">
-<p>I hear a lot about human in the loop, and it’s important. No one is saying you shouldn’t be in the loop (well someone is). but we need to actually make that loop work. it isn’t enough for you to just kind of be there monitoring. The system has to work with how people actually behave, not depend on individual willpower to review every action carefully. Three examples: auto mode, showing code, and slowing down EDA.</p>
+<p>I hear a lot about human in the loop, and it’s important. No one is saying you shouldn’t be in the loop (well someone is). That includes the interaction with the person. Putting someone in the loop isn’t enough—we have to make their involvement useful. but we need to actually make that loop work. it isn’t enough for you to just kind of be there monitoring. The system has to work with how people actually behave, not depend on individual willpower to review every action carefully. Three examples: auto mode, showing code, and slowing down EDA.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -768,7 +781,8 @@ Can models interpret plots that contradict their expectations?
 <h2>Pause when needed</h2>
 <img class="rounded" src="figures/posit-assistant-pause-often.gif" alt="Posit Assistant plots the top 20 states by number of Spanish speakers, notes that raw counts aren't normalized by population, and pauses to suggest follow-up questions." style="display: block; height: 540px; width: auto; max-width: 90%; margin: 16px auto 0;">
 <aside class="notes">
-<p>Reused from the PHUSE deck. The agent pauses after each result, summarizes what it found, and asks what to look at next, instead of running on to a finished conclusion. Slowing down keeps the person in the exploration loop.</p>
+<p>The agent pauses after each result, summarizes what it found, and asks what to look at next, instead of running on to a finished conclusion. Slowing down keeps the person in the exploration loop.</p>
+<p>the purpose of EDA is typically for you to understand your data. No matter how good the agent is, if that understanding isn’t transferred, the analysis process is not done.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -790,6 +804,7 @@ Can models interpret plots that contradict their expectations?
 <section id="non-data-scientist" class="title-slide slide level1 beat-slide center">
 <h1>And what if the user is not a data scientist?</h1>
 <aside class="notes">
+<p>we’ve talked about what a coding agent like posit assistant might look like to be trustworthy but llms have another consequence too – they open up data analysis to more people. it is now easier than ever to get <em>an</em> answer to your data question, whether or not that answer is right</p>
 <p>but what if the user is not a data scientist? how do we help them get correct answers too?</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -820,112 +835,18 @@ Can models interpret plots that contradict their expectations?
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-</section>
-<section id="site-traffic-analysis" class="slide level2 agent-story-slide slow-tool-calls">
-<h2></h2>
-<div class="agent-window">
-  <div class="agent-thread">
-        <div class="chat-turn chat-turn-user">
-          <div class="chat-message chat-message-user">
-            how is traffic trending for our site?
-          </div>
-        </div>
-        <div class="chat-turn chat-turn-agent tool-run fragment fade-up" data-fragment-index="0">
-          <div class="chat-message chat-message-agent">
-            <div class="agent-thinking"><span></span> Analyzing site traffic</div>
-            <div class="tool-card" style="--tool-delay: 0s">
-              <span class="tool-card-icon">⌕</span>
-              <span><strong>Searching workspace</strong><small>web analytics</small></span>
-              <span class="tool-progress"><i class="tool-spinner"></i><i class="tool-check">✓</i></span>
-            </div>
-            <div class="tool-card" style="--tool-delay: 2.25s">
-              <span class="tool-card-icon">◫</span>
-              <span><strong>Querying warehouse</strong><small>analytics.pageviews</small></span>
-              <span class="tool-progress"><i class="tool-spinner"></i><i class="tool-check">✓</i></span>
-            </div>
-            <div class="tool-card" style="--tool-delay: 4.5s">
-              <span class="tool-card-icon">∿</span>
-              <span><strong>Calculating daily visits</strong><small>last 90 days</small></span>
-              <span class="tool-progress"><i class="tool-spinner"></i><i class="tool-check">✓</i></span>
-            </div>
-          </div>
-        </div>
-        <div class="chat-turn chat-turn-agent result-turn fragment fade-up" data-fragment-index="0">
-          <div class="chat-message chat-message-agent">
-            <p>Daily visits are down <strong>64%</strong> over the last 90 days.</p>
-            <div class="dau-chart">
-              <div class="dau-chart-title"><span>Daily site visits</span><strong>−64%</strong></div>
-              <svg viewbox="0 0 620 225" role="img" aria-label="Daily site visits rise unevenly, then fall sharply after a changepoint.">
-                <defs>
-                  <lineargradient id="dau-area" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stop-color="#ee6331" stop-opacity="0.28"></stop>
-                    <stop offset="100%" stop-color="#ee6331" stop-opacity="0.02"></stop>
-                  </lineargradient>
-                </defs>
-                <g class="chart-grid">
-                  <line x1="56" y1="34" x2="598" y2="34"></line><line x1="56" y1="86" x2="598" y2="86"></line>
-                  <line x1="56" y1="138" x2="598" y2="138"></line><line x1="56" y1="190" x2="598" y2="190"></line>
-                </g>
-                <g class="chart-labels">
-                  <text x="46" y="39">60k</text><text x="46" y="91">40k</text><text x="46" y="143">20k</text>
-                  <text x="56" y="215">90 days ago</text><text x="324" y="215">45 days ago</text><text x="598" y="215">Today</text>
-                </g>
-                <path class="chart-area" d="M56,61 L69,67 L82,58 L95,60 L108,54 L121,59 L134,51 L147,55 L160,57 L173,48 L186,52 L199,45 L212,50 L225,42 L238,46 L251,39 L264,44 L277,36 L290,41 L303,34 L313,37 L319,35 L329,51 L340,57 L351,53 L362,66 L373,61 L384,72 L395,78 L406,73 L417,86 L428,82 L439,95 L450,99 L461,93 L472,108 L483,103 L494,117 L505,113 L516,126 L527,122 L538,134 L549,130 L560,140 L571,137 L582,146 L598,145 L598,190 L56,190 Z"></path>
-                <path class="chart-line" pathlength="1" d="M56,61 L69,67 L82,58 L95,60 L108,54 L121,59 L134,51 L147,55 L160,57 L173,48 L186,52 L199,45 L212,50 L225,42 L238,46 L251,39 L264,44 L277,36 L290,41 L303,34 L313,37 L319,35 L329,51 L340,57 L351,53 L362,66 L373,61 L384,72 L395,78 L406,73 L417,86 L428,82 L439,95 L450,99 L461,93 L472,108 L483,103 L494,117 L505,113 L516,126 L527,122 L538,134 L549,130 L560,140 L571,137 L582,146 L598,145"></path>
-                <circle class="chart-end" cx="598" cy="145" r="6"></circle>
-              </svg>
-            </div>
-          </div>
-        </div>
-  </div>
+</section></section>
+<section id="commons" class="title-slide slide level1 commons-intro-slide center">
+<h1></h1>
+<p><img data-src="figures/commons-hex.png" class="commons-intro-logo" alt="Commons logo"></p>
+<div class="footer">
+<p>https://pos.it/commons</p>
 </div>
 <aside class="notes">
-<p>This morning, your VP pulled up a coding agent and asked a question.</p>
-<p>[yada yada this is what happen]</p>
-<p>Now, as data people, we might have asked ourselves “How are daily visits being measured?” “What event triggers an entry in this column?” “What other possible explanations could account for this change in trend other than a genuine reversal in the traffic going to this site?” If you had dug further, you would have learned that this kind of pageview event no longer triggers on newer versions of Chrome. As users gradually update Chrome, their page visits are no longer registered in this table. Regardless, this isn’t even the typical table that the data science team uses to measure site traffic anyway.</p>
-<p>Nevertheless, you’re not there. Your VP brings this chart to leadership. They decide to spend millions to reverse the trend.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section></section>
-<section id="section-2" class="title-slide slide level1 paper-slide center">
-<h1></h1>
-<aside class="notes">
-<p>and this is not good! but we know that data teams often have code to answer these kinds of questions if this happened in real life, the vp could ask a data scientist or statician. and they might have code that they use all the time to run this kind of analysis.</p>
-<p>we’re going to call this kind of code trusted code</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-
-<section id="trusted-code" class="title-slide slide level1 center">
-<h1><span id="trusted-code" style="color: #b8623f; font-size: 1.4em;"><em>Trusted</em> code</span></h1>
-<aside class="notes">
-<p>This vetted code used by the data scientists is what we’ll called <em>trusted</em> code they rely on it and trust it to give them the right answers</p>
-<p>They also might have trusted code in</p>
-<ul>
-<li>Shiny apps</li>
-<li>R and Python packages</li>
-<li>Quarto documents</li>
-</ul>
-<p>Instead of the model writing code afresh every time it’s answering a question, what if it could discover and use this trusted code?</p>
-<p>This is one of the core ideas behind a new open source package that we’re excited to share with you all today. It’s called commons.</p>
+<p>this is exactly the problem that commons is trying to solve</p>
+<p>commons helps data scientists build trustworthy data agents for their collaborators that give more correct, reproducible, and transparent answers than the default “vibe analysis” siutation, while still being easy and intuitive to use.</p>
+<p>It’s an open source R and Python package built on <code>ellmer</code> / <code>chatlas</code> and <code>shinychat</code>. You can use it with whatever model from whatever provider you want.</p>
+<p>and it’s a bird because…</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -940,16 +861,19 @@ Can models interpret plots that contradict their expectations?
 </section>
 
 <section>
-<section id="commons" class="title-slide slide level1 commons-intro-slide center">
-<h1></h1>
-<p><img data-src="figures/commons-hex.png" class="commons-intro-logo" alt="Commons logo"></p>
-<div class="footer">
-<p>https://pos.it/commons</p>
-</div>
+<section id="trusted-code" class="title-slide slide level1 center">
+<h1><span id="trusted-code" style="color: #b8623f; font-size: 1.4em;"><em>Trusted</em> code</span></h1>
 <aside class="notes">
-<p>commons helps data scientists build trustworthy data agents for their collaborators.</p>
-<p>It’s an open source R and Python package built on <code>ellmer</code> / <code>chatlas</code> and <code>shinychat</code>. You can use it with whatever model from whatever provider you want.</p>
-<p>and it’s a bird because…</p>
+<p>one of the core ideas behind commons is that data teams have trusted code …</p>
+<p>This vetted code used by the data scientists is what we’ll called <em>trusted</em> code they rely on it and trust it to give them the right answers</p>
+<p>They also might have trusted code in</p>
+<ul>
+<li>Shiny apps</li>
+<li>R and Python packages</li>
+<li>Quarto documents</li>
+</ul>
+<p>Instead of the model writing code afresh every time it’s answering a question, what if it could discover and use this trusted code?</p>
+<p>This is one of the core ideas behind a new open source package that we’re excited to share with you all today. It’s called commons.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -976,8 +900,8 @@ Can models interpret plots that contradict their expectations?
 <source src="figures/commons-01-traffic-trend-a.mp4" type="video/mp4">
 </video>
 <aside class="notes">
-<p>Let’s see how the VP’s analysis would work with a commons agent.</p>
-<p>The first thing the agent does is search for a trusted calculation. Here it finds and runs the data scientist’s site traffic calculation.</p>
+<p>Let’s see it in action</p>
+<p>The first thing the agent does is search for a trusted calculation. Here it finds and runs a trusted site traffic calculation.</p>
 <p>The answer is marked as verified to signify that it used vetted code.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -1026,7 +950,7 @@ Can models interpret plots that contradict their expectations?
 </video>
 <aside class="notes">
 <p>There’s one more possible path: the model cannot find trusted context to justify its approach. In this case, we mark the answer with a yellow tag, which lets the user know the answer should be considered less trusted.</p>
-<p>This is how we balance convenience and correctness. The tool has to feel convenient enough that the user actually wants to reach for it – it needs to feel like a normal chat. When correctness is closer to a normal coding agent, we signal that the user ought to be more skeptical of the answer.</p>
+<p>The tool has to feel convenient enough that the user actually wants to reach for it – it needs to feel like a normal chat. When correctness is closer to a normal coding agent, we signal that the user ought to be more skeptical of the answer.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1200,32 +1124,29 @@ Can models interpret plots that contradict their expectations?
 <section id="information-layers" class="slide level2 paper-slide">
 <h2>Build: information layers</h2>
 <table class="caption-top">
-<colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
-</colgroup>
 <thead>
 <tr class="header">
-<th>Layer</th>
-<th>Sources</th>
-<th>Role</th>
+<th data-quarto-table-cell-role="th">Layer</th>
+<th data-quarto-table-cell-role="th">Sources</th>
+<th data-quarto-table-cell-role="th">Role</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr class="fragment odd" data-fragment-index="0">
 <td><strong>Semantic layer</strong></td>
 <td>Measures in <code>.R</code> files, definitions in <code>data-dict.yaml</code>, and supported warehouse semantic models</td>
 <td>Provides trusted calculations</td>
 </tr>
-<tr class="even">
+<tr class="fragment even" data-fragment-index="1">
 <td><strong>Context layer</strong></td>
 <td>Markdown files and descriptive fields in <code>data-dict.yaml</code></td>
 <td>Informs custom SQL or R and guides interpretation</td>
 </tr>
 </tbody>
 </table>
+<div class="fragment" data-fragment-index="2">
 <p>Data dictionaries span both layers.</p>
+</div>
 <aside class="notes">
 <p>These layers complement the data source. The semantic layer supplies trusted ways to compute answers. The context layer helps the agent write custom SQL or R and interpret the results when a trusted calculation doesn’t cover the question.</p>
 <p>Data dictionaries can contribute to both: calculation definitions to the semantic layer, and descriptive information to the context layer.</p>
@@ -1391,9 +1312,9 @@ Can models interpret plots that contradict their expectations?
 <section id="trajectory-review" class="slide level2 paper-slide">
 <h2>Improve: analyze trajectories</h2>
 <ul>
-<li class="fragment"><code>commons(log = TRUE)</code> records conversation histories with OpenTelemetry</li>
-<li class="fragment"><code>trajectory_read()</code> reads trajectories from Connect or local traces</li>
-<li class="fragment"><code>trajectory_review()</code> opens a Shiny app to browse, flag, and annotate conversations</li>
+<li class="fragment"><code>commons(log = TRUE)</code> records conversation histories with OpenTelemetry.</li>
+<li class="fragment"><code>trajectory_read()</code> reads trajectories from Connect or local traces.</li>
+<li class="fragment"><code>trajectory_review()</code> opens a Shiny app to browse, flag, and annotate conversations.</li>
 </ul>
 <aside class="notes">
 <p>We’ll demo the trajectory reviewer here. Reviewed conversations surface recurring questions, then you add trusted calculations or context. The goal is to improve the system, not just ask users to check answers more carefully. These reviewer functions are in the R package.</p>

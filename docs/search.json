@@ -88,7 +88,7 @@
     "href": "index.html#trust-question",
     "title": "",
     "section": "How do we make data analysis agents trustworthy?",
-    "text": "How do we make data analysis agents trustworthy?"
+    "text": "How do we make data analysis agents trustworthy?\n\nWe can’t get there just by choosing a good model and telling people to be careful. We have to build trustworthiness into the environment around it."
   },
   {
     "objectID": "index.html#posit-assistant",
@@ -165,7 +165,7 @@
     "href": "index.html#slowing-eda",
     "title": "",
     "section": "Pause when needed",
-    "text": "Pause when needed\n\n\nReused from the PHUSE deck. The agent pauses after each result, summarizes what it found, and asks what to look at next, instead of running on to a finished conclusion. Slowing down keeps the person in the exploration loop."
+    "text": "Pause when needed\n\n\nThe agent pauses after each result, summarizes what it found, and asks what to look at next, instead of running on to a finished conclusion. Slowing down keeps the person in the exploration loop.\nthe purpose of EDA is typically for you to understand your data. No matter how good the agent is, if that understanding isn’t transferred, the analysis process is not done."
   },
   {
     "objectID": "index.html#test-set",
@@ -173,13 +173,6 @@
     "title": "",
     "section": "",
     "text": "This is something we’ve seen internally at Posit and in organizations we work with: it’s becoming normal to vibe-analyze data.\nThe idea for the following hypothetical came from this episode of The Test Set podcast."
-  },
-  {
-    "objectID": "index.html#site-traffic-analysis",
-    "href": "index.html#site-traffic-analysis",
-    "title": "",
-    "section": "",
-    "text": "how is traffic trending for our site?\n          \n        \n        \n          \n             Analyzing site traffic\n            \n              ⌕\n              Searching workspaceweb analytics\n              ✓\n            \n            \n              ◫\n              Querying warehouseanalytics.pageviews\n              ✓\n            \n            \n              ∿\n              Calculating daily visitslast 90 days\n              ✓\n            \n          \n        \n        \n          \n            Daily visits are down 64% over the last 90 days.\n            \n              Daily site visits−64%\n              \n                \n                  \n                    \n                    \n                  \n                \n                \n                  \n                  \n                \n                \n                  60k40k20k\n                  90 days ago45 days agoToday\n                \n                \n                \n                \n              \n            \n          \n        \n  \n\n\nThis morning, your VP pulled up a coding agent and asked a question.\n[yada yada this is what happen]\nNow, as data people, we might have asked ourselves “How are daily visits being measured?” “What event triggers an entry in this column?” “What other possible explanations could account for this change in trend other than a genuine reversal in the traffic going to this site?” If you had dug further, you would have learned that this kind of pageview event no longer triggers on newer versions of Chrome. As users gradually update Chrome, their page visits are no longer registered in this table. Regardless, this isn’t even the typical table that the data science team uses to measure site traffic anyway.\nNevertheless, you’re not there. Your VP brings this chart to leadership. They decide to spend millions to reverse the trend."
   },
   {
     "objectID": "index.html#commons-does-3-things",
@@ -193,7 +186,7 @@
     "href": "index.html#commons-trusted-calculation",
     "title": "",
     "section": "",
-    "text": "Let’s see how the VP’s analysis would work with a commons agent.\nThe first thing the agent does is search for a trusted calculation. Here it finds and runs the data scientist’s site traffic calculation.\nThe answer is marked as verified to signify that it used vetted code."
+    "text": "Let’s see it in action\nThe first thing the agent does is search for a trusted calculation. Here it finds and runs a trusted site traffic calculation.\nThe answer is marked as verified to signify that it used vetted code."
   },
   {
     "objectID": "index.html#commons-context-citations",
@@ -207,7 +200,7 @@
     "href": "index.html#commons-lower-trust-answer",
     "title": "",
     "section": "",
-    "text": "There’s one more possible path: the model cannot find trusted context to justify its approach. In this case, we mark the answer with a yellow tag, which lets the user know the answer should be considered less trusted.\nThis is how we balance convenience and correctness. The tool has to feel convenient enough that the user actually wants to reach for it – it needs to feel like a normal chat. When correctness is closer to a normal coding agent, we signal that the user ought to be more skeptical of the answer."
+    "text": "There’s one more possible path: the model cannot find trusted context to justify its approach. In this case, we mark the answer with a yellow tag, which lets the user know the answer should be considered less trusted.\nThe tool has to feel convenient enough that the user actually wants to reach for it – it needs to feel like a normal chat. When correctness is closer to a normal coding agent, we signal that the user ought to be more skeptical of the answer."
   },
   {
     "objectID": "index.html#commons-trust-flow",
@@ -242,7 +235,7 @@
     "href": "index.html#information-layers",
     "title": "",
     "section": "Build: information layers",
-    "text": "Build: information layers\n\n\n\n\n\n\n\n\nLayer\nSources\nRole\n\n\n\n\nSemantic layer\nMeasures in .R files, definitions in data-dict.yaml, and supported warehouse semantic models\nProvides trusted calculations\n\n\nContext layer\nMarkdown files and descriptive fields in data-dict.yaml\nInforms custom SQL or R and guides interpretation\n\n\n\nData dictionaries span both layers.\n\nThese layers complement the data source. The semantic layer supplies trusted ways to compute answers. The context layer helps the agent write custom SQL or R and interpret the results when a trusted calculation doesn’t cover the question.\nData dictionaries can contribute to both: calculation definitions to the semantic layer, and descriptive information to the context layer."
+    "text": "Build: information layers\n\n\n\nLayer\nSources\nRole\n\n\n\n\nSemantic layer\nMeasures in .R files, definitions in data-dict.yaml, and supported warehouse semantic models\nProvides trusted calculations\n\n\nContext layer\nMarkdown files and descriptive fields in data-dict.yaml\nInforms custom SQL or R and guides interpretation\n\n\n\n\nData dictionaries span both layers.\n\n\nThese layers complement the data source. The semantic layer supplies trusted ways to compute answers. The context layer helps the agent write custom SQL or R and interpret the results when a trusted calculation doesn’t cover the question.\nData dictionaries can contribute to both: calculation definitions to the semantic layer, and descriptive information to the context layer."
   },
   {
     "objectID": "index.html#build-semantic",
@@ -284,7 +277,7 @@
     "href": "index.html#trajectory-review",
     "title": "",
     "section": "Improve: analyze trajectories",
-    "text": "Improve: analyze trajectories\n\ncommons(log = TRUE) records conversation histories with OpenTelemetry\ntrajectory_read() reads trajectories from Connect or local traces\ntrajectory_review() opens a Shiny app to browse, flag, and annotate conversations\n\n\nWe’ll demo the trajectory reviewer here. Reviewed conversations surface recurring questions, then you add trusted calculations or context. The goal is to improve the system, not just ask users to check answers more carefully. These reviewer functions are in the R package.\nGo to trajectory reviewer\nhttps://01a13e15-380b-24ec-91a0-f7e07302f411.share.connect.posit.cloud/"
+    "text": "Improve: analyze trajectories\n\ncommons(log = TRUE) records conversation histories with OpenTelemetry.\ntrajectory_read() reads trajectories from Connect or local traces.\ntrajectory_review() opens a Shiny app to browse, flag, and annotate conversations.\n\n\nWe’ll demo the trajectory reviewer here. Reviewed conversations surface recurring questions, then you add trusted calculations or context. The goal is to improve the system, not just ask users to check answers more carefully. These reviewer functions are in the R package.\nGo to trajectory reviewer\nhttps://01a13e15-380b-24ec-91a0-f7e07302f411.share.connect.posit.cloud/"
   },
   {
     "objectID": "index.html#ecosystem",

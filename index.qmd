@@ -486,6 +486,11 @@ Depending on your organization's setup, making that context available can be a l
 
 ## How do we make data analysis agents trustworthy? {#trust-question .deep-slide}
 
+::: notes
+We can't get there just by choosing a good model and telling people to be
+careful. We have to build trustworthiness into the environment around it.
+:::
+
 ## {#posit-assistant .paper-slide}
 
 ![](figures/posit-assistant-homepage.png){.rounded .nostretch height="650"}
@@ -639,6 +644,8 @@ We can't just rely on individual oversight.
 
 ::: notes
 I hear a lot about human in the loop, and it's important. No one is saying you shouldn't be in the loop (well someone is).
+That includes the interaction with the person. Putting someone in the loop
+isn't enough—we have to make their involvement useful.
 but we need to actually make that loop work. it isn't enough for you to just kind of be there monitoring. 
 The system has to work with how people actually behave, not depend on
 individual willpower to review every action carefully.
@@ -769,9 +776,11 @@ Ordinary chat still shows data-analysis code by default.
 ```
 
 ::: notes
-Reused from the PHUSE deck. The agent pauses after each result, summarizes
+The agent pauses after each result, summarizes
 what it found, and asks what to look at next, instead of running on to a
 finished conclusion. Slowing down keeps the person in the exploration loop.
+
+the purpose of EDA is typically for you to understand your data. No matter how good the agent is, if that understanding isn't transferred, the analysis process is not done. 
 :::
 
 # {.paper-slide}
@@ -779,6 +788,9 @@ finished conclusion. Slowing down keeps the person in the exploration loop.
 # And what if the user is not a data scientist? {#non-data-scientist .beat-slide}
 
 ::: notes
+we've talked about what a coding agent like posit assistant might look like to be trustworthy
+but llms have another consequence too -- they open up data analysis to more people. it is now easier than ever to get _an_ answer to your data question, whether or not that answer is right
+
 but what if the user is not a data scientist?
 how do we help them get correct answers too?
 :::
@@ -795,91 +807,31 @@ The idea for the following hypothetical came from this episode of
 The Test Set podcast.
 :::
 
-## {#site-traffic-analysis .agent-story-slide .slow-tool-calls}
 
-```{=html}
-<div class="agent-window">
-  <div class="agent-thread">
-        <div class="chat-turn chat-turn-user">
-          <div class="chat-message chat-message-user">
-            how is traffic trending for our site?
-          </div>
-        </div>
-        <div class="chat-turn chat-turn-agent tool-run fragment fade-up" data-fragment-index="0">
-          <div class="chat-message chat-message-agent">
-            <div class="agent-thinking"><span></span> Analyzing site traffic</div>
-            <div class="tool-card" style="--tool-delay: 0s">
-              <span class="tool-card-icon">⌕</span>
-              <span><strong>Searching workspace</strong><small>web analytics</small></span>
-              <span class="tool-progress"><i class="tool-spinner"></i><i class="tool-check">✓</i></span>
-            </div>
-            <div class="tool-card" style="--tool-delay: 2.25s">
-              <span class="tool-card-icon">◫</span>
-              <span><strong>Querying warehouse</strong><small>analytics.pageviews</small></span>
-              <span class="tool-progress"><i class="tool-spinner"></i><i class="tool-check">✓</i></span>
-            </div>
-            <div class="tool-card" style="--tool-delay: 4.5s">
-              <span class="tool-card-icon">∿</span>
-              <span><strong>Calculating daily visits</strong><small>last 90 days</small></span>
-              <span class="tool-progress"><i class="tool-spinner"></i><i class="tool-check">✓</i></span>
-            </div>
-          </div>
-        </div>
-        <div class="chat-turn chat-turn-agent result-turn fragment fade-up" data-fragment-index="0">
-          <div class="chat-message chat-message-agent">
-            <p>Daily visits are down <strong>64%</strong> over the last 90 days.</p>
-            <div class="dau-chart">
-              <div class="dau-chart-title"><span>Daily site visits</span><strong>−64%</strong></div>
-              <svg viewBox="0 0 620 225" role="img" aria-label="Daily site visits rise unevenly, then fall sharply after a changepoint.">
-                <defs>
-                  <linearGradient id="dau-area" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stop-color="#ee6331" stop-opacity="0.28"/>
-                    <stop offset="100%" stop-color="#ee6331" stop-opacity="0.02"/>
-                  </linearGradient>
-                </defs>
-                <g class="chart-grid">
-                  <line x1="56" y1="34" x2="598" y2="34"/><line x1="56" y1="86" x2="598" y2="86"/>
-                  <line x1="56" y1="138" x2="598" y2="138"/><line x1="56" y1="190" x2="598" y2="190"/>
-                </g>
-                <g class="chart-labels">
-                  <text x="46" y="39">60k</text><text x="46" y="91">40k</text><text x="46" y="143">20k</text>
-                  <text x="56" y="215">90 days ago</text><text x="324" y="215">45 days ago</text><text x="598" y="215">Today</text>
-                </g>
-                <path class="chart-area" d="M56,61 L69,67 L82,58 L95,60 L108,54 L121,59 L134,51 L147,55 L160,57 L173,48 L186,52 L199,45 L212,50 L225,42 L238,46 L251,39 L264,44 L277,36 L290,41 L303,34 L313,37 L319,35 L329,51 L340,57 L351,53 L362,66 L373,61 L384,72 L395,78 L406,73 L417,86 L428,82 L439,95 L450,99 L461,93 L472,108 L483,103 L494,117 L505,113 L516,126 L527,122 L538,134 L549,130 L560,140 L571,137 L582,146 L598,145 L598,190 L56,190 Z"/>
-                <path class="chart-line" pathLength="1" d="M56,61 L69,67 L82,58 L95,60 L108,54 L121,59 L134,51 L147,55 L160,57 L173,48 L186,52 L199,45 L212,50 L225,42 L238,46 L251,39 L264,44 L277,36 L290,41 L303,34 L313,37 L319,35 L329,51 L340,57 L351,53 L362,66 L373,61 L384,72 L395,78 L406,73 L417,86 L428,82 L439,95 L450,99 L461,93 L472,108 L483,103 L494,117 L505,113 L516,126 L527,122 L538,134 L549,130 L560,140 L571,137 L582,146 L598,145"/>
-                <circle class="chart-end" cx="598" cy="145" r="6"/>
-              </svg>
-            </div>
-          </div>
-        </div>
-  </div>
-</div>
-```
+# {#commons .commons-intro-slide}
 
-:::notes
-This morning, your VP pulled up a coding agent and asked a question. 
+![](figures/commons-hex.png){.commons-intro-logo .nostretch fig-alt="Commons logo"}
 
-[yada yada this is what happen]
-
-Now, as data people, we might have asked ourselves "How are daily visits being measured?" "What event triggers an entry in this column?" "What other possible explanations could account for this change in trend other than a genuine reversal in the traffic going to this site?" If you had dug further, you would have learned that this kind of pageview event no longer triggers on newer versions of Chrome. As users gradually update Chrome, their page visits are no longer registered in this table. Regardless, this isn't even the typical table that the data science team uses to measure site traffic anyway.
-
-Nevertheless, you're not there. Your VP brings this chart to leadership. They decide to spend millions to reverse the trend.
+:::footer
+https://pos.it/commons
 :::
-
-
-# {.paper-slide}
 
 ::: notes
-and this is not good!
-but we know that data teams often have code to answer these kinds of questions
-if this happened in real life, the vp could ask a data scientist or statician. and they might have code that they use all the time to run this kind of analysis. 
+this is exactly the problem that commons is trying to solve
 
-we're going to call this kind of code trusted code
+commons helps data scientists build trustworthy data agents for their collaborators that give more correct, reproducible, and transparent answers than the default "vibe analysis" siutation, while still being easy and intuitive to use. 
+
+It's an open source R and Python package built on `ellmer` / `chatlas` and `shinychat`. You can use it with whatever model from whatever provider you want.
+
+and it's a bird because...
 :::
+
 
 # [_Trusted_ code]{#trusted-code style="color: #b8623f; font-size: 1.4em;"}
 
 ::: notes
+one of the core ideas behind commons is that data teams have trusted code ...
+
 This vetted code used by the data scientists is what we'll called _trusted_ code
 they rely on it and trust it to give them the right answers
 
@@ -894,21 +846,6 @@ Instead of the model writing code afresh every time it's answering a question, w
 This is one of the core ideas behind a new open source package that we're excited to share with you all today. It's called commons.
 :::
 
-# {#commons .commons-intro-slide}
-
-![](figures/commons-hex.png){.commons-intro-logo .nostretch fig-alt="Commons logo"}
-
-:::footer
-https://pos.it/commons
-:::
-
-::: notes
-commons helps data scientists build trustworthy data agents for their collaborators.
-
-It's an open source R and Python package built on `ellmer` / `chatlas` and `shinychat`. You can use it with whatever model from whatever provider you want.
-
-and it's a bird because...
-:::
 
 ## commons does 3 things
 
@@ -925,10 +862,10 @@ and it's a bird because...
 </video>
 
 ::: notes
-Let's see how the VP's analysis would work with a commons agent.
+Let's see it in action
 
 The first thing the agent does is search for a trusted calculation. Here it
-finds and runs the data scientist's site traffic calculation.
+finds and runs a trusted site traffic calculation.
 
 The answer is marked as verified to signify that it used vetted code.
 :::
@@ -973,7 +910,7 @@ There's one more possible path: the model cannot find trusted context to
 justify its approach. In this case, we mark the answer with a yellow tag,
 which lets the user know the answer should be considered less trusted.
 
-This is how we balance convenience and correctness. The tool has to feel
+The tool has to feel
 convenient enough that the user actually wants to reach for it -- it needs
 to feel like a normal chat. When correctness is closer to a normal coding
 agent, we signal that the user ought to be more skeptical of the answer.
@@ -1128,12 +1065,27 @@ Claude Code, Codex).
 ## Build: information layers {#information-layers .paper-slide}
 
 
-| Layer | Sources | Role |
-|---|---|---|
-| **Semantic layer** | Measures in `.R` files, definitions in `data-dict.yaml`, and supported warehouse semantic models | Provides trusted calculations |
-| **Context layer** | Markdown files and descriptive fields in `data-dict.yaml` | Informs custom SQL or R and guides interpretation |
+```{=html}
+<table>
+  <thead><tr><th>Layer</th><th>Sources</th><th>Role</th></tr></thead>
+  <tbody>
+    <tr class="fragment" data-fragment-index="0">
+      <td><strong>Semantic layer</strong></td>
+      <td>Measures in <code>.R</code> files, definitions in <code>data-dict.yaml</code>, and supported warehouse semantic models</td>
+      <td>Provides trusted calculations</td>
+    </tr>
+    <tr class="fragment" data-fragment-index="1">
+      <td><strong>Context layer</strong></td>
+      <td>Markdown files and descriptive fields in <code>data-dict.yaml</code></td>
+      <td>Informs custom SQL or R and guides interpretation</td>
+    </tr>
+  </tbody>
+</table>
+```
 
+::: {.fragment data-fragment-index="2"}
 Data dictionaries span both layers.
+:::
 
 ::: notes
 These layers complement the data source. The semantic layer supplies
@@ -1280,9 +1232,9 @@ table- and column-level policies.
 ## Improve: analyze trajectories {#trajectory-review .paper-slide}
 
 ::: {.incremental}
-* `commons(log = TRUE)` records conversation histories with OpenTelemetry
-* `trajectory_read()` reads trajectories from Connect or local traces
-* `trajectory_review()` opens a Shiny app to browse, flag, and annotate conversations
+* `commons(log = TRUE)` records conversation histories with OpenTelemetry.
+* `trajectory_read()` reads trajectories from Connect or local traces.
+* `trajectory_review()` opens a Shiny app to browse, flag, and annotate conversations.
 :::
 
 ::: notes
